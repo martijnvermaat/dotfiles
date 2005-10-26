@@ -1,0 +1,5 @@
+#!/bin/sh
+
+echo "Running xset fp rehash..."
+xset fp rehash
+/usr/bin/xemacs
