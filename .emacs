@@ -80,3 +80,14 @@
 (custom-set-variables
  '(load-home-init-file t t))
 (custom-set-faces)
+
+;; C# mode
+(defun poor-mans-csharp-mode ()
+  (java-mode)
+  (setq mode-name "C#")
+  (set-variable 'tab-width 8)
+  (set-variable 'indent-tabs-mode t)
+  (set-variable 'c-basic-offset 8)
+  (c-set-offset 'inline-open 0)
+  (c-set-offset 'case-label 0)
+)
