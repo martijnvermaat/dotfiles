@@ -10,7 +10,16 @@
        (global-font-lock-mode t)
 ))
 
-;; Vidual feedback on selections
+;; Nicer font
+(cond
+     ((string-match "linux" (emacs-version))
+      (set-default-font "-dec-terminal-medium-r-normal--14-140-75-75-c-80-iso8859-1")
+))
+
+;; No more annoying beeps
+(setq visible-bell 1)
+
+;; Visual feedback on selections
 (setq-default transient-mark-mode t)
 
 ;; Always end a file with a newline
@@ -27,6 +36,11 @@
 (defun doe-maar-stroustrup-doen ()
   (c-set-style "stroustrup"))
 (add-hook 'java-mode-hook 'doe-maar-stroustrup-doen)
+
+;;(defun java-indent-four ()
+;;  (set-variable 'tab-width 4)
+;;  (set-variable 'c-basic-offset 4))
+;;(add-hook 'java-mode-hook 'java-indent-four)
 
 ;; No backupfiles
 (setq make-backup-files nil)
@@ -91,3 +105,9 @@
   (c-set-offset 'inline-open 0)
   (c-set-offset 'case-label 0)
 )
+
+;; Stratego mode
+(autoload 'stratego-mode "stratego")
+(setq auto-mode-alist (cons '("\.str$" . stratego-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\.strs$" . stratego-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
