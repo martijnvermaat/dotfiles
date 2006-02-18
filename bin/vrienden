@@ -1,0 +1,24 @@
+#!/bin/sh
+
+RESPONSE=`/home/martijn/bin/vu vrienden`
+
+if [ -n "$RESPONSE" ]; then
+
+  # Adapted from Erich Schubert
+  # http://blog.drinsama.de/erich/en/linux/2006021003-gnome-hack-of-the-day.html
+
+  # Send notification to all active sessions
+
+  user=`whoami`
+  pids=`pgrep -u $user session`  # (session is actually x-session-manager or gnome-session)
+
+  for pid in $pids; do
+    # find DBUS session bus for this session
+    DBUS_SESSION_BUS_ADDRESS=`grep -z DBUS_SESSION_BUS_ADDRESS \
+      /proc/$pid/environ | sed -e 's/DBUS_SESSION_BUS_ADDRESS=//'`
+    # use it
+    DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
+      /usr/bin/notify-send -u low -t 5 "Nieuwe e-mail" "$RESPONSE"
+  done
+
+fi
