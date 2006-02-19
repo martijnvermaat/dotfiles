@@ -4,6 +4,15 @@ RESPONSE=`/home/martijn/bin/vu vrienden`
 
 if [ -n "$RESPONSE" ]; then
 
+  # Remove < and > signs
+  RESPONSE=`echo "$RESPONSE" | perl -pe 's/</&amp;lt;/g;s/>/&amp;gt;/g'`
+
+  # Print category header in bold
+  RESPONSE=`echo "$RESPONSE" | perl -pe 's/^(Unread .+:)$/<b>\\1<\/b>/'`
+
+  # Remove message number, date, and to: field
+  RESPONSE=`echo "$RESPONSE" | perl -pe 's/^[0-9]+\+ [0-9\/]+ (?:to:[a-z]+\s+)//i'`
+
   # Adapted from Erich Schubert
   # http://blog.drinsama.de/erich/en/linux/2006021003-gnome-hack-of-the-day.html
 
@@ -18,7 +27,7 @@ if [ -n "$RESPONSE" ]; then
       /proc/$pid/environ | sed -e 's/DBUS_SESSION_BUS_ADDRESS=//'`
     # use it
     DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
-      /usr/bin/notify-send -u low -t 5 "Nieuwe e-mail" "$RESPONSE"
+      /usr/bin/notify-send -u low -t 5 "Vrienden :)" "<small>$RESPONSE</small>"
   done
 
 fi
