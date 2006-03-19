@@ -27,7 +27,7 @@ if [ -n "$RESPONSE" ]; then
       /proc/$pid/environ | sed -e 's/DBUS_SESSION_BUS_ADDRESS=//'`
     # use it
     DBUS_SESSION_BUS_ADDRESS=$DBUS_SESSION_BUS_ADDRESS \
-      /usr/bin/notify-send -u low -t 10 "Vrienden :)" "<small>$RESPONSE</small>"
+      /usr/bin/notify-send -u low -t 10000 "Vrienden :)" "<small>$RESPONSE</small>"
   done
 
 fi
