@@ -1,0 +1,7 @@
+(if
+    (is (window_name) "Evolution - Mail")
+    (begin
+       (set_workspace 2)
+       (maximize)
+    )
+)
