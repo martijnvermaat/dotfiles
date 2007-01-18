@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # random_wallpaper
 #
@@ -18,6 +18,5 @@ WALLPAPER_DIR=/home/martijn/img/wallpaper
 
 IMGS=`find "$WALLPAPER_DIR" -iname '*.jpg' -o -iname '*.png'`
 N=`echo $IMGS | wc -w`
-((N=RANDOM%N))
-((N=N+1))
+N=$[ ( $RANDOM % $N ) + 1 ]
 gconftool-2 -t str -s /desktop/gnome/background/picture_filename "`echo $IMGS | cut -d ' ' -f $N`"
