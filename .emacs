@@ -12,9 +12,16 @@
 
 ;; Nicer font
 (cond
-     ((string-match "linux" (emacs-version))
-      (set-default-font "-dec-terminal-medium-r-normal--14-140-75-75-c-80-iso8859-1")
+     ((string-match "gtk" (emacs-version))
+      (set-default-font "Bitstream Vera Sans Mono-11")
+;;      (set-default-font "Monospace-10")
 ))
+
+;; Show tabs for buffers
+;;(tabbar-mode t)
+
+;; No splash screen
+(setq inhibit-startup-message t)
 
 ;; No more annoying beeps
 (setq visible-bell 1)
@@ -52,7 +59,7 @@
 (cond (window-system (mwheel-install)))
 
 ;; Scrollbar right
-(cond ((not running-xemacs)
+(cond ((string-match "gtk" (emacs-version))
        (set-scroll-bar-mode 'right)
 ))
 
