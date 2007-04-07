@@ -1,2 +1,2 @@
 #!/bin/sh
-ssh -o TCPKeepAlive=yes -l mvermaat galjas.few.vu.nl $*
+ssh -o TCPKeepAlive=yes -l mvt600 kits.few.vu.nl $*
