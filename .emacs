@@ -10,11 +10,10 @@
        (global-font-lock-mode t)
 ))
 
-;; Nicer font
+;; Nicer font in emacs-gtk
 (cond
-     ((string-match "gtk" (emacs-version))
-      (set-default-font "Bitstream Vera Sans Mono-11")
-;;      (set-default-font "Monospace-10")
+ ((string-match "gtk" (emacs-version))
+  (set-default-font "Bitstream Vera Sans Mono-11")
 ))
 
 ;; Show tabs for buffers
@@ -59,9 +58,7 @@
 (cond (window-system (mwheel-install)))
 
 ;; Scrollbar right
-(cond ((string-match "gtk" (emacs-version))
-       (set-scroll-bar-mode 'right)
-))
+(cond (window-system (set-scroll-bar-mode 'right)))
 
 ;;(line-number-mode 1)
 (column-number-mode 1)
@@ -124,3 +121,8 @@
 (setq auto-mode-alist (cons '("\.str$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.strs$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
+
+;; Proof General
+(cond (running-xemacs
+       (load-file "/opt/ProofGeneral/generic/proof-site.el")
+       ))
