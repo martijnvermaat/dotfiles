@@ -24,7 +24,6 @@ fi
 #alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
-alias ocaml='ledit ocaml'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
@@ -75,3 +74,6 @@ fi
 
 export ENABLE_COLORS=true
 export EDITOR=emacs
+export PAGER=less
+
+alias ocaml='ledit ocaml'
