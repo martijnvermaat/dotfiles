@@ -1,1 +1,2 @@
+#!/bin/sh
 xfig -P -specialtext -latexfonts
