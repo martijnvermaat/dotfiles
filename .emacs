@@ -64,7 +64,7 @@
 (column-number-mode 1)
 
 ;; OCaml tuareg mode
-(setq load-path (cons "/usr/share/emacs21/site-lisp/tuareg" load-path))
+(setq load-path (cons "/usr/share/emacs21/site-lisp/tuareg" load-path)) ;; TODO: move to local ~/.emacs
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
