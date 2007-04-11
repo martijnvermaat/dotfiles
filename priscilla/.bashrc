@@ -75,3 +75,14 @@ fi
 
 export ENABLE_COLORS=true
 export EDITOR=emacs
+
+PATH=/opt/groovy/bin:"${PATH}"
+
+export JAVA_HOME=/usr/lib/j2sdk1.5-sun/jre
+export ANT_HOME=/usr/local/lib/apache-ant
+export GROOVY_HOME=/opt/groovy
+export CLASSPATH=/usr/share/java/jsch.jar:.:$CLASSPATH
+export WALLPAPER_DIR=/home/martijn/img/wallpaper
+
+# nix configuration
+source /nix/etc/profile.d/nix.sh
