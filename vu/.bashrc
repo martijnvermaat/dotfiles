@@ -5,6 +5,55 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
+if [ -z "$RELEASE" ]; then  # Skip all this if already set.
+
+    # File-creation mode mask.  No core dumps.
+    umask 077
+    ulimit -c 0
+
+    : ${USER:=$LOGNAME}; export USER
+    export RELEASE=`uname -r`
+    export OS=`uname -s`
+    export ARCH=`case $OS in SunOS) uname -p;; *) uname -m;; esac`
+    case $ARCH in i?86) ARCH=i386;; esac
+    export NODENAME=`uname -n`
+
+    case "$NODENAME" in *.*) ;; *) NODENAME="$NODENAME.`domainname`";; esac
+    export HOSTNAME=`expr $NODENAME : '\\([^.]*\\)'`
+
+    # System executables.
+    PATH=$PATH:/opt/mcrl-2.8.5/bin:/usr/local/bin:/bin:/usr/bin
+    case $OS in
+        SunOS) PATH=$PATH:/usr/openwin/bin:/opt/local/nmh/bin:/home/mklencke/bin:/usr/ccs/bin:/net/java/jdk1.5.0/bin:/net/public/bin:/net/public1/bin
+            ;;
+        Linux) PATH=$PATH:/usr/X11R6/bin:/usr/bin/mh
+    esac
+
+    # Java home
+    case $OS in
+        SunOS) export JAVA_HOME=/net/java/jdk1.5.0
+            ;;
+        Linux) export JAVA_HOME=/usr/local/java
+    esac
+
+    case $OS in
+        SunOS)
+        # ISO Latin-1 locale to enable 8-bit chars in many utilities.
+            export LC_CTYPE=iso_8859_1
+    esac
+
+    # List of directories to look for manual pages.
+    case $OS in
+        SunOS) export MANPATH=/usr/local/man:/usr/man:/usr/openwin/man:/opt/local/nmh/man
+    esac
+
+    # Tell the shell that all these variables are to be given to any program
+    # it executes.
+    export USER RELEASE ARCH NODENAME HOSTNAME PATH EDITOR EXINIT MANPATH PAGER
+    export TERMINFO LC_CTYPE JAVA_HOME CLASSPATH
+
+fi  # end of skip
+
 # don't put duplicate lines in the history. See bash(1) for more options
 #export HISTCONTROL=ignoredups
 
@@ -24,7 +73,6 @@ fi
 #alias ll='ls -l'
 #alias la='ls -A'
 #alias l='ls -CF'
-alias ocaml='ledit ocaml'
 
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(lesspipe)"
@@ -68,10 +116,34 @@ if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
 fi
 
+# include ~/public/bin in PATH
+if [ -d ~/public/bin ] ; then
+    PATH=~/public/bin:"${PATH}"
+fi
+
 # set PATH so it includes user's private bin if it exists
 if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
+export CADP=/opt/cadp/current
+export PATH=$PATH:$CADP/com:$CADP/bin.sun5
+export MANPATH=$MANPATH:$CADP/man
+export CADP_CC=gcc
+export CADP_LANGUAGE=english
+export CADP_PS_VIEWER=gv
+
 export ENABLE_COLORS=true
 export EDITOR=emacs
+export PAGER=less
+export TERMINFO=/usr/local/lib/terminfo
+export CLASSPATH=$CLASSPATH:/home/mvt600/public/sablecc/lib/ant-sablecc.jar:/home/mvt600/public/sablecc/lib/sablecc.jar:.
+
+# No beeps
+if [ $DISPLAY ]; then
+    xset -b b off
+fi
+
+alias ocaml='ledit ocaml'
+alias gemacs='/usr/bin/emacs'
+alias emacs='/usr/bin/emacs -nw'
