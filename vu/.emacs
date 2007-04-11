@@ -125,3 +125,7 @@
 (cond (running-xemacs
        (load-file "/opt/ProofGeneral/generic/proof-site.el")
        ))
+
+(setq load-path (cons "~mvt600/public/tuareg_mode/" load-path))
+(setq load-path (cons "~mvt600/public/prolog_mode/" load-path))
+(setq load-path (cons "~mvt600/public/stratego_mode/" load-path))

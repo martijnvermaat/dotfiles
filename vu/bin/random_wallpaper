@@ -13,7 +13,7 @@
 
 
 # Store .jpg and .png images in this directory
-WALLPAPER_DIR=/home/martijn/img/wallpaper
+WALLPAPER_DIR=/home/mvt600/wallpapers
 
 
 IMGS=`find "$WALLPAPER_DIR" -iname '*.jpg' -o -iname '*.png'`
