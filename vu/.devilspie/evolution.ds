@@ -1,0 +1,7 @@
+(if
+    (contains (window_name) "Evolution")
+    (begin
+       (set_workspace 2)
+       (maximize)
+    )
+)
