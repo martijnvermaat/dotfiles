@@ -63,8 +63,9 @@ shopt -s checkwinsize
 
 # enable color support of ls and also add handy aliases
 if [ "$TERM" != "dumb" ]; then
-    eval "`dircolors -b`"
-    alias ls='ls --color=auto'
+    case $OS in
+        Linux) eval "`dircolors -b`"; alias ls='ls --color=auto'
+    esac
     #alias dir='ls --color=auto --format=vertical'
     #alias vdir='ls --color=auto --format=long'
 fi
@@ -145,5 +146,5 @@ if [ $DISPLAY ]; then
 fi
 
 alias ocaml='ledit ocaml'
-alias gemacs='/usr/bin/emacs'
-alias emacs='/usr/bin/emacs -nw'
+alias gemacs='emacs'
+alias emacs='emacs -nw'
