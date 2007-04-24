@@ -1,2 +1,2 @@
 #!/bin/sh
-ssh -o TCPKeepAlive=yes -l vermaat vermaat.name $*
+ssh -o TCPKeepAlive=yes -l vermaat vermaat.name "${@}"

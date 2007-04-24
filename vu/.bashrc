@@ -146,5 +146,5 @@ if [ $DISPLAY ]; then
 fi
 
 alias ocaml='ledit ocaml'
-alias gemacs='emacs'
-alias emacs='emacs -nw'
+alias gemacs='/usr/bin/emacs'
+alias emacs='/usr/bin/emacs -nw'
