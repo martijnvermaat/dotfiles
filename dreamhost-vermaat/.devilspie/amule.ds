@@ -1,0 +1,7 @@
+(if
+    (contains (window_name) "aMule")
+    (begin
+       (set_workspace 3)
+       (maximize)
+    )
+)
