@@ -19,6 +19,8 @@
 #   # Monthly at 05:07
 #     7 5 * * 1  ~/bin/svn-backup monthly >> /var/log/svn-backup 2>&1
 #
+# TODO: Remove all but latest 10 daily and 5 weekly backups
+#
 # Copyright (c) 2007, Martijn Vermaat
 
 
@@ -39,6 +41,8 @@ TYPE="$1"
 
 
 echo
+echo
+echo "$(/bin/date)   Starting subversion backups"
 
 # We use the current date in the backup path
 DATE=`/bin/date '+%F'`
@@ -51,20 +55,13 @@ case "$TYPE" in
     *       ) TYPE=daily ;;
 esac
 
-echo
-echo "Starting subversion backups procedure at $DATE"
-echo
-echo `/bin/date`
-
 # Backup dir will contain type and date
 BACKUP_DIR=$BACKUPS/$TYPE/$DATE
 
 # Check if backup is needed
 if [ -d $BACKUP_DIR ]; then
     echo
-    echo `/bin/date`
-    echo
-    echo "Backup already exists, quiting"
+    echo "$(/bin/date)   Backup already exists, quiting"
     exit 1
 fi
 
@@ -102,11 +99,8 @@ for REPOSITORY in `/usr/bin/find $REPOSITORIES -type d -mindepth 1 -maxdepth 1`;
 
 done
 
-# TODO: remove all but latest 10 daily backups
-
-echo
-echo `/bin/date`
 echo
 echo "Backups completed and located at $BACKUP_DIR"
 echo "Copies are written to $BACKUPS/latest"
 echo
+echo "$(/bin/date)   Finished subversion backups"
