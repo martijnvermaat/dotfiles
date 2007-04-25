@@ -72,8 +72,19 @@ if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
+# Add user software binaries to path
+PATH=/home/vermaat/software/bin:"${PATH}"
+export PATH
+
+# Add user libs for Perl
+PERL5LIB=/home/vermaat/perlmods/lib/perl/5.8:/home/vermaat/perlmods/lib/perl/5.8.4
+PERL5LIB=$PERL5LIB:/home/vermaat/perlmods/share/perl/5.8:/home/vermaat/perlmods/share/perl/5.8.4
+PERL5LIB=$PERL5LIB:/usr/lib/perl/5.8:/usr/share/perl/5.8
+export PERL5LIB
+
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 
+alias python='python2.4'
 alias ocaml='ledit ocaml'

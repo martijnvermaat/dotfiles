@@ -2,6 +2,8 @@
 # see /usr/share/doc/bash/examples/startup-files for examples.
 # the files are located in the bash-doc package.
 
+umask 002
+PS1='[\h]$ '
 # the default umask is set in /etc/login.defs
 #umask 022
 
