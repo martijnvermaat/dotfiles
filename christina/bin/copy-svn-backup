@@ -11,7 +11,7 @@
 # Copyright (c) 2007, Martijn Vermaat
 
 REMOTE_DIR=/home/vermaatsvn/backups/svn/latest/
-LOCAL_DIR=/backup/svn/latest
+LOCAL_DIR=/var/backups/subversion/latest
 
 echo
 echo "$(/bin/date)   Running rsync"
