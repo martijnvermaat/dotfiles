@@ -1,0 +1,22 @@
+#!/bin/sh
+
+# Retreive the latest repository backups from a remote host using rsync.
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Retreive latest repository backups daily
+#   30 03 * * * ~/bin/copy-svn-backup >> /var/log/copy-svn-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+REMOTE_DIR=/home/vermaatsvn/backups/svn/latest/
+LOCAL_DIR=/backup/svn/latest
+
+echo
+echo "$(/bin/date)   Running rsync"
+
+# Use rsync to get the latest repository backups
+/usr/bin/rsync -e ssh -avz vermaatsvn@vermaat.name:$REMOTE_DIR $LOCAL_DIR
+
+echo "$(/bin/date)   Finished rsync"

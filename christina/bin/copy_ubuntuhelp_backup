@@ -1,0 +1,63 @@
+#!/bin/sh
+
+# This should be a shell script that copies
+# a remote backup of the UbuntuHelp wiki
+# to a local directory.
+# From the remote backup directory, it picks
+# the latest created backup.
+#
+# To run periodically from a scheduler like
+# cron, for example:
+#
+#   $ crontab -l
+#   # Copy latest remote UbuntuHelp wiki backup every day at 20u40
+#   40 20 * * * /home/martijn/bin/copy_ubuntuhelp_backup >> /var/log/copy_ubuntuhelp_backup 2>&1
+#
+# Martijn Vermaat, 2005-10-07
+
+
+# Configuration
+
+REMOTE_HOST=sommelsdijk.xs4all.nl
+REMOTE_DIR=/var/backups/ubuntuhelp
+LOCAL_DIR=/backup/christina/ubuntuhelp/automated
+
+
+# Start of script
+
+echo `date`
+
+
+# Get filename for latest backup
+
+echo "Checking for latest backup file..."
+
+LATEST=`ssh $REMOTE_HOST "ls $REMOTE_DIR | tail -1"`
+
+echo "Latest backup: $LATEST"
+
+
+# Check if this backup is not already present
+
+if [ -f "$LOCAL_DIR/$LATEST" ]; then
+
+    # This backup is already present
+
+    echo "Backup already present locally"
+
+else
+
+    # Copy latest backup to local dir
+
+    echo "Copying $LATEST from $REMOTE_HOST:$REMOTE_DIR to $LOCAL_DIR"
+
+    scp $REMOTE_HOST:$REMOTE_DIR/$LATEST $LOCAL_DIR
+
+    echo "Done"
+
+fi
+
+
+# Extra newline
+
+echo
