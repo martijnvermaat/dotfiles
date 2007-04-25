@@ -24,7 +24,9 @@
 
 # Configuration
 
-# Repository path
+# Directory containing repositories
+# All direct subdirectories of this directory are regarded as repository
+# locations to be backed up
 REPOSITORIES=/home/vermaatsvn/svn
 
 # Backup directory
