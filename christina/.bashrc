@@ -76,4 +76,8 @@ export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 
+export CLASSPATH=/usr/share/java/jsch.jar:$CLASSPATH
+
 alias ocaml='ledit ocaml'
+
+source /nix/etc/profile.d/nix.sh
