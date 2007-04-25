@@ -129,6 +129,7 @@
 ;; CSS mode
 (autoload 'css-mode "css-mode")
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+(add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level '4)
 
