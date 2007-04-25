@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Find empty directories
+
+ROOT=${1:-.}
+if [ ! -d $ROOT ];then ROOT=.;fi
+find $ROOT -type d -empty|xargs echo
