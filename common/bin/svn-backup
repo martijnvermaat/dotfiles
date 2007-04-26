@@ -19,8 +19,6 @@
 #   # Monthly at 05:07
 #     7 5 * * 1  ~/bin/svn-backup monthly >> /var/log/svn-backup 2>&1
 #
-# TODO: Remove all but latest 10 daily and 5 weekly backups
-#
 # Copyright (c) 2007, Martijn Vermaat
 
 
@@ -33,6 +31,11 @@ REPOSITORIES=/home/vermaatsvn/svn
 
 # Backup directory
 BACKUPS=/home/vermaatsvn/backups/svn
+
+# Number of backups to keep
+KEEP_DAILY=10
+KEEP_WEEKLY=5
+KEEP_MONTHLY=36
 
 # Receive type of backup from command line argument
 TYPE="$1"
@@ -49,10 +52,18 @@ DATE=$(/bin/date '+%F')
 
 # Check for a sane type
 case "$TYPE" in
-    daily   ) TYPE=daily ;;
-    weekly  ) TYPE=weekly ;;
-    monthly ) TYPE=monthly ;;
-    *       ) TYPE=daily ;;
+    monthly)
+        TYPE=monthly
+        KEEP=$KEEP_MONTHLY
+        ;;
+    weekly)
+        TYPE=weekly
+        KEEP=$KEEP_WEEKLY
+        ;;
+    *)
+        TYPE=daily
+        KEEP=$KEEP_DAILY
+        ;;
 esac
 
 # Backup dir will contain type and date
@@ -97,6 +108,17 @@ for REPOSITORY in $(/usr/bin/find $REPOSITORIES \
 
     # Copy backup to latest backup
     /bin/cp $BACKUP_DIR/$BACKUP_FILE.gz $BACKUPS/latest/
+
+done
+
+# Remove old backups of this type
+for BACKUP in $(/bin/ls $BACKUPS/$TYPE | head -n -$KEEP); do
+
+    echo
+    echo "Removing old backup in $BACUPS/$TYPE/$BACKUP"
+
+    # Remove old backup
+    /bin/rm -r $BACKUPS/$TYPE/$BACKUP
 
 done
 
