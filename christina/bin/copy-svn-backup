@@ -1,6 +1,7 @@
 #!/bin/sh
 
-# Retreive the latest repository backups from a remote host using rsync.
+# Mirror the latest repository backups from a remote host using rsync and
+# backup any changes.
 #
 # To run periodically from a scheduler like cron, for example:
 #
@@ -10,13 +11,17 @@
 #
 # Copyright (c) 2007, Martijn Vermaat
 
+REMOTE_HOST=vermaat.name
+REMOTE_USER=vermaatsvn
 REMOTE_DIR=/home/vermaatsvn/backups/svn/latest/
-LOCAL_DIR=/var/backups/subversion/latest
+MIRROR_DIR=/var/backups/subversion/latest
+BACKUP_DIR=/var/backups/subversion/$(/bin/date '+%F')
 
 echo
 echo "$(/bin/date)   Running rsync"
 
-# Use rsync to get the latest repository backups
-/usr/bin/rsync -e ssh -avz vermaatsvn@vermaat.name:$REMOTE_DIR $LOCAL_DIR
+# Use rsync to mirror the latest repository backups
+/usr/bin/rsync -e ssh -avzb --backup-dir $BACKUP_DIR \
+    $REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR $MIRROR_DIR
 
 echo "$(/bin/date)   Finished rsync"
