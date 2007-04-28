@@ -1,6 +1,8 @@
 #!/bin/sh
 
-rm /home/vermaat/windows-2000/*.log
+rm /backup/windows/windows-2000/*.log
 umask u=rwx,g=rwx,o=rx
-vmplayer /home/vermaat/windows-2000/windows2000pro.vmx
-rm /home/vermaat/windows-2000/*.log
+#chmod ug+rw /backup/windows/windows-2000/*
+vmplayer /backup/windows/windows-2000/windows2000pro.vmx
+#chmod ug+rw /backup/windows/windows-2000/*
+rm /backup/windows/windows-2000/*.log
