@@ -115,7 +115,7 @@ done
 for BACKUP in $(/bin/ls $BACKUPS/$TYPE | head -n -$KEEP); do
 
     echo
-    echo "Removing old backup in $BACUPS/$TYPE/$BACKUP"
+    echo "Removing old backup in $BACKUPS/$TYPE/$BACKUP"
 
     # Remove old backup
     /bin/rm -r $BACKUPS/$TYPE/$BACKUP
