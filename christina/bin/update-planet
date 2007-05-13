@@ -1,3 +1,0 @@
-#!/bin/sh
-cd /home/vermaat/software/share/venus
-/usr/bin/python2.4 planet.py /home/vermaat/.planet.ini
