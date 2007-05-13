@@ -8,21 +8,14 @@
 
 test -x /usr/sbin/backup-manager || exit 0
 
-echo `/bin/date`
-echo "Running daily backup"
+echo
+echo "$(/bin/date)   Running daily backup"
 
 # Storing dpkg selections
 dpkg --get-selections > /etc/installed-software.log
 
 # Only run if USB harddisk is attached
-if [ -d "/media/usb-linux/backup/priscilla" ]; then
-  echo "Starting backup-manager"
-  /usr/sbin/backup-manager
-else
-  echo "Backup not started (USB harddisk is not attached)"
-fi
+/usr/sbin/backup-manager --verbose --no-purge
 
-echo `/bin/date`
-echo "Daily backup finished"
-echo
+echo "$(/bin/date)   Daily backup finished"
 echo
