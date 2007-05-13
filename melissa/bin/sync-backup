@@ -13,14 +13,14 @@
 echo
 echo "$(/bin/date)   Starting synchronizing local backup"
 
+# Synchronize photos
+/usr/bin/rsync -e ssh -az --delete /vermaat/fotos/ martijn@christina:/backup/melissa/fotos
+
 # Synchronize /etc
-/usr/bin/rsync -a --delete /etc/ /backup/priscilla/etc
+/usr/bin/rsync -e ssh -az --delete /etc/ martijn@christina:/backup/melissa/etc
 
-# Synchronize home
-/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ /backup/priscilla/home
-
-# Make sure martijn can read everything
-/bin/chown -R martijn:martijn /backup/priscilla
+# Synchronize /home/janny
+/usr/bin/rsync -e ssh -az --delete --delete-excluded --exclude-from /home/janny/.backup-filter /home/janny/ martijn@christina:/backup/melissa/home/janny
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo

@@ -1,0 +1,9 @@
+#!/bin/sh
+
+SHARED_DIR=/vermaat
+SHARED_USER=martijn
+SHARED_GROUP=vermaat
+
+/bin/chown -R $SHARED_USER:$SHARED_GROUP $SHARED_DIR
+/bin/chmod -R ug+rwX $SHARED_DIR
+find $SHARED_DIR -type d -exec chmod g+s {} \;
