@@ -1,6 +1,0 @@
-#!/bin/sh
-
-rm /home/vermaat/windows-2000/*.log
-umask u=rwx,g=rwx,o=rx
-vmplayer /home/vermaat/windows-2000/windows2000pro.vmx
-rm /home/vermaat/windows-2000/*.log
