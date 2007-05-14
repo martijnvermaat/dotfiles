@@ -22,5 +22,11 @@ echo "$(/bin/date)   Starting synchronizing local backup"
 # Synchronize /home/janny
 /usr/bin/rsync -e ssh -az --delete --delete-excluded --exclude-from /home/janny/.backup-filter /home/janny/ martijn@christina:/backup/melissa/home/janny
 
+# Synchronize /home/aat
+/usr/bin/rsync -e ssh -az --delete --delete-excluded --exclude-from /home/aat/.backup-filter /home/aat/ martijn@christina:/backup/melissa/home/aat
+
+# Synchronize /home/derk
+/usr/bin/rsync -e ssh -az --delete --delete-excluded --exclude-from /home/derk/.backup-filter /home/derk/ martijn@christina:/backup/melissa/home/derk
+
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo
