@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Mirror the latest repository backups from a remote host using rsync and
-# backup any changes.
+# backup any changes. Keep a maximum number of backups.
 #
 # To run periodically from a scheduler like cron, for example:
 #
@@ -14,14 +14,25 @@
 REMOTE_HOST=vermaat.name
 REMOTE_USER=vermaatsvn
 REMOTE_DIR=/home/vermaatsvn/backups/svn/latest/
-MIRROR_DIR=/var/backups/subversion/latest
-BACKUP_DIR=/var/backups/subversion/$(/bin/date '+%F')
+MIRROR_DIR=/backup/subversion
+KEEP=10
 
 echo
 echo "$(/bin/date)   Running rsync"
 
 # Use rsync to mirror the latest repository backups
-/usr/bin/rsync -e ssh -avzb --backup-dir $BACKUP_DIR \
-    $REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR $MIRROR_DIR
+/usr/bin/rsync -e ssh -avzb --backup-dir $MIRROR_DIR/$(/bin/date '+%F') \
+    $REMOTE_USER@$REMOTE_HOST:$REMOTE_DIR $MIRROR_DIR/latest
+
+# Remove old backups of this type
+for BACKUP in $(/bin/ls $MIRROR_DIR | grep -v latest | head -n -$KEEP); do
+
+    echo
+    echo "Removing old backup in $MIRROR_DIR/$BACKUP"
+
+    # Remove old backup
+    /bin/rm -r $MIRROR_DIR/$BACKUP
+
+done
 
 echo "$(/bin/date)   Finished rsync"
