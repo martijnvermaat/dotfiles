@@ -22,7 +22,10 @@ if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
 fi
 
 # Synchronize SVN backup
-/usr/bin/rsync -av /backup/svn/ /media/usb-linux/backup/subversion
+/usr/bin/rsync -av --delete /backup/svn/ /media/usb-linux/backup/subversion
+
+# Synchronize priscilla backup
+/usr/bin/rsync -av --delete /backup/priscilla/ /media/usb-linux/backup/priscilla/latest
 
 # Synchronize music collection
 /usr/bin/rsync -av --delete /home/martijn/music/ /media/usb-linux/music
