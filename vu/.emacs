@@ -34,6 +34,11 @@
 ;; Stop at the end of the file, not just add lines
 (setq next-line-add-newlines nil)
 
+;; Remove trailing white spaces
+(autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" nil t)
+(add-hook 'mail-send-hook 'nuke-trailing-whitespace)
+(add-hook 'write-file-hooks 'nuke-trailing-whitespace)
+
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
