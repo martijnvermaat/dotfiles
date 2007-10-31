@@ -11,6 +11,7 @@
 # Copyright (c) 2007, Martijn Vermaat
 
 MOUNT_DIR=/media/usb-linux
+BACKUP_DIR=$(/bin/date '+%Y-%m')
 
 echo
 echo "$(/bin/date)   Starting synchronizing USB disk"
@@ -25,7 +26,7 @@ fi
 /usr/bin/rsync -a --delete /backup/svn/ /media/usb-linux/backup/subversion
 
 # Synchronize priscilla backup
-/usr/bin/rsync -a --delete /backup/priscilla/ /media/usb-linux/backup/priscilla/latest
+/usr/bin/rsync -a --delete /backup/priscilla/ /media/usb-linux/backup/priscilla/automated/$BACKUP_DIR
 
 # Synchronize music collection
 /usr/bin/rsync -a --delete /home/martijn/music/ /media/usb-linux/music

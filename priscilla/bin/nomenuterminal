@@ -1,2 +1,2 @@
 #!/bin/sh
-gnome-terminal --window-with-profile=nomenu
+sleep 30; gnome-terminal --window-with-profile=nomenu

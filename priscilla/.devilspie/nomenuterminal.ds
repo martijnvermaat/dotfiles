@@ -3,7 +3,6 @@
     (begin
        (set_workspace 4)
        (maximize)
-       (fullscreen)
        (undecorate)
     )
 )
