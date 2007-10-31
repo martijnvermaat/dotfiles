@@ -1,0 +1,34 @@
+#!/bin/sh
+
+# Synchronize USB backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize usb backup
+#   30 03 * * * ~/bin/sync-backup >> /var/log/sync-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+MOUNT_DIR=/media/disk
+
+echo
+echo "$(/bin/date)   Starting synchronizing USB backup"
+
+# Test if USB disk is mounted
+if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+    echo "$(/bin/date)   Nothing to do (not connected)"
+    exit 1
+fi
+
+# Synchronize /etc
+/usr/bin/rsync -a --delete /etc/ $MOUNT_DIR/Backup/latest/etc
+
+# Synchronize home
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/rosanne/.backup-filter /home/rosanne/ $MOUNT_DIR/Backup/latest/home
+
+# Make sure rosanne can read everything
+/bin/chown -R rosanne:rosanne $MOUNT_DIR/Backup/latest
+
+echo "$(/bin/date)   Finished synchronizing USB backup"
+echo
