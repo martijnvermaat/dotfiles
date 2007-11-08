@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # Synchronize USB backup
 #
@@ -11,6 +11,7 @@
 # Copyright (c) 2007, Martijn Vermaat
 
 MOUNT_DIR=/media/disk
+BACKUP_DIR=$MOUNT_DIR/Backup/automated/$(/bin/date '+%Y-%m')
 
 echo
 echo "$(/bin/date)   Starting synchronizing USB backup"
@@ -21,14 +22,22 @@ if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
     exit 1
 fi
 
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR"
+
 # Synchronize /etc
-/usr/bin/rsync -a --delete /etc/ $MOUNT_DIR/Backup/latest/etc
+/usr/bin/rsync -a --delete /etc/ $BACKUP_DIR/etc
 
 # Synchronize home
-/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/rosanne/.backup-filter /home/rosanne/ $MOUNT_DIR/Backup/latest/home
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/rosanne/.backup-filter /home/rosanne/ $BACKUP_DIR/home
 
 # Make sure rosanne can read everything
-/bin/chown -R rosanne:rosanne $MOUNT_DIR/Backup/latest
+/bin/chown -R rosanne:rosanne $BACKUP_DIR
 
 echo "$(/bin/date)   Finished synchronizing USB backup"
 echo
