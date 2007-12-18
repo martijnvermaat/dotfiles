@@ -43,4 +43,9 @@ echo "$(/bin/date)   Synchronizing $MOUNT_DIR/music"
 # Synchronize music collection
 /usr/bin/rsync -a --delete /home/martijn/music/ $MOUNT_DIR/music
 
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/photos"
+
+# Synchronize photo collection
+/usr/bin/rsync -a --delete /home/martijn/Photos/ $MOUNT_DIR/photos
+
 echo "$(/bin/date)   Finished synchronizing USB disk"
