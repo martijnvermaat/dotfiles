@@ -11,10 +11,10 @@
 ))
 
 ;; Nicer font in emacs-gtk
-(cond
- ((string-match "gtk" (emacs-version))
-  (set-default-font "Bitstream Vera Sans Mono-11")
-))
+;;(cond
+;; ((string-match "gtk" (emacs-version))
+;;  (set-default-font "Bitstream Vera Sans Mono-11")
+;;))
 
 ;; Show tabs for buffers
 ;;(tabbar-mode t)
