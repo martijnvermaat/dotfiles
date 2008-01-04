@@ -76,4 +76,6 @@ export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 
+export PATH=~/kiek/trunk:"${PATH}"
+
 alias ocaml='ledit ocaml'
