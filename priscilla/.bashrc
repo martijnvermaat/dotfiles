@@ -78,10 +78,10 @@ export PAGER=less
 
 alias ocaml='ledit ocaml'
 
-PATH=/opt/groovy/bin:"${PATH}"
+PATH=/home/martijn/projects/kiek/trunk:/opt/groovy/bin:"${PATH}"
 
 export JAVA_HOME=/usr/lib/j2sdk1.5-sun/jre
-export ANT_HOME=/usr/local/lib/apache-ant
+export ANT_HOME=/usr/share/ant #/usr/local/lib/apache-ant
 export GROOVY_HOME=/opt/groovy
 export CLASSPATH=/usr/share/java/jsch.jar:.:$CLASSPATH
 
