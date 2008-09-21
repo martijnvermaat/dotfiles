@@ -73,6 +73,10 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
+;; no indentation after `in' keywords
+(add-hook 'tuareg-mode-hook
+          '(lambda () (setq tuareg-in-indent 0)))
+
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
@@ -140,5 +144,5 @@
 
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")
-(setq auto-mode-alist       
+(setq auto-mode-alist
 (cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))

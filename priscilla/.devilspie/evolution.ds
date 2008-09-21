@@ -1,5 +1,9 @@
 (if
-    (contains (window_name) "Evolution")
+    (or
+        (contains (window_name) "Evolution")
+        (contains (window_name) "INBOX")
+        (contains (window_name) "ليوشن")
+    )
     (begin
        (set_workspace 2)
        (maximize)

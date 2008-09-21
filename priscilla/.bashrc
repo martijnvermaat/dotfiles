@@ -85,5 +85,10 @@ export ANT_HOME=/usr/share/ant #/usr/local/lib/apache-ant
 export GROOVY_HOME=/opt/groovy
 export CLASSPATH=/usr/share/java/jsch.jar:.:$CLASSPATH
 
+# No beeps
+if [ $DISPLAY ]; then
+    xset -b b off
+fi
+
 # nix configuration
 source /nix/etc/profile.d/nix.sh
