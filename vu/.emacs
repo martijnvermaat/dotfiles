@@ -34,7 +34,7 @@
 ;; Stop at the end of the file, not just add lines
 (setq next-line-add-newlines nil)
 
-;; Remove trailing white spaces
+;; Remove trailing whitespace
 (autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" nil t)
 (add-hook 'mail-send-hook 'nuke-trailing-whitespace)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
@@ -72,6 +72,10 @@
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
+
+;; no indentation after `in' keywords
+(add-hook 'tuareg-mode-hook
+          '(lambda () (setq tuareg-in-indent 0)))
 
 ;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
