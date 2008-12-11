@@ -5,6 +5,14 @@
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 
+;; Compile with F12
+(defun silent-compile ()
+  (interactive)
+  (compile "make")
+  (delete-other-windows)
+)
+(global-set-key [f12] 'silent-compile)
+
 ;; Turn of font-lock mode for Emacs
 (cond ((not running-xemacs)
        (global-font-lock-mode t)
