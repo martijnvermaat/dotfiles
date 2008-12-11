@@ -12,15 +12,15 @@
 
 BACKUP_SERVER=backup.dreamhost.com
 BACKUP_USER=b292235
-BACKUP_DIR=~/priscilla
+BACKUP_DIR="~/priscilla"
 
 echo
 echo "$(/bin/date)   Starting synchronizing Dreamhost backup"
 
-echo "$(/bin/date)   Synchronizing /home/martijn/music"
+#echo "$(/bin/date)   Synchronizing /home/martijn/music"
 
 # Synchronize music collection
-/usr/bin/rsync --protocol=29 -e ssh -za --delete /home/martijn/music/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/music
+#/usr/bin/rsync --protocol=29 -e ssh -za --delete /home/martijn/music/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/music
 
 echo "$(/bin/date)   Synchronizing /home/martijn/Photos"
 
