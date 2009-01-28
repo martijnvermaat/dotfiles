@@ -77,8 +77,8 @@ export EDITOR=emacs
 export PAGER=less
 
 alias ocaml='ledit ocaml'
-
-PATH=/home/martijn/projects/kiek/trunk:/opt/groovy/bin:"${PATH}"
+alias gemacs='/usr/bin/emacs-snapshot-gtk'
+alias emacs='/usr/bin/emacs-snapshot-nox'
 
 export JAVA_HOME=/usr/lib/j2sdk1.5-sun/jre
 export ANT_HOME=/usr/share/ant #/usr/local/lib/apache-ant
@@ -89,6 +89,3 @@ export CLASSPATH=/usr/share/java/jsch.jar:.:$CLASSPATH
 if [ $DISPLAY ]; then
     xset -b b off
 fi
-
-# nix configuration
-source /nix/etc/profile.d/nix.sh

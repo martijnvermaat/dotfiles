@@ -21,7 +21,22 @@
 ;; Nicer font in emacs-gtk
 (cond
  ((string-match "gtk" (emacs-version))
-  (set-default-font "Bitstream Vera Sans Mono-11")
+  (custom-set-faces
+    '(default ((t (:inherit nil
+                   :stipple nil
+                   :background "black"
+                   :foreground "lightgrey"
+                   :inverse-video nil
+                   :box nil
+                   :strike-through nil
+                   :overline nil
+                   :underline nil
+                   :slant normal
+                   :weight normal
+                   :height 70
+                   :width normal
+                   :foundry "unknown"
+                   :family "DejaVu Sans Mono")))))
 ))
 
 ;; Show tabs for buffers
@@ -29,6 +44,9 @@
 
 ;; No splash screen
 (setq inhibit-startup-message t)
+
+;; Just follow version controlled symlinks
+(setq vc-follow-symlinks t)
 
 ;; No more annoying beeps
 (setq visible-bell 1)
@@ -117,9 +135,6 @@
 (autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
 (setq auto-mode-alist
       (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-(custom-set-variables
- '(load-home-init-file t t))
-(custom-set-faces)
 
 ;; C# mode
 (defun poor-mans-csharp-mode ()

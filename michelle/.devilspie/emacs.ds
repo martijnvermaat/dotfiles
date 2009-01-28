@@ -1,0 +1,6 @@
+(if
+    (contains (window_name) "emacs-snapshot-gtk")
+    (begin
+       (maximize)
+    )
+)
