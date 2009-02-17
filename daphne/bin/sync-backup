@@ -8,19 +8,61 @@
 #   # Synchronize local backup
 #   30 03 * * * ~/bin/sync-backup >> /var/log/sync-backup 2>&1
 #
-# Copyright (c) 2007, Martijn Vermaat
+# Copyright (c) 2009, Martijn Vermaat
+
+MOUNT_DIR=/backup
+BACKUP_DIR=$MOUNT_DIR/backup/daphne/automated/$(/bin/date '+%Y-%m')
 
 echo
 echo "$(/bin/date)   Starting synchronizing local backup"
 
+# Test if backup disk is mounted
+if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+    echo "$(/bin/date)   Nothing to do (not connected)"
+    exit 1
+fi
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/fotos"
+
+# Synchronize photos
+/usr/bin/rsync -a --delete /home/vermaat/fotos/ $MOUNT_DIR/fotos
+
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
+
 # Synchronize /etc
-/usr/bin/rsync -a --delete /etc/ /backup/priscilla/etc
+/usr/bin/rsync -a --delete /etc/ $BACKUP_DIR/etc
 
-# Synchronize home
-/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ /backup/priscilla/home
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/windows"
 
-# Make sure martijn can read everything
-/bin/chown -R martijn:martijn /backup/priscilla
+# Synchronize /home/vermaat/windows
+/usr/bin/rsync -a --delete /home/vermaat/windows/ $BACKUP_DIR/windows
+
+# Make sure home dir exists
+if [ ! -d $BACKUP_DIR/home ]; then
+    echo "$(/bin/date)   Creating backup home directory"
+    /bin/mkdir -p $BACKUP_DIR/home
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/home/janny"
+
+# Synchronize /home/janny
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/janny/.backup-filter /home/janny/ $BACKUP_DIR/home/janny
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/home/aat"
+
+# Synchronize /home/aat
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/aat/.backup-filter /home/aat/ $BACKUP_DIR/home/aat
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/home/martijn"
+
+# Synchronize /home/martijn
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ $BACKUP_DIR/home/martijn
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo

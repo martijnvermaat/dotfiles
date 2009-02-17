@@ -1,0 +1,2 @@
+#!/bin/sh
+ssh -o TCPKeepAlive=yes -R 2022:localhost:22 sshlogin@vermaat.name 'while :; do sleep 86400; echo alles komt goed; done'

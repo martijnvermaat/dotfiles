@@ -1,0 +1,8 @@
+#!/bin/sh
+
+rm /home/vermaat/windows/*.log
+umask u=rwx,g=rwx,o=rx
+#chmod ug+rw /home/vermaat/windows/*
+vmplayer /home/vermaat/windows/windows2000pro.vmx
+#chmod ug+rw /home/vermaat/windows/*
+rm /home/vermaat/windows/*.log
