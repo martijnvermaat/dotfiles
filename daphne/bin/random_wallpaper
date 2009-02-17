@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# random_wallpaper
+#
+# Install a random wallpaper for your Gnome desktop.
+# For example, to pick a new wallpaper every hour, add
+# this to your cron file:
+#
+#   # Pick new random wallpaper every hour
+#   25 * * * * /home/martijn/bin/random_wallpaper
+#
+# 2006-02-04, Martijn Vermaat (mvermaat@cs.vu.nl)
+
+
+# Store .jpg and .png images in this directory
+WALLPAPER_DIR=/home/martijn/img/wallpaper
+
+
+IMGS=`find "$WALLPAPER_DIR" -iname '*.jpg' -o -iname '*.png' -o -iname '*.gif'`
+N=`echo $IMGS | wc -w`
+N=$[ ( $RANDOM % $N ) + 1 ]
+gconftool-2 -t str -s /desktop/gnome/background/picture_filename "`echo $IMGS | cut -d ' ' -f $N`"
