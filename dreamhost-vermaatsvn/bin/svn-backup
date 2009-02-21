@@ -15,9 +15,9 @@
 #   # Daily at 03:07
 #     7 3 * * *  ~/bin/svn-backup daily >> /var/log/svn-backup 2>&1
 #   # Weekly at 04:07
-#     7 4 1 * *  ~/bin/svn-backup weekly >> /var/log/svn-backup 2>&1
+#     7 4 * * 1  ~/bin/svn-backup weekly >> /var/log/svn-backup 2>&1
 #   # Monthly at 05:07
-#     7 5 * * 1  ~/bin/svn-backup monthly >> /var/log/svn-backup 2>&1
+#     7 5 1 * *  ~/bin/svn-backup monthly >> /var/log/svn-backup 2>&1
 #
 # Copyright (c) 2007, Martijn Vermaat
 
