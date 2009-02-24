@@ -1,0 +1,31 @@
+#!/bin/sh
+
+# Synchronize remote backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize local backup
+#   30 03 * * * ~/bin/sync-remote-backup >> /var/log/sync-remote-backup 2>&1
+#
+# Copyright (c) 2007-2009, Martijn Vermaat
+
+BANDWIDTH=60
+#BACKUP_SERVER=backup.dreamhost.com
+#BACKUP_USER=b292235
+#BACKUP_DIR="~/michelle"
+BACKUP_SERVER=vermaat.name
+BACKUP_USER=sshlogin
+BACKUP_DIR="~/michelle"
+
+echo
+echo "$(/bin/date)   Starting synchronizing remote backup"
+
+# Synchronize /etc
+/usr/bin/rsync --protocol=29 -e ssh -za --delete --bwlimit=$BANDWIDTH /etc/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/etc
+
+# Synchronize home
+/usr/bin/rsync --protocol=29 -e ssh -za --delete --delete-excluded --exclude-from --bwlimit=$BANDWIDTH /home/martijn/.backup-filter /home/martijn/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/home
+
+echo "$(/bin/date)   Finished synchronizing remote backup"
+echo
