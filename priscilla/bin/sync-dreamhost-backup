@@ -10,9 +10,12 @@
 #
 # Copyright (c) 2008, Martijn Vermaat
 
-BACKUP_SERVER=backup.dreamhost.com
-BACKUP_USER=b292235
-BACKUP_DIR="~/priscilla"
+#BACKUP_SERVER=backup.dreamhost.com
+#BACKUP_USER=b292235
+#BACKUP_DIR="~/priscilla"
+BACKUP_SERVER=vermaat.name
+BACKUP_USER=sshlogin
+BACKUP_DIR="~"
 
 echo
 echo "$(/bin/date)   Starting synchronizing Dreamhost backup"
@@ -25,6 +28,6 @@ echo "$(/bin/date)   Starting synchronizing Dreamhost backup"
 echo "$(/bin/date)   Synchronizing /home/martijn/Photos"
 
 # Synchronize photo collection
-/usr/bin/rsync --protocol=29 -e ssh -za --delete /home/martijn/Photos/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/photos
+/usr/bin/rsync --protocol=29 -e ssh -za --delete --bwlimit=60 /home/martijn/Photos/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/photos
 
 echo "$(/bin/date)   Finished synchronizing Dreamhost backup"
