@@ -21,6 +21,6 @@ echo "$(/bin/date)   Starting synchronizing photo backup"
 echo "$(/bin/date)   Synchronizing /home/martijn/Photos"
 
 # Synchronize photo collection
-/usr/bin/rsync --protocol=29 -e ssh -za --delete --bwlimit=60 /home/martijn/Photos/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/
+/usr/bin/rsync --protocol=29 -e ssh -za --bwlimit=$BANDWIDTH --delete --bwlimit=60 /home/martijn/Photos/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/
 
 echo "$(/bin/date)   Finished synchronizing photo backup"
