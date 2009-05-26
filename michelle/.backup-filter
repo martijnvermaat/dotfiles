@@ -11,6 +11,7 @@
 /.remember
 .svn
 .gvfs
+urlclassifier3.sqlite
 *Cache
 *cache
 *.wav
