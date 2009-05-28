@@ -28,6 +28,8 @@ if [ ! -d $BACKUP_DIR ]; then
     /bin/mkdir -p $BACKUP_DIR
 fi
 
+. prepare-backup
+
 echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
 
 # Synchronize /etc
