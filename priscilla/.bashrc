@@ -78,7 +78,7 @@ export PAGER=less
 
 alias ocaml='ledit ocaml'
 
-PATH=/home/martijn/projects/kiek/trunk:/opt/groovy/bin:"${PATH}"
+PATH=/home/martijn/projects/kiek/trunk:/home/martijn/projects/coq-8.2-source/bin:"${PATH}"
 
 export JAVA_HOME=/usr/lib/j2sdk1.5-sun/jre
 export ANT_HOME=/usr/share/ant #/usr/local/lib/apache-ant

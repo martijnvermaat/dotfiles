@@ -13,6 +13,13 @@
 echo
 echo "$(/bin/date)   Starting synchronizing local backup"
 
+# Get installed packages list
+/usr/bin/dpkg --get-selections > /etc/installed-software.log
+
+# Get crontabs
+/usr/bin/crontab -u root -l > /etc/crontab.root
+/usr/bin/crontab -u martijn -l > /etc/crontab.martijn
+
 # Synchronize /etc
 /usr/bin/rsync -a --delete /etc/ /backup/priscilla/etc
 
@@ -20,7 +27,7 @@ echo "$(/bin/date)   Starting synchronizing local backup"
 /usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ /backup/priscilla/home
 
 # Make sure martijn can read everything
-/bin/chown -R martijn:martijn /backup/priscilla
+#/bin/chown -R martijn:martijn /backup/priscilla
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo
