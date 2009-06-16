@@ -109,6 +109,7 @@ export PAGER=less
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
+alias l='ls -lh --group-directories-first'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 

@@ -1,6 +1,7 @@
 /Muziek
 /Foto's
 /Video's
+/.evolution/mail/imap
 /.aMule
 /.thumbnails
 /.Trash
@@ -8,8 +9,10 @@
 /.wine
 /.private
 /.remember
+/.tosh-key
 .svn
 .gvfs
+urlclassifier3.sqlite
 *Cache
 *cache
 *.wav

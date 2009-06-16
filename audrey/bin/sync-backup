@@ -1,6 +1,6 @@
-#!/bin/sh
+#!/bin/bash
 
-# Synchronize local backup
+# Synchronize local backup on USB disk
 #
 # To run periodically from a scheduler like cron, for example:
 #
@@ -10,24 +10,53 @@
 #
 # Copyright (c) 2007, Martijn Vermaat
 
+# TODO: Backup Subversion repositories
+
+MOUNT_DIR=/media/tosh
+BACKUP_DIR=$MOUNT_DIR/Backup/audrey/automated/$(/bin/date '+%Y-%m')
+
 echo
 echo "$(/bin/date)   Starting synchronizing local backup"
 
-# Get installed packages list
-/usr/bin/dpkg --get-selections > /etc/installed-software.log
+# Test if backup disk is mounted
+if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+    echo "$(/bin/date)   Nothing to do (not connected)"
+    exit 1
+fi
 
-# Get crontabs
-/usr/bin/crontab -u root -l > /etc/crontab.root
-/usr/bin/crontab -u martijn -l > /etc/crontab.martijn
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+. /home/martijn/bin/prepare-backup
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
 
 # Synchronize /etc
-/usr/bin/rsync -a --delete /etc/ /backup/priscilla/etc
+/usr/bin/rsync -a --delete /etc/ $BACKUP_DIR/etc
 
-# Synchronize home
-/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ /backup/priscilla/home
+# Make sure home dir exists
+if [ ! -d $BACKUP_DIR/home ]; then
+    echo "$(/bin/date)   Creating backup home directory"
+    /bin/mkdir -p $BACKUP_DIR/home
+fi
 
-# Make sure martijn can read everything
-#/bin/chown -R martijn:martijn /backup/priscilla
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/home/martijn"
+
+# Synchronize /home/martijn
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ $BACKUP_DIR/home/martijn
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/Muziek"
+
+# Synchronize music collection
+/usr/bin/rsync -a --delete /home/martijn/Muziek/ $MOUNT_DIR/Muziek
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/Foto's"
+
+# Synchronize photo collection
+/usr/bin/rsync -a --delete /home/martijn/Foto\'s/ $MOUNT_DIR/Foto\'s
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo
