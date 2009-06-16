@@ -78,7 +78,6 @@ export PAGER=less
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
-alias emacs='/usr/bin/emacs-snapshot-nox'
 
 export JAVA_HOME=/usr/lib/j2sdk1.5-sun/jre
 export ANT_HOME=/usr/share/ant #/usr/local/lib/apache-ant
