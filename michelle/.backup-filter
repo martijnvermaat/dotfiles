@@ -9,7 +9,7 @@
 /.wine
 /.private
 /.remember
-.tosh-key
+/.tosh-key
 .svn
 .gvfs
 urlclassifier3.sqlite
@@ -29,3 +29,4 @@ urlclassifier3.sqlite
 *.m4v
 *.mov
 *.MOV
+*.iso
