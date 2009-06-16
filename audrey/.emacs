@@ -30,6 +30,9 @@
 ;; No splash screen
 (setq inhibit-startup-message t)
 
+;; Just follow version controlled symlinks
+(setq vc-follow-symlinks t)
+
 ;; No more annoying beeps
 (setq visible-bell 1)
 
