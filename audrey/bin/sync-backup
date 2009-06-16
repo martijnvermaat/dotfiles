@@ -1,0 +1,33 @@
+#!/bin/sh
+
+# Synchronize local backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize local backup
+#   30 03 * * * ~/bin/sync-backup >> /var/log/sync-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+echo
+echo "$(/bin/date)   Starting synchronizing local backup"
+
+# Get installed packages list
+/usr/bin/dpkg --get-selections > /etc/installed-software.log
+
+# Get crontabs
+/usr/bin/crontab -u root -l > /etc/crontab.root
+/usr/bin/crontab -u martijn -l > /etc/crontab.martijn
+
+# Synchronize /etc
+/usr/bin/rsync -a --delete /etc/ /backup/priscilla/etc
+
+# Synchronize home
+/usr/bin/rsync -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter /home/martijn/ /backup/priscilla/home
+
+# Make sure martijn can read everything
+#/bin/chown -R martijn:martijn /backup/priscilla
+
+echo "$(/bin/date)   Finished synchronizing local backup"
+echo
