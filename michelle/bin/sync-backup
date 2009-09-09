@@ -6,11 +6,16 @@
 #
 #   $ crontab -l
 #   # Synchronize local backup
-#   30 03 * * * ~/bin/sync-backup >> /var/log/sync-backup 2>&1
+#   30 03 * * * ~/bin/sync-backup /media/tosh >> /var/log/sync-backup.tosh 2>&1
 #
 # Copyright (c) 2007, Martijn Vermaat
 
-MOUNT_DIR=/media/tosh
+if [ -z "$1" ]; then
+    echo "$(/bin/date)   No backup media mount dir provided"
+    exit 1
+fi
+
+MOUNT_DIR="$1"
 BACKUP_DIR=$MOUNT_DIR/Backup/michelle/automated/$(/bin/date '+%Y-%m')
 
 echo

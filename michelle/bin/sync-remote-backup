@@ -39,6 +39,8 @@ case "$1" in
         ;;
 esac
 
+. /home/martijn/bin/prepare-backup
+
 # Synchronize /etc
 /usr/bin/rsync --protocol=29 -e ssh -za --bwlimit=${BANDWIDTH["$1"]} --delete /etc/ ${BACKUP_USER["$1"]}@${BACKUP_SERVER["$1"]}:${BACKUP_DIR["$1"]}/etc
 
