@@ -39,4 +39,9 @@ macro pager i "c!\n" "Go to inbox"
 
 macro index y "c?" "show incoming mailboxes list"
 macro pager y "c?" "show incoming mailboxes list"
-alias wanf Wan Fokkink <wanf@cs.vu.nl>
+
+ignore X-Spam-Score: X-CanItPRO-Stream: X-Canit-Stats-ID: X-Scanned-By:
+ignore X-ngMessageSubType: X-WebmailclientIP: X-Keywords: X-UID:
+ignore X-Virus-Scanned: Message-ID:
+
+unignore Date:

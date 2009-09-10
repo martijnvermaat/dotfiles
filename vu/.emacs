@@ -145,3 +145,4 @@
 (setq load-path (cons "~mvt600/public/tuareg_mode/" load-path))
 (setq load-path (cons "~mvt600/public/prolog_mode/" load-path))
 (setq load-path (cons "~mvt600/public/stratego_mode/" load-path))
+(setq load-path (cons "~mvt600/public/python_mode/" load-path))

@@ -139,6 +139,7 @@ export EDITOR=emacs
 export PAGER=less
 export TERMINFO=/usr/local/lib/terminfo
 export CLASSPATH=$CLASSPATH:/home/mvt600/public/sablecc/lib/ant-sablecc.jar:/home/mvt600/public/sablecc/lib/sablecc.jar:.
+export MATLABPATH=/home/mvt600/neural-networks/netlab
 
 # No beeps
 if [ $DISPLAY ]; then
@@ -148,3 +149,12 @@ fi
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs'
 alias emacs='/usr/bin/emacs -nw'
+
+function say {
+    echo "$1" >> /tmp/teun-martijn-chat
+}
+
+alias vu='ssh mvt600@kits.few.vu.nl'
+alias vermaat='ssh vermaat@vermaat.name'
+alias tcs='ssh tcs@kits.few.vu.nl'
+alias alienblonde='ssh -p 222 martijn@alienblonde.net'
