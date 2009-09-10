@@ -88,3 +88,8 @@ export CLASSPATH=/usr/share/java/jsch.jar:.:$CLASSPATH
 if [ $DISPLAY ]; then
     xset -b b off
 fi
+
+alias vu='ssh mvt600@kits.few.vu.nl'
+alias vermaat='ssh vermaat@vermaat.name'
+alias vermaatsvn='ssh vermaatsvn@vermaat.name'
+alias alienblonde='ssh -p 222 martijn@alienblonde.net'
