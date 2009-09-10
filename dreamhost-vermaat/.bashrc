@@ -88,3 +88,6 @@ export PAGER=less
 
 alias python='python2.4'
 alias ocaml='ledit ocaml'
+alias irssi='LD_LIBRARY_PATH=/home/vermaat/software/lib /home/vermaat/software/bin/irssi'
+
+alias vu='ssh mvt600@kits.few.vu.nl'
