@@ -117,3 +117,9 @@ PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 if [ $DISPLAY ]; then
     xset -b b off
 fi
+
+alias vu='ssh mvt600@kits.few.vu.nl'
+alias vermaat='ssh vermaat@vermaat.name'
+alias tcs='ssh tcs@kits.few.vu.nl'
+alias alienblonde='ssh -p 222 martijn@alienblonde.net'
+
