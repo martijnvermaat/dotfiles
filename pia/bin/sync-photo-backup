@@ -1,0 +1,26 @@
+#!/bin/sh
+
+# Synchronize remote photo backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize remote backup
+#   30 03 * * * ~/bin/sync-photo-backup >> /var/log/sync-photo-backup 2>&1
+#
+# Copyright (c) 2007-2009, Martijn Vermaat
+
+BANDWIDTH=60
+BACKUP_SERVER=backup.dreamhost.com
+BACKUP_USER=b292235
+BACKUP_DIR="~/fotos-martijn"
+
+echo
+echo "$(/bin/date)   Starting synchronizing photo backup"
+
+echo "$(/bin/date)   Synchronizing /home/martijn/Photos"
+
+# Synchronize photo collection
+/usr/bin/rsync --protocol=29 -e ssh -za --bwlimit=$BANDWIDTH --delete --bwlimit=60 /home/martijn/Photos/ $BACKUP_USER@$BACKUP_SERVER:$BACKUP_DIR/
+
+echo "$(/bin/date)   Finished synchronizing photo backup"
