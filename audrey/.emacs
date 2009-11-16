@@ -21,7 +21,7 @@
 ;; Nicer font in emacs-gtk
 (cond
  ((string-match "gtk" (emacs-version))
-  (set-default-font "Bitstream Vera Sans Mono-11")
+  (set-default-font "DejaVu Sans Mono-10")
 ))
 
 ;; Show tabs for buffers
@@ -120,9 +120,6 @@
 (autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
 (setq auto-mode-alist
       (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-(custom-set-variables
- '(load-home-init-file t t))
-(custom-set-faces)
 
 ;; C# mode
 (defun poor-mans-csharp-mode ()
@@ -142,9 +139,17 @@
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
 
 ;; Proof General
-(cond (running-xemacs
-       (load-file "/opt/ProofGeneral/generic/proof-site.el")
-       ))
+(load-file "/usr/share/emacs/site-lisp/proofgeneral/generic/proof-site.el")
+(eval-after-load "proof-script" '(progn
+  (define-key proof-mode-map [(control down)]
+                             'proof-assert-next-command-interactive)
+  (define-key proof-mode-map [(control up)]
+                             'proof-undo-last-successful-command)
+  (define-key proof-mode-map [(control right)]
+                             'proof-goto-point)
+  (define-key proof-mode-map [(control left)]
+                             'proof-retract-buffer)
+))
 
 ;; CSS mode
 (autoload 'css-mode "css-mode")

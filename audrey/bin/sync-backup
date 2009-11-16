@@ -12,7 +12,7 @@
 
 # TODO: Backup Subversion repositories
 
-MOUNT_DIR=/media/tosh
+MOUNT_DIR=/media/Tosh
 BACKUP_DIR=$MOUNT_DIR/Backup/audrey/automated/$(/bin/date '+%Y-%m')
 
 echo
@@ -56,7 +56,7 @@ echo "$(/bin/date)   Synchronizing $MOUNT_DIR/Muziek"
 echo "$(/bin/date)   Synchronizing $MOUNT_DIR/Foto's"
 
 # Synchronize photo collection
-/usr/bin/rsync -a --delete /home/martijn/Foto\'s/ $MOUNT_DIR/Foto\'s
+/usr/bin/rsync -a --delete /home/martijn/Afbeeldingen/Foto\'s/ $MOUNT_DIR/Foto\'s
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo
