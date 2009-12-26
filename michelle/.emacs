@@ -154,9 +154,17 @@
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
 
 ;; Proof General
-(cond (running-xemacs
-       (load-file "/opt/ProofGeneral/generic/proof-site.el")
-       ))
+(load-file "/usr/share/emacs/site-lisp/proofgeneral/generic/proof-site.el")
+(eval-after-load "proof-script" '(progn
+  (define-key proof-mode-map [(control down)]
+                             'proof-assert-next-command-interactive)
+  (define-key proof-mode-map [(control up)]
+                             'proof-undo-last-successful-command)
+  (define-key proof-mode-map [(control right)]
+                             'proof-goto-point)
+  (define-key proof-mode-map [(control left)]
+                             'proof-retract-buffer)
+))
 
 ;; CSS mode
 (autoload 'css-mode "css-mode")
