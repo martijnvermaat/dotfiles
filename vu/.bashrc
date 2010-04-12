@@ -156,5 +156,8 @@ function say {
 
 alias vu='ssh mvt600@kits.few.vu.nl'
 alias vermaat='ssh vermaat@vermaat.name'
+alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias tcs='ssh tcs@kits.few.vu.nl'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
+
+PATH=/home/mvt600/public/coq-8.3-beta0-1/bin:"${PATH}"

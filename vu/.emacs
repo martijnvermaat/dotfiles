@@ -5,6 +5,14 @@
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 
+;; Compile with F12
+(defun silent-compile ()
+  (interactive)
+  (compile "make")
+  (delete-other-windows)
+)
+(global-set-key [f12] 'silent-compile)
+
 ;; Turn of font-lock mode for Emacs
 (cond ((not running-xemacs)
        (global-font-lock-mode t)
@@ -68,6 +76,11 @@
 ;;(line-number-mode 1)
 (column-number-mode 1)
 
+;; Unknown macros in LaTeX mode are black-on-black by default for some reason
+(custom-set-faces
+ '(font-latex-sedate-face ((t nil)))
+)
+
 ;; OCaml tuareg mode
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
@@ -109,9 +122,6 @@
 (autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
 (setq auto-mode-alist
       (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-(custom-set-variables
- '(load-home-init-file t t))
-(custom-set-faces)
 
 ;; C# mode
 (defun poor-mans-csharp-mode ()
@@ -130,10 +140,25 @@
 (setq auto-mode-alist (cons '("\.strs$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
 
+;; For some reason, we need these mappings for Ctrl+<arrow> keys to work
+(define-key global-map "\e[1;5A" [C-up])
+(define-key global-map "\e[1;5B" [C-down])
+(define-key global-map "\e[1;5C" [C-right])
+(define-key global-map "\e[1;5D" [C-left])
+
 ;; Proof General
-(cond (running-xemacs
-       (load-file "/opt/ProofGeneral/generic/proof-site.el")
-       ))
+;;(load-file "/usr/share/emacs/site-lisp/proofgeneral/generic/proof-site.el")
+(load-file "/home/mvt600/public/proofgeneral/generic/proof-site.el")
+(eval-after-load "proof-script" '(progn
+  (define-key proof-mode-map [(control down)]
+                             'proof-assert-next-command-interactive)
+  (define-key proof-mode-map [(control up)]
+                             'proof-undo-last-successful-command)
+  (define-key proof-mode-map [(control right)]
+                             'proof-goto-point)
+  (define-key proof-mode-map [(control left)]
+                             'proof-retract-buffer)
+))
 
 ;; CSS mode
 (autoload 'css-mode "css-mode")
@@ -141,6 +166,22 @@
 (add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level '4)
+
+;; We use a local self-built emacs, but want to be able to use elisp packages
+;; from the system
+(let ((startup-file "/usr/share/emacs/site-lisp/debian-startup.el"))
+  (if (and (or (not (fboundp 'debian-startup))
+               (not (boundp  'debian-emacs-flavor)))
+           (file-readable-p startup-file))
+      (progn
+        (load-file startup-file)
+        (setq debian-emacs-flavor 'emacs)
+        (debian-startup debian-emacs-flavor)
+        (mapcar '(lambda (f)
+                   (and (not (string= (substring f -3) "/.."))
+                        (file-directory-p f)
+                        (add-to-list 'load-path f)))
+                (directory-files "/usr/share/emacs/site-lisp" t)))))
 
 (setq load-path (cons "~mvt600/public/tuareg_mode/" load-path))
 (setq load-path (cons "~mvt600/public/prolog_mode/" load-path))
