@@ -112,15 +112,19 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
+PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
+#PATH=/home/martijn/coq-trunk/bin:"${PATH}"
 
 # No beeps
 if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vu='ssh mvt600@kits.few.vu.nl'
+alias vu='LANG=en_US.UTF-8 ssh mvt600@kits.few.vu.nl'
 alias vermaat='ssh vermaat@vermaat.name'
 alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
-alias tcs='ssh tcs@kits.few.vu.nl'
-
+alias tcs='LANG=en_US.UTF-8 ssh tcs@kits.few.vu.nl'
+alias drew='ssh -p 2222 martijn@drew'
+alias tabita='ssh -p 2223 martijn@tabita'
+alias n900='ssh -p 222 root@n900'

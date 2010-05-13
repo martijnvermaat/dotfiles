@@ -27,6 +27,10 @@
 ;; Show tabs for buffers
 ;;(tabbar-mode t)
 
+;; Split window horizontally by default
+(setq split-height-threshold nil)
+(setq split-width-threshold 80)
+
 ;; No splash screen
 (setq inhibit-startup-message t)
 
@@ -150,6 +154,7 @@
   (define-key proof-mode-map [(control left)]
                              'proof-retract-buffer)
 ))
+(setq proof-toolbar-enable nil)
 
 ;; CSS mode
 (autoload 'css-mode "css-mode")

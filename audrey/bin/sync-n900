@@ -1,0 +1,51 @@
+#!/bin/bash
+
+# Synchronize n900 backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize local backup
+#   30 03 * * * /root/bin/sync-backup >> /var/log/sync-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+
+SOURCE='root@n900:'
+
+MOUNT_DIR=/media/Tosh
+BACKUP_DIR=$MOUNT_DIR/Backup/n900/automated/$(/bin/date '+%Y-%m')
+
+echo
+echo "$(/bin/date)   Starting synchronizing local backup"
+
+# Test if backup disk is mounted
+if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+    echo "$(/bin/date)   Nothing to do (not connected)"
+    exit 1
+fi
+
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
+
+# Synchronize /etc
+/usr/bin/rsync -e 'ssh -p 222' -a --delete $SOURCE/etc/ $BACKUP_DIR/etc
+
+# Make sure home dir exists
+if [ ! -d $BACKUP_DIR/home ]; then
+    echo "$(/bin/date)   Creating backup home directory"
+    /bin/mkdir -p $BACKUP_DIR/home
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/home/user"
+
+# Synchronize /home/user
+/usr/bin/rsync -e 'ssh -p 222' -a --delete --delete-excluded --exclude-from /home/martijn/.backup-filter-n900 $SOURCE/home/user/ $BACKUP_DIR/home/user
+
+echo "$(/bin/date)   Finished synchronizing local backup"
+echo
