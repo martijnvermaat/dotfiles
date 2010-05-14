@@ -65,6 +65,8 @@
 (add-hook 'mail-send-hook 'nuke-trailing-whitespace)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
+(setq-default fill-column 78)
+
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
