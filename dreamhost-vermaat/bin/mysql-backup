@@ -1,0 +1,129 @@
+#!/bin/bash
+
+# This should be a shell script that creates a backup of all MySQL
+# databases and gzips the result.
+#
+# A command line argument may be given to indicate the type of the backup,
+# which should be 'daily', 'weekly', or 'monthly'. This is used to generate
+# a location for the backup. Default backup type is 'daily'.
+#
+# It also copies the backup to a static directory (latest backup).
+#
+# A ~/.my.cnf should exist with at least a user, password, host and the
+# all-databases options for each database $db in a section [mysqld_$db].
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Daily at 03:07
+#     7 3 * * *  ~/bin/mysql-backup daily >> /var/log/mysql-backup 2>&1
+#   # Weekly at 04:07
+#     7 4 * * 1  ~/bin/mysql-backup weekly >> /var/log/mysql-backup 2>&1
+#   # Monthly at 05:07
+#     7 5 1 * *  ~/bin/mysql-backup monthly >> /var/log/mysql-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+
+# Configuration
+
+# Databases
+DATABASES="deleesplank jannylog rosannelog vondellaan"
+
+# Backup directory
+BACKUPS=/home/vermaat/backup/mysql
+
+# Number of backups to keep
+KEEP_DAILY=10
+KEEP_WEEKLY=5
+KEEP_MONTHLY=36
+
+# Receive type of backup from command line argument
+TYPE="$1"
+
+# End of configuration
+
+
+echo
+echo
+echo "$(/bin/date)   Starting MySQL backups"
+
+# We use the current date in the backup path
+DATE=$(/bin/date '+%F')
+
+# Check for a sane type
+case "$TYPE" in
+    monthly)
+        TYPE=monthly
+        KEEP=$KEEP_MONTHLY
+        ;;
+    weekly)
+        TYPE=weekly
+        KEEP=$KEEP_WEEKLY
+        ;;
+    *)
+        TYPE=daily
+        KEEP=$KEEP_DAILY
+        ;;
+esac
+
+# Backup dir will contain type and date
+BACKUP_DIR=$BACKUPS/$TYPE/$DATE
+
+# Check if backup is needed
+if [ -d $BACKUP_DIR ]; then
+    echo
+    echo "$(/bin/date)   Backup already exists, quiting"
+    exit 1
+fi
+
+echo
+echo "Creating directory $BACKUP_DIR"
+
+# Create backup dir
+/bin/mkdir -p $BACKUP_DIR
+
+# Loop over database
+for DATABASE in $DATABASES; do
+
+    BACKUP_FILE="$(/usr/bin/basename $DATABASE).sql"
+
+    echo
+    echo "Running mysqldump --defaults-group-suffix=_$DATABASE > $BACKUP_DIR/$BACKUP_FILE"
+
+    # Create backup with mysqldump
+    /usr/bin/mysqldump --defaults-group-suffix=_$DATABASE > $BACKUP_DIR/$BACKUP_FILE
+
+    echo "Running gzip"
+
+    # gzip backup
+    /bin/gzip --force $BACKUP_DIR/$BACKUP_FILE
+
+    echo "Removing old latest backup"
+
+    # Remove old latest backup
+    /bin/rm -f $BACKUPS/latest/$BACKUP_FILE.gz
+
+    echo "Copying backup to latest backup"
+
+    # Copy backup to latest backup
+    /bin/cp $BACKUP_DIR/$BACKUP_FILE.gz $BACKUPS/latest/
+
+done
+
+# Remove old backups of this type
+for BACKUP in $(/bin/ls $BACKUPS/$TYPE | head -n -$KEEP); do
+
+    echo
+    echo "Removing old backup in $BACKUPS/$TYPE/$BACKUP"
+
+    # Remove old backup
+    /bin/rm -r $BACKUPS/$TYPE/$BACKUP
+
+done
+
+echo
+echo "Backups completed and located at $BACKUP_DIR"
+echo "Copies are written to $BACKUPS/latest"
+echo
+echo "$(/bin/date)   Finished MySQL backups"
