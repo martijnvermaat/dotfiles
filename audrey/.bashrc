@@ -106,13 +106,15 @@ fi
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
+export HISTSIZE=5000
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
-PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
+#PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
+PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
 #PATH=/home/martijn/coq-trunk/bin:"${PATH}"
 
 # No beeps

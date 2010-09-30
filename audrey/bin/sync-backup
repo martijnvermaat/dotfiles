@@ -19,7 +19,7 @@ echo
 echo "$(/bin/date)   Starting synchronizing local backup"
 
 # Test if backup disk is mounted
-if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+if ! /bin/grep -q " $MOUNT_DIR " /etc/mtab; then
     echo "$(/bin/date)   Nothing to do (not connected)"
     exit 1
 fi

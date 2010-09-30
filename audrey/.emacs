@@ -28,8 +28,8 @@
 ;;(tabbar-mode t)
 
 ;; Split window horizontally by default
-(setq split-height-threshold nil)
-(setq split-width-threshold 80)
+;(setq split-height-threshold nil)
+;(setq split-width-threshold 80)
 
 ;; No splash screen
 (setq inhibit-startup-message t)
