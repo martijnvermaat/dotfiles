@@ -42,6 +42,10 @@
 ;; Show tabs for buffers
 ;;(tabbar-mode t)
 
+;; Try to split window horizontally by default
+;(setq split-height-threshold nil)
+;(setq split-width-threshold 80)
+
 ;; No splash screen
 (setq inhibit-startup-message t)
 
@@ -75,6 +79,12 @@
 (defun doe-maar-stroustrup-doen ()
   (c-set-style "stroustrup"))
 (add-hook 'java-mode-hook 'doe-maar-stroustrup-doen)
+
+;; auto-fill-mode for LaTeX
+(add-hook 'text-mode-hook
+          '(lambda ()
+             (turn-on-auto-fill)
+             (auto-fill-mode 1)))
 
 ;;(defun java-indent-four ()
 ;;  (set-variable 'tab-width 4)

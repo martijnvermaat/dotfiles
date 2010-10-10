@@ -94,5 +94,7 @@ alias vermaat='ssh vermaat@vermaat.name'
 alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
 alias tcs='ssh tcs@kits.few.vu.nl'
+alias n900='ssh -p 222 root@n900'
 
-#PATH=/opt/coq-trunk/bin:"${PATH}"
+#PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
+#PATH=/home/martijn/coq-trunk/bin:"${PATH}"
