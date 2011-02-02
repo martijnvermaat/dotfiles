@@ -7,9 +7,9 @@
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # don't overwrite GNU Midnight Commander's setting of `ignorespace'.
-HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
+export HISTCONTROL=$HISTCONTROL${HISTCONTROL+,}ignoredups
 # ... or force ignoredups and ignorespace
-HISTCONTROL=ignoreboth
+export HISTCONTROL=ignoreboth
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -21,7 +21,7 @@ shopt -s histappend
 shopt -s checkwinsize
 
 # make less more friendly for non-text input files, see lesspipe(1)
-[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
+#[ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
 # set variable identifying the chroot you work in (used in the prompt below)
 if [ -z "$debian_chroot" ] && [ -r /etc/debian_chroot ]; then
@@ -65,16 +65,25 @@ xterm*|rxvt*)
     ;;
 esac
 
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+#if [ -f ~/.bash_aliases ]; then
+#    . ~/.bash_aliases
+#fi
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
+    eval "`dircolors -b`"
     alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 
-    alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    #alias grep='grep --color=auto'
+    #alias fgrep='fgrep --color=auto'
+    #alias egrep='egrep --color=auto'
 fi
 
 # some more ls aliases
@@ -82,51 +91,14 @@ fi
 #alias la='ls -A'
 #alias l='ls -CF'
 
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
-fi
-
 # enable programmable completion features (you don't need to enable
 # this, if it's already enabled in /etc/bash.bashrc and /etc/profile
 # sources /etc/bash.bashrc).
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+if [ -f /etc/bash_completion ]; then
     . /etc/bash_completion
-fi
-
-# set PATH so it includes user's private bin if it exists
-if [ -d ~/bin ] ; then
-    PATH=~/bin:"${PATH}"
 fi
 
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 export HISTSIZE=5000
-
-alias ocaml='ledit ocaml'
-alias gemacs='/usr/bin/emacs-snapshot-gtk'
-alias l='ls -lh --group-directories-first'
-
-PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
-#PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
-PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
-#PATH=/home/martijn/coq-trunk/bin:"${PATH}"
-
-# No beeps
-if [ $DISPLAY ]; then
-    xset -b b off
-fi
-
-alias vu='LANG=en_US.UTF-8 ssh mvt600@kits.few.vu.nl'
-alias vermaat='ssh vermaat@vermaat.name'
-alias vermaatsvn='ssh vermaatsvn@vermaat.name'
-alias alienblonde='ssh -p 222 martijn@alienblonde.net'
-alias tcs='LANG=en_US.UTF-8 ssh tcs@kits.few.vu.nl'
-alias drew='ssh -p 2222 martijn@drew'
-alias tabita='ssh -p 2223 martijn@tabita'
-alias n900='ssh -p 222 root@n900'
