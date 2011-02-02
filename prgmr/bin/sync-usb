@@ -1,0 +1,51 @@
+#!/bin/sh
+
+# Synchronize some data on my external USB disk with local data
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize USB disk
+#   30 03 * * * ~/bin/sync-usb >> /var/log/sync-usb 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+MOUNT_DIR=/media/usb-linux
+BACKUP_DIR=$MOUNT_DIR/backup/priscilla/automated/$(/bin/date '+%Y-%m')
+
+echo
+echo "$(/bin/date)   Starting synchronizing USB disk"
+
+# Test if USB disk is mounted
+if ! /bin/grep -q $MOUNT_DIR /etc/mtab; then
+    echo "$(/bin/date)   Nothing to do (not connected)"
+    exit 1
+fi
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/backup/subversion"
+
+# Synchronize SVN backup
+/usr/bin/rsync -a --delete /backup/svn/ $MOUNT_DIR/backup/subversion
+
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR"
+
+# Synchronize priscilla backup
+/usr/bin/rsync -a --delete /backup/priscilla/ $BACKUP_DIR
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/music"
+
+# Synchronize music collection
+/usr/bin/rsync -a --delete /home/martijn/music/ $MOUNT_DIR/music
+
+echo "$(/bin/date)   Synchronizing $MOUNT_DIR/photos"
+
+# Synchronize photo collection
+/usr/bin/rsync -a --delete /home/martijn/Photos/ $MOUNT_DIR/photos
+
+echo "$(/bin/date)   Finished synchronizing USB disk"
