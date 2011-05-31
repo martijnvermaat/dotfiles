@@ -120,6 +120,9 @@ PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 #PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
 PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
 #PATH=/home/martijn/coq-trunk/bin:"${PATH}"
+PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk/bcftools:"${PATH}"
+PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
+PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
 
 # No beeps
 if [ $DISPLAY ]; then
@@ -141,3 +144,5 @@ export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
 export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
 export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
+
+export PERL5LIB=~/projects/gvnl/concordance/vcftools/perl
