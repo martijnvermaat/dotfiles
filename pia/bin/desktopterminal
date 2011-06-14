@@ -1,2 +1,0 @@
-#!/bin/sh
-(sleep 5 && /usr/bin/gnome-terminal --window-with-profile=BureaubladTerminal)&

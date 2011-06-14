@@ -1,2 +1,0 @@
-#!/bin/sh
-ssh -o TCPKeepAlive=yes -l mvt600 kits.few.vu.nl "${@}"

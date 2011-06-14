@@ -1,7 +1,0 @@
-(if
-    (is (application_name) "cairo-clock")
-    (begin
-       (below)
-       (wintype "dock")
-    )
-)

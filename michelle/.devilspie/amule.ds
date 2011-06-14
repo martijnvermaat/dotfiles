@@ -1,6 +1,0 @@
-(if
-    (is (application_name) "amule")
-    (begin
-       (maximize)
-    )
-)

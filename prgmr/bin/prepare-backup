@@ -1,8 +1,0 @@
-#!/bin/bash
-
-# Get installed packages list
-/usr/bin/dpkg --get-selections > /etc/installed-software.log
-
-# Get crontabs
-/usr/bin/crontab -u root -l > /etc/crontab.root
-/usr/bin/crontab -u martijn -l > /etc/crontab.martijn

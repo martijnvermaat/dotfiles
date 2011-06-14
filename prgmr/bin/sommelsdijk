@@ -1,2 +1,0 @@
-#!/bin/sh
-ssh -o TCPKeepAlive=yes -l martijn sommelsdijk.xs4all.nl "${@}"

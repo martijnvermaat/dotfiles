@@ -1,1 +1,0 @@
-caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %u"

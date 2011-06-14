@@ -1,2 +1,0 @@
-#!/bin/sh
-(sleep 25 && /usr/bin/nvclock -f -F 10)&

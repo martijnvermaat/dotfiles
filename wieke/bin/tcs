@@ -1,2 +1,0 @@
-#!/bin/sh
-ssh -o TCPKeepAlive=yes -l tcs keg.few.vu.nl "${@}"
