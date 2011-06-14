@@ -1,2 +1,10 @@
 These files are in the public domain; they can be used for whatever purpose
 with absolutely no restrictions.
+
+Originally this repository contained a directory for each host, containing
+the dotfiles for that host. But they started to diverge too mutch due to the
+manual synching that was involved.
+
+Another solution to this which I'm currently trying here is to have a master
+branch with 'common' dotfiles and a branch for each diverging host. Now I
+just need to keep the branches in sync.
