@@ -1,14 +1,22 @@
-/HumGen
+/Muziek
+/Foto's
+/Afbeeldingen/Foto's
+/Video's
 /Downloads
+/.VirtualBox
 /.evolution/mail/imap
+/.aMule
 /.thumbnails
 /.Trash
-/.VirtualBox
-/.private
+/.beagle
+/.wine
 /.cpan
-/backup-temp
-/data
-/.config/google-chrome
+/.config/google-chrome/Default/Extensions
+/.config/google-chrome/Default/History
+/.config/google-chrome/Default/Archived\ History
+/.config/google-chrome/Default/History\ Index*
+/.private
+/.remember
 .svn
 .gvfs
 urlclassifier3.sqlite

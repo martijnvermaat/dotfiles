@@ -1,3 +1,0 @@
-#!/bin/sh
-(sleep 12 && /usr/bin/gnome-terminal --window-with-profile=DesktopTerminal)&
-(sleep 12 && /opt/google/chrome/google-chrome)&

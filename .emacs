@@ -25,7 +25,7 @@
 ))
 
 ;; Show tabs for buffers
-;;(tabbar-mode t)
+;(tabbar-mode t)
 
 ;; Split window horizontally by default
 ;(setq split-height-threshold nil)
@@ -54,8 +54,8 @@
 (add-hook 'mail-send-hook 'nuke-trailing-whitespace)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
-(setq-default tab-width 8)
-(setq-default c-basic-offset 8)
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
 
 (setq-default indent-tabs-mode nil)
 
@@ -63,10 +63,14 @@
   (c-set-style "stroustrup"))
 (add-hook 'java-mode-hook 'doe-maar-stroustrup-doen)
 
-;;(defun java-indent-four ()
-;;  (set-variable 'tab-width 4)
-;;  (set-variable 'c-basic-offset 4))
-;;(add-hook 'java-mode-hook 'java-indent-four)
+;(defun java-indent-four ()
+;  (set-variable 'tab-width 4)
+;  (set-variable 'c-basic-offset 4))
+;(add-hook 'java-mode-hook 'java-indent-four)
+
+(autoload 'php-mode "php-mode" "Major mode for editing php code." t)
+(add-to-list 'auto-mode-alist '("\\.php$" . php-mode))
+(add-to-list 'auto-mode-alist '("\\.inc$" . php-mode))
 
 ;; No backupfiles
 (setq make-backup-files nil)
@@ -74,7 +78,7 @@
 (put 'upcase-region 'disabled nil)
 
 ;; Use mouse scrolling
-;;(mouse-wheel-mode 1)
+;(mouse-wheel-mode 1)
 (cond (window-system (mwheel-install)))
 
 ;; Scrollbar right
@@ -121,12 +125,9 @@
                               auto-mode-alist))
 
 ;; Javascript mode
-;(autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
-;(setq auto-mode-alist
-;      (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-;(autoload 'js2-mode "js2" "Major mode for editing Javascript programs" t)
-;(setq auto-mode-alist
-;      (cons '("\\.js$" . js2-mode) auto-mode-alist))
+(autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
+(setq auto-mode-alist
+      (cons '("\\.js$" . javascript-mode) auto-mode-alist))
 
 ;; C# mode
 (defun poor-mans-csharp-mode ()
@@ -145,12 +146,26 @@
 (setq auto-mode-alist (cons '("\.strs$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
 
+;; Proof General
+;(load-file "/usr/share/emacs/site-lisp/proofgeneral/generic/proof-site.el")
+;(eval-after-load "proof-script" '(progn
+;  (define-key proof-mode-map [(control down)]
+;                             'proof-assert-next-command-interactive)
+;  (define-key proof-mode-map [(control up)]
+;                             'proof-undo-last-successful-command)
+;  (define-key proof-mode-map [(control right)]
+;                             'proof-goto-point)
+;  (define-key proof-mode-map [(control left)]
+;                             'proof-retract-buffer)
+;))
+;(setq proof-toolbar-enable nil)
+
 ;; CSS mode
 (autoload 'css-mode "css-mode")
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
-(setq cssm-indent-level '8)
+(setq cssm-indent-level '4)
 
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")

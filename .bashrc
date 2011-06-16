@@ -50,19 +50,16 @@ if [ -n "$force_color_prompt" ]; then
 fi
 
 if [ "$color_prompt" = yes ]; then
-    #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@celly\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
-    #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\u@celly:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
 fi
 unset color_prompt force_color_prompt
 
 # If this is an xterm set the title to user@host:dir
 case "$TERM" in
 xterm*|rxvt*)
-    #PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
-    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@celly: \w\a\]$PS1"
+    PS1="\[\e]0;${debian_chroot:+($debian_chroot)}\u@\h: \w\a\]$PS1"
     ;;
 *)
     ;;
@@ -116,33 +113,12 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 
-PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
-#PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
-PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
-#PATH=/home/martijn/coq-trunk/bin:"${PATH}"
-PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk/bcftools:"${PATH}"
-PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
-PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
-
 # No beeps
 if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vu='LANG=en_US.UTF-8 ssh mvt600@kits.few.vu.nl'
-alias vermaat='ssh vermaat@vermaat.name'
-alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
-alias shark='ssh shark.lumcnet.prod.intern'
-alias europium='ssh -p 81 martijn@eu.liacs.nl'
-alias casave='ssh martijn@casave'
-alias eutest='ssh -p 81 martijn@eutest'
+alias n900='ssh -p 222 root@n900'
 alias prgmr='ssh -p 404 martijn@martijn.xen.prgmr.com'
-
-export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
-export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
-export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
-
-export PERL5LIB=~/projects/gvnl/concordance/vcftools/perl
+alias europium='ssh -p 81 martijn@eu.liacs.nl'
