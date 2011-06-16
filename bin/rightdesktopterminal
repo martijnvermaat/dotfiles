@@ -1,3 +1,0 @@
-#!/bin/sh
-(sleep 15 && /usr/bin/gnome-terminal --window-with-profile=RightDesktopTerminal)&
-(sleep 15 && evolution)&
