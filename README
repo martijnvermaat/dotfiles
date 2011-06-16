@@ -1,5 +1,5 @@
-These files are in the public domain; they can be used for whatever purpose
-with absolutely no restrictions.
+Unless stated otherwise, these files are in the public domain; they can be
+used for whatever purpose with absolutely no restrictions.
 
 Originally this repository contained a directory for each host, containing
 the dotfiles for that host. But they started to diverge too mutch due to the
