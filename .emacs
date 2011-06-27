@@ -54,8 +54,8 @@
 (add-hook 'mail-send-hook 'nuke-trailing-whitespace)
 (add-hook 'write-file-hooks 'nuke-trailing-whitespace)
 
-(setq-default tab-width 8)
-(setq-default c-basic-offset 8)
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
 
 (setq-default indent-tabs-mode nil)
 
@@ -132,9 +132,9 @@
 (defun poor-mans-csharp-mode ()
   (java-mode)
   (setq mode-name "C#")
-  (set-variable 'tab-width 8)
+  (set-variable 'tab-width 4)
   (set-variable 'indent-tabs-mode t)
-  (set-variable 'c-basic-offset 8)
+  (set-variable 'c-basic-offset 4)
   (c-set-offset 'inline-open 0)
   (c-set-offset 'case-label 0)
 )
@@ -150,7 +150,7 @@
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
-(setq cssm-indent-level '8)
+(setq cssm-indent-level '4)
 
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")
