@@ -49,12 +49,29 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+function ps_svn() {
+    local REV=$(svnversion 2>/dev/null)
+    [ $? -eq 0 ] || return
+    [ "$REV" == 'exported' ] && return
+    echo -n "($REV)" | sed -e 's/M/\*/'
+}
+
+function ps_git() {
+    local BRANCH=$(__git_ps1)
+    [ "x$BRANCH" != 'x' ] || return
+    echo -n "$BRANCH" | sed -e 's/^ //' -e 's/)//'
+    local STATUS=$(git status 2>/dev/null)
+    echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
+    echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be commited' && echo -n \*
+    echo -n \)
+}
+
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@celly\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\u@celly:\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@celly:$(ps_svn)$(ps_git)\w\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -115,6 +132,7 @@ alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
+alias py='ipython'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 #PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
@@ -136,8 +154,10 @@ alias alienblonde='ssh -p 222 martijn@alienblonde.net'
 alias shark='ssh shark.lumcnet.prod.intern'
 alias europium='ssh -p 81 martijn@eu.liacs.nl'
 alias casave='ssh martijn@casave'
-alias eutest='ssh -p 81 martijn@eutest'
+alias zwarterita='ssh -p 81 martijn@zwarterita'
 alias prgmr='ssh -p 404 martijn@martijn.xen.prgmr.com'
+alias zwaluwtiran='ssh martijn@zwaluwtiran'
+alias zwaveltiran='ssh martijn@zwaveltiran'
 
 export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
