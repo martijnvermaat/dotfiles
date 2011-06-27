@@ -62,7 +62,7 @@ function ps_git() {
     echo -n "$BRANCH" | sed -e 's/^ //' -e 's/)//'
     local STATUS=$(git status 2>/dev/null)
     echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
-    echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be commited' && echo -n \*
+    echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be committed' && echo -n \*
     echo -n \)
 }
 
