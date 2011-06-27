@@ -53,17 +53,17 @@ function ps_svn() {
     local REV=$(svnversion 2>/dev/null)
     [ $? -eq 0 ] || return
     [ "$REV" == 'exported' ] && return
-    echo -n "($REV)" | sed -e 's/M/\*/'
+    echo -n "[r$REV]" | sed -e 's/M/\*/'
 }
 
 function ps_git() {
     local BRANCH=$(__git_ps1)
     [ "x$BRANCH" != 'x' ] || return
-    echo -n "$BRANCH" | sed -e 's/^ //' -e 's/)//'
+    echo -n "$BRANCH" | sed -e 's/^ (/\[:/' -e 's/)//'
     local STATUS=$(git status 2>/dev/null)
     echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
     echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be committed' && echo -n \*
-    echo -n \)
+    echo -n \]
 }
 
 if [ "$color_prompt" = yes ]; then
@@ -71,7 +71,7 @@ if [ "$color_prompt" = yes ]; then
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@celly\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\u@celly:$(ps_svn)$(ps_git)\w\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@celly:\w$(ps_svn)$(ps_git)\$ '
 fi
 unset color_prompt force_color_prompt
 
