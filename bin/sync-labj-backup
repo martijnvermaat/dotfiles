@@ -54,5 +54,7 @@ echo "$(/bin/date)   Copying from $BACKUP_TEMP to $BACKUP_DIR/home.tar"
 rm -f $BACKUP_DIR/home.tar.gz
 /bin/tar -czf $BACKUP_DIR/home.tar.gz $BACKUP_TEMP
 
+echo "$(/bin/date)   Backup is $(/usr/bin/du -sh $BACKUP_DIR/home.tar.gz | cut -f1) in size"
+
 echo "$(/bin/date)   Finished synchronizing lab-j folder backup"
 echo
