@@ -141,6 +141,7 @@ PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
 PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk/bcftools:"${PATH}"
 PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
 PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
+PATH=/home/martijn/projects/bamtools/bamtools/bin:"${PATH}"
 
 # No beeps
 if [ $DISPLAY ]; then
