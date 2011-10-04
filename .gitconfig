@@ -1,7 +1,9 @@
 [user]
-	name = Martijn Vermaat
-	email = martijn@vermaat.name
+name = Martijn Vermaat
+email = martijn@vermaat.name
+
 [color]
-	diff = auto
-	status = auto
-	branch = auto
+ui = auto
+
+[core]
+pager = less -R

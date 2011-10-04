@@ -12,7 +12,7 @@
 
 MOUNT_DIR=/home/martijn/HumGen
 BACKUP_DIR=$MOUNT_DIR/lab-j/Martijn/Backup
-BACKUP_TEMP=/home/martijn/backup-temp
+BACKUP_TEMP=/home/martijn/.backup-temp
 
 echo
 echo "$(/bin/date)   Starting synchronizing lab-j folder backup"

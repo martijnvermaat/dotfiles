@@ -1,0 +1,9 @@
+#!/bin/sh
+# SVN Diff Wrapper for Meld
+# KOG 2008-02
+# http://www.nabble.com/How-to-use-meld-with-'svn-diff'-td16765244.html
+
+left="$6"
+right="$7"
+
+meld "$left" "$right"

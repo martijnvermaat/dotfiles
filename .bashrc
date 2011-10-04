@@ -127,12 +127,15 @@ export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 export HISTSIZE=5000
+export LESS="-S"
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
+alias igv='/home/martijn/projects/IGV/IGV_2.0.3/igv.sh'
+alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 #PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
@@ -142,6 +145,8 @@ PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk
 PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
 PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
 PATH=/home/martijn/projects/bamtools/bamtools/bin:"${PATH}"
+PATH=/home/martijn/projects/bedtools/bin:"${PATH}"
+PATH=/home/martijn/projects/muscle/muscle3.8.31/src:"${PATH}"
 
 # No beeps
 if [ $DISPLAY ]; then
@@ -159,6 +164,8 @@ alias zwarterita='ssh -p 81 martijn@zwarterita'
 alias prgmr='ssh -p 404 martijn@martijn.xen.prgmr.com'
 alias zwaluwtiran='ssh martijn@zwaluwtiran'
 alias zwaveltiran='ssh martijn@zwaveltiran'
+alias celdery='ssh -p 22222 martijn@celdery'
+alias isilon='ssh gonl@Nas.isilon.lumcnet.prod.intern'
 
 export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig

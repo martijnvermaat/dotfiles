@@ -6,7 +6,7 @@
 /.VirtualBox
 /.private
 /.cpan
-/backup-temp
+/.backup-temp
 /data
 /.config/google-chrome
 .svn
