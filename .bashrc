@@ -127,7 +127,7 @@ export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 export HISTSIZE=5000
-export LESS="-S"
+export LESS="-S -R"
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
