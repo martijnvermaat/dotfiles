@@ -5,6 +5,7 @@
 /.Trash
 /.VirtualBox
 /.private
+/.netrc
 /.cpan
 /.backup-temp
 /data
