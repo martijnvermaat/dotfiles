@@ -61,6 +61,8 @@ function ps_git() {
     [ "x$BRANCH" != 'x' ] || return
     echo -n "$BRANCH" | sed -e 's/^ (/\[:/' -e 's/)//'
     local STATUS=$(git status 2>/dev/null)
+    echo "$STATUS" | grep -q 'have diverged' && echo -n !
+    echo "$STATUS" | grep -q 'Your branch is behind' && echo -n -
     echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
     echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be committed' && echo -n \*
     echo -n \]
