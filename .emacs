@@ -50,9 +50,15 @@
 (setq next-line-add-newlines nil)
 
 ;; Remove trailing whitespace
-(autoload 'nuke-trailing-whitespace "nuke-trailing-whitespace" nil t)
-(add-hook 'mail-send-hook 'nuke-trailing-whitespace)
-(add-hook 'write-file-hooks 'nuke-trailing-whitespace)
+(defun my-delete-trailing-blank-lines ()
+  (interactive)
+  (save-excursion
+    (save-restriction
+      (widen)
+      (goto-char (point-max))
+      (delete-blank-lines))))
+(add-hook 'before-save-hook 'delete-trailing-whitespace)
+(add-hook 'before-save-hook 'my-delete-trailing-blank-lines)
 
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
@@ -128,6 +134,10 @@
 ;(setq auto-mode-alist
 ;      (cons '("\\.js$" . js2-mode) auto-mode-alist))
 
+;; CoffeeScript mode
+(add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
+(require 'coffee-mode)
+
 ;; C# mode
 (defun poor-mans-csharp-mode ()
   (java-mode)
@@ -151,6 +161,10 @@
 (add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level '4)
+
+;; Less CSS mode
+(add-to-list 'load-path "~/.emacs.d/vendor/less-css-mode")
+(require 'less-css-mode)
 
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")
