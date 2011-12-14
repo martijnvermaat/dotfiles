@@ -64,7 +64,8 @@ function ps_git() {
     echo "$STATUS" | grep -q 'have diverged' && echo -n !
     echo "$STATUS" | grep -q 'Your branch is behind' && echo -n -
     echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
-    echo "$STATUS" | grep -q 'Changed but not updated\|Changes to be committed' && echo -n \*
+    echo "$STATUS" | grep -q 'Changes to be committed' && echo -n \#
+    echo "$STATUS" | grep -q 'Changed but not updated\|Changes not staged for commit' && echo -n \*
     echo -n \]
 }
 
