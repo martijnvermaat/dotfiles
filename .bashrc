@@ -159,15 +159,16 @@ alias vu='LANG=en_US.UTF-8 ssh mvt600@kits.few.vu.nl'
 alias vermaat='ssh vermaat@vermaat.name'
 alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
-alias shark='ssh shark.lumcnet.prod.intern'
+alias shark='ssh mvermaat1@shark.lumcnet.prod.intern'
 alias europium='ssh -p 81 martijn@eu.liacs.nl'
 alias casave='ssh martijn@casave'
 alias zwarterita='ssh -p 81 martijn@zwarterita'
 alias prgmr='ssh -p 404 martijn@martijn.xen.prgmr.com'
-alias zwaluwtiran='ssh martijn@zwaluwtiran'
-alias zwaveltiran='ssh martijn@zwaveltiran'
+alias zwaluwtiran='ssh martijn@zwaluwtiran.lumc.nl'
+alias zwaveltiran='ssh martijn@zwaveltiran.lumc.nl'
 alias celdery='ssh -p 22222 martijn@celdery'
 alias isilon='ssh gonl@Nas.isilon.lumcnet.prod.intern'
+alias ngslims='ssh mvermaat1@ngslims'
 
 export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
@@ -176,3 +177,10 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
 
 export PERL5LIB=~/projects/gvnl/concordance/vcftools/perl
+
+# virtualenvwrapper
+export WORKON_HOME=~/.virtualenvs
+source /usr/local/bin/virtualenvwrapper.sh
+export PIP_VIRTUALENV_BASE=$WORKON_HOME
+export PIP_REQUIRE_VIRTUALENV=true
+export PIP_RESPECT_VIRTUALENV=true
