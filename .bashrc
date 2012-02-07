@@ -49,11 +49,28 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
+function get_svn_branch {
+  # Capture the output of the "git status" command.
+  svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
+
+  # Get the name of the branch.
+  branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
+  trunk_pattern="^URL: .*/trunk(/.*)?$"
+  if [[ ${svn_info} =~ $branch_pattern ]]; then
+    echo ${BASH_REMATCH[2]}
+  elif [[ ${svn_info} =~ $trunk_pattern ]]; then
+    echo 'trunk'
+  fi
+}
+
 function ps_svn() {
     local REV=$(svnversion 2>/dev/null)
     [ $? -eq 0 ] || return
     [ "$REV" == 'exported' ] && return
-    echo -n "[r$REV]" | sed -e 's/M/\*/'
+    echo -n \[
+    local BRANCH=$(get_svn_branch)
+    echo "$BRANCH" | grep -q '.' && echo -n "$BRANCH:"
+    echo -n "$REV]" | sed -e 's/M/\*/'
 }
 
 function ps_git() {
@@ -156,9 +173,6 @@ if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vu='LANG=en_US.UTF-8 ssh mvt600@kits.few.vu.nl'
-alias vermaat='ssh vermaat@vermaat.name'
-alias vermaatsvn='ssh vermaatsvn@vermaat.name'
 alias alienblonde='ssh -p 222 martijn@alienblonde.net'
 alias shark='ssh mvermaat1@shark.lumcnet.prod.intern'
 alias europium='ssh -p 81 martijn@eu.liacs.nl'
