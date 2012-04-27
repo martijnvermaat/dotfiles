@@ -27,6 +27,8 @@
 ;; Show tabs for buffers
 ;;(tabbar-mode t)
 
+(setq save-abbrevs nil)
+
 ;; Split window horizontally by default
 ;(setq split-height-threshold nil)
 ;(setq split-width-threshold 80)

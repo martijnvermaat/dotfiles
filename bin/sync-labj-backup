@@ -20,10 +20,13 @@ BACKUP_TEMP=/home/martijn/.backup-temp
 echo
 echo "$(/bin/date)   Starting synchronizing lab-j folder backup"
 
+UNMOUNT="echo Not unmounting because it was already mounted"
+
 # Test if backup disk is mounted
 if ! /bin/grep -q -w $MOUNT_DIR /etc/mtab; then
     echo "$(/bin/date)   Mounting backup directory filesystem"
     /bin/mount $MOUNT_DIR
+    UNMOUNT="/bin/umount $MOUNT_DIR"
 fi
 
 # Test again
@@ -58,6 +61,10 @@ rm -f $BACKUP_DIR/home.tar.gz
 /bin/tar -czf $BACKUP_DIR/home.tar.gz $BACKUP_TEMP
 
 echo "$(/bin/date)   Backup is $(/usr/bin/du -sh $BACKUP_DIR/home.tar.gz | cut -f1) in size"
+
+echo "$(/bin/date)   Unmounting backup directory filesystem"
+
+$UNMOUNT
 
 echo "$(/bin/date)   Finished synchronizing lab-j folder backup"
 echo

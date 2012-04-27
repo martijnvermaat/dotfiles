@@ -1,0 +1,2 @@
+#!/bin/sh
+sleep 20 && /usr/bin/gnome-terminal --window-with-profile=DellDesktopTerminal

@@ -146,7 +146,7 @@ fi
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
-export HISTSIZE=5000
+export HISTSIZE=50000
 export LESS="-S -R"
 
 alias ocaml='ledit ocaml'
