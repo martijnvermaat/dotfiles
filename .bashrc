@@ -147,6 +147,7 @@ export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
 export HISTSIZE=50000
+export HISTFILESIZE=100000
 export LESS="-S -R"
 
 alias ocaml='ledit ocaml'
@@ -195,7 +196,7 @@ export PERL5LIB=~/projects/gvnl/concordance/vcftools/perl
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
-source /usr/local/bin/virtualenvwrapper.sh
+#source /usr/local/bin/virtualenvwrapper.sh
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_RESPECT_VIRTUALENV=true

@@ -1,0 +1,18 @@
+#!/bin/sh
+
+/bin/mount ~/HumGen
+
+/usr/bin/devilspie2 &
+
+sleep 2
+
+/usr/bin/gnome-terminal --window-with-profile=Left &
+/usr/bin/gnome-terminal --window-with-profile=Right &
+#/usr/bin/gnome-terminal --window-with-profile=Alienblonde &
+
+sleep 1
+
+/usr/bin/google-chrome &
+#/usr/bin/google-chrome --incognito --app='http://mail.vermaat.name' --user-data-dir=~/.config/google-chrome-vermaat &
+
+/usr/bin/evolution &
