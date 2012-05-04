@@ -1,10 +1,16 @@
 These files are in the public domain; they can be used for whatever purpose
 with absolutely no restrictions.
 
-Originally this repository contained a directory for each host, containing
-the dotfiles for that host. But they started to diverge too mutch due to the
-manual synching that was involved.
+To tackle the problem of using dotfiles on multiple hosts I tried several
+approaches. Originally this repository contained a directory for each host,
+containing the dotfiles for that host. But they started to diverge too mutch
+due to the manual synching that was involved.
 
-Another solution to this which I'm currently trying here is to have a master
-branch with 'common' dotfiles and a branch for each diverging host. Now I
-just need to keep the branches in sync.
+The next approach was to have a master branch with 'common' dotfiles and a
+branch for each diverging host. Now I just needed to keep the branches in
+sync. But as it turned out I do not take the effort to maintain the branches.
+
+So the current approach is to have just one set of dotfiles which ideally
+should apply to all hosts universally. Where I need divergence, I either do
+that inside the dotfile if possible (using for example conditionals), or by
+using separate dotfiles per host (ideally referenced by one common dotfile).
