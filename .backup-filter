@@ -1,4 +1,3 @@
-/HumGen
 /Downloads
 /.evolution/mail/imap
 /.thumbnails
@@ -7,8 +6,6 @@
 /.private
 /.netrc
 /.cpan
-/.backup-temp
-/data
 /.config/google-chrome
 .svn
 .gvfs

@@ -50,7 +50,7 @@ fi
 echo "$(/bin/date)   Synchronizing $BACKUP_TEMP"
 
 # Synchronize /home/martijn
-/usr/bin/rsync -a --delete --delete-excluded --filter ':- .backup-filter' --max-size=80m /home/martijn/ $BACKUP_TEMP
+/usr/bin/rsync -a --delete --delete-excluded --filter ':- .backup-filter' --filter ':- .backup-filter.lumc' --max-size=80m /home/martijn/ $BACKUP_TEMP
 
 echo "$(/bin/date)   Copying from $BACKUP_TEMP to $BACKUP_DIR/home.tar"
 
