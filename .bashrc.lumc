@@ -1,3 +1,6 @@
+# Hack to get rid of ugly big hostname in prompt at LUMC
+PS1=${PS1//\h/celly}
+
 PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk/bcftools:"${PATH}"
 PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
 PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
