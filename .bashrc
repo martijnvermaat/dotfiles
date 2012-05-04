@@ -162,41 +162,26 @@ PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 #PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
 PATH=/home/martijn/coq-8.3-rc1/bin:"${PATH}"
 #PATH=/home/martijn/coq-trunk/bin:"${PATH}"
-PATH=/home/martijn/projects/samtools-trunk:/home/martijn/projects/samtools-trunk/bcftools:"${PATH}"
-PATH=/home/martijn/projects/gvnl/concordance/vcftools/bin:/home/martijn/projects/gvnl/concordance/vcftools/cpp:"${PATH}"
-PATH=/home/martijn/projects/gvnl/concordance/tabix:"${PATH}"
-PATH=/home/martijn/projects/bamtools/bamtools/bin:"${PATH}"
-PATH=/home/martijn/projects/bedtools/bin:"${PATH}"
-PATH=/home/martijn/projects/muscle/muscle3.8.31/src:"${PATH}"
 
 # No beeps
 if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias alienblonde='ssh -p 222 martijn@alienblonde.net'
-alias shark='ssh mvermaat1@shark.lumcnet.prod.intern'
-alias europium='ssh -p 81 martijn@eu.liacs.nl'
-alias casave='ssh martijn@casave'
-alias zwarterita='ssh -p 81 martijn@zwarterita'
-alias prgmr='ssh -p 404 martijn@martijn.xen.prgmr.com'
-alias zwaluwtiran='ssh martijn@zwaluwtiran.lumc.nl'
-alias zwaveltiran='ssh martijn@zwaveltiran.lumc.nl'
-alias celdery='ssh -p 22222 martijn@celdery'
-alias isilon='ssh gonl@Nas.isilon.lumcnet.prod.intern'
-alias ngslims='ssh mvermaat1@ngslims'
-
-export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
-export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
-export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
-export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
-
-export PERL5LIB=~/projects/gvnl/concordance/vcftools/perl
+alias vermaat='ssh vermaat'
+alias alienblonde='ssh alienblonde'
+alias shark='ssh shark'
+alias europium='ssh europium'
+alias casave='ssh casave'
+alias zwarterita='ssh zwarterita'
+alias zwaluwtiran='ssh zwaluwtiran'
+alias zwaveltiran='ssh zwaveltiran'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
-#source /usr/local/bin/virtualenvwrapper.sh
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+    source /usr/local/bin/virtualenvwrapper.sh
+fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_RESPECT_VIRTUALENV=true
