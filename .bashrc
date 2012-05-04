@@ -185,3 +185,8 @@ fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_REQUIRE_VIRTUALENV=true
 export PIP_RESPECT_VIRTUALENV=true
+
+# Source site-specific configuration if it exists
+if [ -f ~/.bashrc.site ]; then
+    source ~/.bashrc.site
+fi
