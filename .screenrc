@@ -1,1 +1,14 @@
+# http://serverfault.com/questions/3740/what-are-useful-screenrc-settings
+
+startup_message off
+vbell off
 caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %u"
+
+#hardstatus alwayslastline
+#hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
+
+# Start counting windows from 1
+bind c screen 1
+bind ^c screen 1
+bind 0 select 10
+screen 1
