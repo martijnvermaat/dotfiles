@@ -1,10 +1,10 @@
 #!/bin/sh
 
-/bin/mount ~/HumGen
+#/bin/mount ~/HumGen
 
 /usr/bin/devilspie2 &
 
-sleep 2
+sleep 10
 
 /usr/bin/gnome-terminal --window-with-profile=Left &
 /usr/bin/gnome-terminal --window-with-profile=Right &

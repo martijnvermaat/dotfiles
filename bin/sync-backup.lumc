@@ -6,7 +6,7 @@
 #
 #   $ crontab -l
 #   # Synchronize lab-j folder backup
-#   30 03 * * * ~/bin/sync-labj-backup >> /var/log/sync-labj-backup 2>&1
+#   30 03 * * * ~/bin/sync-backup.lumc >> /var/log/sync-backup 2>&1
 #
 # Copyright (c) 2007, Martijn Vermaat
 
