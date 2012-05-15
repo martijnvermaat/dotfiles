@@ -1,5 +1,22 @@
-Unless stated otherwise, these files are in the public domain; they can be
-used for whatever purpose with absolutely no restrictions.
+Dotfiles
+========
+
+I share these dotfiles over all hosts I have an account on. This means they
+are really only tested on Debian and Ubuntu systems, although most of it is
+also working fine for me on Red Hat and Solaris. My shell and editor are Bash
+and Emacs, respectively.
+
+
+Bootstrapping
+-------------
+
+There is no sophisticated bootstrapping involved here. On a new account I
+usually just clone this repository in `~/projects/dotfiles` and create
+symbolic links from my home directory on a per-file basis.
+
+
+Sharing over different hosts
+----------------------------
 
 To tackle the problem of using dotfiles on multiple hosts I tried several
 approaches. Originally this repository contained a directory for each host,
@@ -14,3 +31,10 @@ So the current approach is to have just one set of dotfiles which ideally
 should apply to all hosts universally. Where I need divergence, I either do
 that inside the dotfile if possible (using for example conditionals), or by
 using separate dotfiles per host (ideally referenced by one common dotfile).
+
+
+License
+-------
+
+Unless stated otherwise, these files are in the public domain; they can be
+used for whatever purpose with absolutely no restrictions.
