@@ -170,6 +170,7 @@ fi
 
 alias vermaat='ssh vermaat'
 alias alienblonde='ssh alienblonde'
+alias zoe='ssh zoe'
 alias shark='ssh shark'
 alias europium='ssh europium'
 alias casave='ssh casave'
