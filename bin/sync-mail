@@ -1,0 +1,22 @@
+#!/bin/bash
+
+# Synchronize local mail copy
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize mail
+#   30 02 * * * ~/bin/sync-mail >> /var/log/sync-mail 2>&1
+#
+# Martijn Vermaat <martijn@vermaat.name>
+
+set -e
+set -u
+
+echo
+echo "$(/bin/date)   Starting synchronizing mail"
+
+/usr/bin/offlineimap -u Noninteractive.Quiet
+
+echo "$(/bin/date)   Finished synchronizing mail"
+echo

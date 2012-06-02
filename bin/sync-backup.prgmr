@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# Synchronize local backup of system files and full off-site backup
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize local backup
+#   30 03 * * * ~/bin/sync-backup >> /var/log/sync-backup 2>&1
+#
+# Copyright (c) 2007, Martijn Vermaat
+
+BACKUP_DIR=/home/martijn/backup/prgmr/automated/$(/bin/date '+%Y-%m')
+REMOTE_HOST=zoe.prgmr-backup
+REMOTE_DIR=/home/prgmr-backup/backup
+
+echo
+echo "$(/bin/date)   Starting synchronizing local backup"
+
+# Make sure backup dir exists
+if [ ! -d $BACKUP_DIR ]; then
+    echo "$(/bin/date)   Creating backup directory"
+    /bin/mkdir -p $BACKUP_DIR
+fi
+
+# Get installed packages list
+/usr/bin/dpkg --get-selections > /etc/installed-software.log
+
+# Get crontabs
+/usr/bin/crontab -u root -l > /etc/crontab.root
+/usr/bin/crontab -u martijn -l > /etc/crontab.martijn
+
+echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
+
+# Synchronize /etc
+/usr/bin/rsync -a --delete /etc/ $BACKUP_DIR/etc
+
+echo "$(/bin/date)   Synchronizing $REMOTE_HOST:$REMOTE_DIR"
+
+# Synchronize off-site backup
+/usr/bin/rsync -a --delete --delete-excluded --filter ':- .backup-filter' --filter ':- .backup-filter.prgmr' --rsh=ssh /home/martijn/ $REMOTE_HOST:$REMOTE_DIR
+
+echo "$(/bin/date)   Finished synchronizing local backup"
+echo

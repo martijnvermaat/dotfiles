@@ -1,0 +1,36 @@
+#!/bin/bash
+
+# Synchronize local clones of humgenprojects git repositories
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize humgenprojects git
+#   30 03 * * * ~/bin/sync-humgenprojects-git >> /var/log/sync-humgenprojects-git 2>&1
+#
+# Martijn Vermaat <martijn@vermaat.name>
+
+set -e
+set -u
+
+REMOTES=https://humgenprojects.lumc.nl/git
+CLONES=/home/martijn/backup/humgenprojects/git
+REPOS="gridscheduler.git gonl-mt.git wiggelen.git martijn/bio-playground.git martijn/systems-biology.git martijn/snp-annotation-pacthoen.git martijn/gonl-mt-test.git martijn/pipeline.git martijn/ngs-slides.git testing.git varda-web.git varda-server.git varda-client.git gitolite-admin.git"
+
+echo
+echo "$(/bin/date)   Starting synchronizing humgenprojects git"
+
+for REPO in $REPOS; do
+    # Strip possible subdirectory
+    NAME="${REPO##*/}"
+    if [ ! -d "$CLONES/$NAME" ]; then
+        echo "$(/bin/date)   Cloning new repository $REPO"
+        git clone --bare "$REMOTES/$REPO" "$CLONES/$NAME"
+    else
+        echo "$(/bin/date)   Fetching updates from repository $REPO"
+        cd "$CLONES/$NAME" && git fetch --all --tags
+    fi
+done
+
+echo "$(/bin/date)   Finished synchronizing humgenprojects git"
+echo
