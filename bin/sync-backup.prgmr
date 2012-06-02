@@ -38,7 +38,7 @@ echo "$(/bin/date)   Synchronizing $BACKUP_DIR/etc"
 echo "$(/bin/date)   Synchronizing $REMOTE_HOST:$REMOTE_DIR"
 
 # Synchronize off-site backup
-/usr/bin/rsync -a --delete --rsh=ssh /home/martijn/ $REMOTE_HOST:$REMOTE_DIR
+/usr/bin/rsync -a --delete --delete-excluded --filter ':- .backup-filter' --filter ':- .backup-filter.prgmr' --rsh=ssh /home/martijn/ $REMOTE_HOST:$REMOTE_DIR
 
 echo "$(/bin/date)   Finished synchronizing local backup"
 echo
