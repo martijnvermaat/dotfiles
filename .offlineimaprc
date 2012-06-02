@@ -1,0 +1,20 @@
+[general]
+accounts = martijn_gmail
+maxsyncaccounts = 3
+ui = basic
+
+[Account martijn_gmail]
+localrepository = martijn_gmail_local
+remoterepository = martijn_gmail_remote
+
+[Repository martijn_gmail_local]
+type = Maildir
+localfolders = /home/martijn/backup/mail/martijn-gmail
+
+[Repository martijn_gmail_remote]
+type = Gmail
+remoteuser = martijn@vermaat.name
+remotepassfile = /home/martijn/.offlineimap.martijn-gmail.passwd
+maxconnections = 1
+realdelete = no
+readonly = True

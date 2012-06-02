@@ -16,7 +16,7 @@ set -u
 echo
 echo "$(/bin/date)   Starting synchronizing mail"
 
-/usr/bin/offlineimap -u Noninteractive.Quiet
+/usr/bin/offlineimap -u quiet
 
 echo "$(/bin/date)   Finished synchronizing mail"
 echo
