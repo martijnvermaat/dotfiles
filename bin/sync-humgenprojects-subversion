@@ -1,0 +1,34 @@
+#!/bin/bash
+
+# Synchronize local clones of humgenprojects subversion repositories
+#
+# To run periodically from a scheduler like cron, for example:
+#
+#   $ crontab -l
+#   # Synchronize humgenprojects subversion
+#   30 02 * * * ~/bin/sync-humgenprojects-subversion >> /var/log/sync-humgenprojects-subversion 2>&1
+#
+# Martijn Vermaat <martijn@vermaat.name>
+
+set -e
+set -u
+
+SERVER=https://humgenprojects.lumc.nl/svn
+CHECKOUTS=/home/martijn/backup/humgenprojects/subversion
+REPOS="ngs-data ngs-misc GAPSS3 mutalyzer"
+
+echo
+echo "$(/bin/date)   Starting synchronizing humgenprojects subversion"
+
+for REPO in $REPOS; do
+    if [ ! -d "$CHECKOUTS/$REPO" ]; then
+        echo "$(/bin/date)   Checking out new repository $REPO"
+        svn co "$SERVER/$REPO" "$CHECKOUTS/$REPO"
+    else
+        echo "$(/bin/date)   Fetching updates from repository $REPO"
+        cd "$CHECKOUTS/$REPO" && svn up
+    fi
+done
+
+echo "$(/bin/date)   Finished synchronizing humgenprojects subversion"
+echo
