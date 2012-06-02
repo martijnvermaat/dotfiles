@@ -15,7 +15,7 @@ set -u
 
 REMOTES=https://humgenprojects.lumc.nl/git
 CLONES=/home/martijn/backup/humgenprojects/git
-REPOS="gridscheduler.git gonl-mt.git wiggelen.git martijn/bio-playground.git martijn/systems-biology.git martijn/snp-annotation-pacthoen.git martijn/gonl-mt-test.git martijn/pipeline.git martijn/ngs-slides.git testing.git varda-web.git varda-server.git varda-client.git gitolite-admin.git"
+REPOS="gridscheduler.git gonl-mt.git wiggelen.git martijn/bio-playground.git martijn/systems-biology.git martijn/snp-annotation-pacthoen.git martijn/gonl-mt-test.git martijn/pipeline.git martijn/ngs-slides.git varda-web.git varda-server.git varda-client.git gitolite-admin.git"
 
 echo
 echo "$(/bin/date)   Starting synchronizing humgenprojects git"
