@@ -1,0 +1,10 @@
+
+[Desktop Entry]
+Type=Application
+Exec=/home/martijn/bin/login.aida
+Hidden=false
+X-GNOME-Autostart-enabled=true
+Name[en_US]=Login script
+Name=Login script
+Comment[en_US]=Starts Devil's Pie and Gnome Terminal
+Comment=Starts Devil's Pie and Gnome Terminal
