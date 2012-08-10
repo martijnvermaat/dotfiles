@@ -178,6 +178,7 @@ alias casave='ssh casave'
 alias zwarterita='ssh zwarterita'
 alias zwaluwtiran='ssh zwaluwtiran'
 alias zwaveltiran='ssh zwaveltiran'
+alias lgtc='ssh lgtc.nl'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
