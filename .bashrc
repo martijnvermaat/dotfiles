@@ -143,6 +143,7 @@ if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
+export TERM=xterm-256color
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
@@ -155,7 +156,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.0.3/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.1.21/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"

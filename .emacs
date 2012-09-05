@@ -172,3 +172,8 @@
 (autoload 'rnc-mode "rnc-mode")
 (setq auto-mode-alist
 (cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))
+
+;; Tomorrow theme
+(add-to-list 'load-path "~/.emacs.d/vendor/tomorrow-theme")
+(require 'color-theme-tomorrow)
+(color-theme-tomorrow-night)

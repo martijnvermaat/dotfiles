@@ -10,4 +10,4 @@ eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 
 export PATH="${PATH}:/home/mvermaat1/lh3-misc/seq/seqtk"
 
-export TERM='xterm'
+#export TERM='xterm'
