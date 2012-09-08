@@ -1,5 +1,8 @@
 # http://serverfault.com/questions/3740/what-are-useful-screenrc-settings
 
+# Erase background with current bg color
+defbce "on"
+
 startup_message off
 vbell off
 defscrollback 5000
