@@ -156,7 +156,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.1.21/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.1.23/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
@@ -169,17 +169,17 @@ if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vermaat='ssh vermaat'
-alias alienblonde='ssh alienblonde'
-alias zoe='ssh zoe'
+alias vermaat='ssh -t vermaat screen -Rd default'
+alias alienblonde='ssh -t alienblonde screen -Rd default'
+alias zoe='ssh -t zoe screen -Rd default'
 alias n900='ssh n900'
-alias shark='ssh shark'
+alias shark='ssh -t shark screen -Rd default'
 alias europium='ssh europium'
 alias casave='ssh casave'
-alias zwarterita='ssh zwarterita'
-alias zwaluwtiran='ssh zwaluwtiran'
-alias zwaveltiran='ssh zwaveltiran'
-alias lgtc='ssh lgtc.nl'
+alias zwarterita='ssh -t zwarterita screen -Rd default'
+alias zwaluwtiran='ssh -t zwaluwtiran screen -Rd default'
+alias zwaveltiran='ssh -t zwaveltiran screen -Rd default'
+alias lgtc='ssh -t lgtc.nl screen -Rd default'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
