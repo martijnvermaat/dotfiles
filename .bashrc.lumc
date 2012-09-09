@@ -8,8 +8,8 @@ PATH=/home/martijn/projects/bamtools/bamtools/bin:"${PATH}"
 PATH=/home/martijn/projects/bedtools/bin:"${PATH}"
 PATH=/home/martijn/projects/muscle/muscle3.8.31/src:"${PATH}"
 
-alias vermaat='ssh vermaat.lumc'
-alias alienblonde='ssh alienblonde.lumc'
+alias vermaat='ssh -t vermaat.lumc screen -Rd default'
+alias alienblonde='ssh -t alienblonde.lumc screen -Rd default'
 
 export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
