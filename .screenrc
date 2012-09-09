@@ -6,7 +6,7 @@ defbce "on"
 startup_message off
 vbell off
 defscrollback 5000
-caption always "%-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %u"
+caption always "%{+b Kw}%H%{-} %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %u"
 
 #hardstatus alwayslastline
 #hardstatus string '%{= kG}[ %{G}%H %{g}][%= %{= kw}%?%-Lw%?%{r}(%{W}%n*%f%t%?(%u)%?%{r})%{w}%?%+Lw%?%?%= %{g}][%{B} %d/%m %{W}%c %{g}]'
