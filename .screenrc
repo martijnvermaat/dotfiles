@@ -4,6 +4,7 @@
 defbce "on"
 
 startup_message off
+altscreen on
 vbell off
 defscrollback 5000
 caption always "%{+b Kw}%H%{-} %-Lw%{= BW}%50>%n%f* %t%{-}%+Lw%< %u"
