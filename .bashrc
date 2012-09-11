@@ -169,17 +169,17 @@ if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vermaat='ssh -t vermaat screen -Rd default'
-alias alienblonde='ssh -t alienblonde screen -Rd default'
-alias zoe='ssh -t zoe screen -Rd default'
+alias vermaat='ssh -t vermaat "screen -Rd default && clear"'
+alias alienblonde='ssh -t alienblonde "screen -Rd default && clear"'
+alias zoe='ssh -t zoe "screen -Rd default && clear"'
 alias n900='ssh n900'
-alias shark='ssh -t shark screen -Rd default'
+alias shark='ssh -t shark "screen -Rd default && clear"'
 alias europium='ssh europium'
 alias casave='ssh casave'
-alias zwarterita='ssh -t zwarterita screen -Rd default'
-alias zwaluwtiran='ssh -t zwaluwtiran screen -Rd default'
-alias zwaveltiran='ssh -t zwaveltiran screen -Rd default'
-alias lgtc='ssh -t lgtc.nl screen -Rd default'
+alias zwarterita='ssh -t zwarterita "screen -Rd default && clear"'
+alias zwaluwtiran='ssh -t zwaluwtiran "screen -Rd default && clear"'
+alias zwaveltiran='ssh -t zwaveltiran "screen -Rd default && clear"'
+alias lgtc='ssh -t lgtc.nl "screen -Rd default && clear"'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
