@@ -182,6 +182,7 @@ alias zwarterita='ssh -t zwarterita "screen -Rd default && clear"'
 alias zwaluwtiran='ssh -t zwaluwtiran "screen -Rd default && clear"'
 alias zwaveltiran='ssh -t zwaveltiran "screen -Rd default && clear"'
 alias lgtc='ssh -t lgtc.nl "screen -Rd default && clear"'
+alias dvd='ssh dvd'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
