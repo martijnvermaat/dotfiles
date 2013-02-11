@@ -177,3 +177,7 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/tomorrow-theme")
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
+
+;; Auto fill
+(setq-default fill-column 78)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
