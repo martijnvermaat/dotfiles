@@ -185,6 +185,7 @@ alias lgtc='ssh -t lgtc.nl "screen -Rd default && clear"'
 alias mutalyzer2='ssh -t mutalyzer2 "screen -Rd default && clear"'
 alias svep='ssh -t svep "screen -Rd default && clear"'
 alias dvd='ssh dvd'
+alias dvdtest='ssh dvdtest'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
