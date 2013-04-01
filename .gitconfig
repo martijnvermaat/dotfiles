@@ -17,3 +17,6 @@ l = log --graph --abbrev-commit --date=relative
 b = branch --all --verbose
 r = remote --verbose
 d = diff
+
+[merge]
+conflictstyle = diff3
