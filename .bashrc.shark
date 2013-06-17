@@ -11,3 +11,19 @@ eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 export PATH="${PATH}:/home/mvermaat1/lh3-misc/seq/seqtk"
 
 #export TERM='xterm'
+
+# https://github.com/brainsik/virtualenv-burrito
+
+venvb_py_path="$HOME/.venvburrito/lib/python"
+if [ -z "$PYTHONPATH" ]; then
+    export PYTHONPATH="$venvb_py_path"
+elif ! echo $PYTHONPATH | grep -q "$venvb_py_path"; then
+    export PYTHONPATH="$venvb_py_path:$PYTHONPATH"
+fi
+
+venvb_bin_path="$HOME/.venvburrito/bin"
+if ! echo $PATH | grep -q "$venvb_bin_path"; then
+    export PATH="$venvb_bin_path:$PATH"
+fi
+
+. $HOME/.venvburrito/bin/virtualenvwrapper.sh
