@@ -12,8 +12,11 @@ pager = less -R
 pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
 
 [alias]
-s = status --short --untracked-files
+s = status
 l = log --graph --abbrev-commit --date=relative
 b = branch --all --verbose
 r = remote --verbose
 d = diff
+
+[merge]
+conflictstyle = diff3

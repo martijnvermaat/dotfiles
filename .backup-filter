@@ -5,6 +5,7 @@
 /.VirtualBox
 /.private
 /.netrc
+/.montana.key
 /.cpan
 /.config/google-chrome
 .svn

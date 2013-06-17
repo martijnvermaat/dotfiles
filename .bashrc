@@ -157,7 +157,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.1.23/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.3.7/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
@@ -170,17 +170,23 @@ if [ $DISPLAY ]; then
     xset -b b off
 fi
 
-alias vermaat='ssh -t vermaat screen -Rd default'
-alias alienblonde='ssh -t alienblonde screen -Rd default'
-alias zoe='ssh -t zoe screen -Rd default'
+alias vermaat='ssh -t vermaat "screen -Rd default && clear"'
+alias alienblonde='ssh -t alienblonde "screen -Rd default && clear"'
+alias zoe='ssh -t zoe "screen -Rd default && clear"'
 alias n900='ssh n900'
-alias shark='ssh -t shark screen -Rd default'
+alias shark='ssh -t shark.remote "screen -Rd default && clear"'
+alias ngslims='ssh -t ngslims "screen -Rd default && clear"'
+alias hue='ssh hue.remote'
 alias europium='ssh europium'
 alias casave='ssh casave'
-alias zwarterita='ssh -t zwarterita screen -Rd default'
-alias zwaluwtiran='ssh -t zwaluwtiran screen -Rd default'
-alias zwaveltiran='ssh -t zwaveltiran screen -Rd default'
-alias lgtc='ssh -t lgtc.nl screen -Rd default'
+alias zwarterita='ssh -t zwarterita "screen -Rd default && clear"'
+alias zwaluwtiran='ssh -t zwaluwtiran "screen -Rd default && clear"'
+alias zwaveltiran='ssh -t zwaveltiran "screen -Rd default && clear"'
+alias lgtc='ssh -t lgtc.nl "screen -Rd default && clear"'
+alias mutalyzer2='ssh -t mutalyzer2 "screen -Rd default && clear"'
+alias svep='ssh -t svep "screen -Rd default && clear"'
+alias dvd='ssh dvd'
+alias dvdtest='ssh dvdtest'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
