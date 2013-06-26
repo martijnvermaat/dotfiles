@@ -170,6 +170,7 @@ if [ $DISPLAY ]; then
 fi
 
 alias vermaat='ssh -t vermaat "screen -Rd default && clear"'
+alias nora='ssh -t nora "screen -Rd default && clear"'
 alias alienblonde='ssh -t alienblonde "screen -Rd default && clear"'
 alias zoe='ssh -t zoe "screen -Rd default && clear"'
 alias n900='ssh n900'
