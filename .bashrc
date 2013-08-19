@@ -185,7 +185,7 @@ alias zwaveltiran='ssh -t zwaveltiran "screen -Rd default && clear"'
 alias lgtc='ssh -t lgtc.nl "screen -Rd default && clear"'
 alias mutalyzer2='ssh -t mutalyzer2 "screen -Rd default && clear"'
 alias svep='ssh -t svep "screen -Rd default && clear"'
-alias dvd='ssh dvd'
+alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
 
 # virtualenvwrapper
