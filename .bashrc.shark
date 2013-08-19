@@ -1,3 +1,5 @@
+. /usr/local/COMMON-ENV/common-cluster-env.sh
+
 ####ENSEMBL-API#####
 PERL5LIB=${PERL5LIB}:/usr/local/ensembl-api-56/ensembl/modules
 PERL5LIB=${PERL5LIB}:/usr/local/ensembl-api-56/ensembl-compara/modules

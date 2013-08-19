@@ -1,7 +1,6 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 # see /usr/share/doc/bash/examples/startup-files (in the package bash-doc)
 # for examples
- . /usr/local/COMMON-ENV/common-cluster-env.sh
 
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
@@ -171,6 +170,7 @@ if [ $DISPLAY ]; then
 fi
 
 alias vermaat='ssh -t vermaat "screen -Rd default && clear"'
+alias nora='ssh -t nora "screen -Rd default && clear"'
 alias alienblonde='ssh -t alienblonde "screen -Rd default && clear"'
 alias zoe='ssh -t zoe "screen -Rd default && clear"'
 alias n900='ssh n900'
