@@ -178,6 +178,12 @@
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
+;; Our color theme makes markdown headings unreadable
+(setq-default frame-background-mode 'dark)
+
+;; Markdown mode
+(setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
+
 ;; Auto fill
 (setq-default fill-column 78)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
