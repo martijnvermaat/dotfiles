@@ -176,6 +176,7 @@ alias zoe='ssh -t zoe "screen -Rd default && clear"'
 alias n900='ssh n900'
 alias shark='ssh -t shark.remote "screen -Rd default && clear"'
 alias ngslims='ssh -t ngslims "screen -Rd default && clear"'
+alias lumcui='ssh lumcui'
 alias hue='ssh hue.remote'
 alias europium='ssh europium'
 alias casave='ssh casave'
@@ -187,6 +188,7 @@ alias mutalyzer2='ssh -t mutalyzer2 "screen -Rd default && clear"'
 alias svep='ssh -t svep "screen -Rd default && clear"'
 alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
+alias rp3cloud='ssh -t rp3cloud "screen -Rd default && clear"'
 
 # virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
