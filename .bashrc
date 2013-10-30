@@ -156,7 +156,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.3.7/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.3.19/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
