@@ -16,7 +16,7 @@ s = status
 l = log --graph --abbrev-commit --date=relative
 b = branch --all --verbose
 r = remote --verbose
-d = diff
+d = diff --patience
 
 [merge]
 conflictstyle = diff3
