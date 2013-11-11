@@ -7,3 +7,24 @@
 [submodule ".ssh"]
 	path = .ssh
 	url = vermaat:git/dot-ssh.git
+[submodule ".emacs.d/vendor/auto-complete"]
+	path = .emacs.d/vendor/auto-complete
+	url = https://github.com/auto-complete/auto-complete.git
+[submodule ".emacs.d/vendor/emacs-ctable"]
+	path = .emacs.d/vendor/emacs-ctable
+	url = https://github.com/kiwanami/emacs-ctable.git
+[submodule ".emacs.d/vendor/emacs-deferred"]
+	path = .emacs.d/vendor/emacs-deferred
+	url = https://github.com/kiwanami/emacs-deferred.git
+[submodule ".emacs.d/vendor/emacs-epc"]
+	path = .emacs.d/vendor/emacs-epc
+	url = https://github.com/kiwanami/emacs-epc.git
+[submodule ".emacs.d/vendor/emacs-jedi"]
+	path = .emacs.d/vendor/emacs-jedi
+	url = https://github.com/tkf/emacs-jedi.git
+[submodule ".emacs.d/vendor/popup-el"]
+	path = .emacs.d/vendor/popup-el
+	url = https://github.com/auto-complete/popup-el.git
+[submodule ".emacs.d/vendor/fuzzy-el"]
+	path = .emacs.d/vendor/fuzzy-el
+	url = https://github.com/auto-complete/fuzzy-el.git
