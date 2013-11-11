@@ -187,3 +187,9 @@
 ;; Auto fill
 (setq-default fill-column 78)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
+
+;; Load custom per-host files
+(let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
+  (setq custom-file host-file)
+  (if (file-exists-p host-file)
+      (load host-file)))
