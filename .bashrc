@@ -73,6 +73,7 @@ function ps_svn() {
     echo -n "$REV]" | sed -e 's/M/\*/'
 }
 
+# Todo: Use git status --porcelain
 function ps_git() {
     local BRANCH=$(__git_ps1)
     [ "x$BRANCH" != 'x' ] || return
@@ -156,7 +157,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.3.19/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.3.23/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
