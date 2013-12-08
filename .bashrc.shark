@@ -13,11 +13,3 @@ eval $(perl -I$HOME/perl5/lib/perl5 -Mlocal::lib)
 export PATH="${PATH}:/home/mvermaat1/lh3-misc/seq/seqtk"
 
 #export TERM='xterm'
-
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # startup virtualenv-burrito
-    if [ -f "$HOME/.venvburrito/startup.sh" ]; then
-        . "$HOME/.venvburrito/startup.sh"
-    fi
-fi

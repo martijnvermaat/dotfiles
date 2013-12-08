@@ -173,6 +173,7 @@ alias vermaat='ssh -t vermaat "screen -Rd default && clear"'
 alias nora='ssh -t nora "screen -Rd default && clear"'
 alias alienblonde='ssh -t alienblonde "screen -Rd default && clear"'
 alias zoe='ssh -t zoe "screen -Rd default && clear"'
+alias pi='ssh -t pi "screen -Rd default && clear"'
 alias n900='ssh n900'
 alias shark='ssh -t shark.remote "screen -Rd default && clear"'
 alias ngslims='ssh -t ngslims "screen -Rd default && clear"'
@@ -190,13 +191,16 @@ alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
 alias rp3cloud='ssh -t rp3cloud "screen -Rd default && clear"'
 
-# virtualenvwrapper
 export WORKON_HOME=~/.virtualenvs
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-    source /usr/local/bin/virtualenvwrapper.sh
-fi
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
-export PIP_REQUIRE_VIRTUALENV=true
+export PIP_RESPECT_VIRTUALENV=true
+
+if [ -n "$BASH_VERSION" ]; then
+    # startup virtualenv-burrito
+    if [ -f "$HOME/.venvburrito/startup.sh" ]; then
+        . "$HOME/.venvburrito/startup.sh"
+    fi
+fi
 
 # Source site-specific configuration if it exists
 if [ -f ~/.bashrc.site ]; then
