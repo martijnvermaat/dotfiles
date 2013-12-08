@@ -67,6 +67,7 @@ function ps_svn() {
     local REV=$(svnversion 2>/dev/null)
     [ $? -eq 0 ] || return
     [ "$REV" == 'exported' ] && return
+    [ "$REV" == 'Unversioned directory' ] && return
     echo -n \[
     local BRANCH=$(get_svn_branch)
     echo "$BRANCH" | grep -q '.' && echo -n "$BRANCH:"
