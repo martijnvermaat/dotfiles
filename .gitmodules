@@ -4,9 +4,6 @@
 [submodule ".emacs.d/vendor/less-css-mode"]
 	path = .emacs.d/vendor/less-css-mode
 	url = https://github.com/purcell/less-css-mode
-[submodule ".ssh"]
-	path = .ssh
-	url = vermaat:git/dot-ssh.git
 [submodule ".emacs.d/vendor/auto-complete"]
 	path = .emacs.d/vendor/auto-complete
 	url = https://github.com/auto-complete/auto-complete.git
