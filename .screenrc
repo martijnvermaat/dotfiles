@@ -1,5 +1,9 @@
 # http://serverfault.com/questions/3740/what-are-useful-screenrc-settings
 
+# Fix SSH auth socket location so agent forwarding works with screen.
+# See: http://techblog.appnexus.com/2011/managing-ssh-sockets-in-gnu-screen/
+setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
+
 # Erase background with current bg color
 defbce "on"
 
