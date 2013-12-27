@@ -1,0 +1,6 @@
+load otr
+statusbar window add otr
+set cmd_queue_speed 1msec
+
+set autolog on
+set autolog_path ~/.irssi/logs/$0.%Y-%m-%d.log
