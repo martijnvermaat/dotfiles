@@ -25,3 +25,6 @@
 [submodule ".emacs.d/vendor/fuzzy-el"]
 	path = .emacs.d/vendor/fuzzy-el
 	url = https://github.com/auto-complete/fuzzy-el.git
+[submodule ".emacs.d/vendor/yaml-mode"]
+	path = .emacs.d/vendor/yaml-mode
+	url = https://github.com/yoshiki/yaml-mode.git

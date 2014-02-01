@@ -170,8 +170,7 @@
 
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")
-(setq auto-mode-alist
-(cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))
+(setq auto-mode-alist (cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))
 
 ;; Tomorrow theme
 (add-to-list 'load-path "~/.emacs.d/vendor/tomorrow-theme")
@@ -183,6 +182,13 @@
 
 ;; Markdown mode
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
+
+;; YAML mode
+(add-to-list 'load-path "~/.emacs.d/vendor/yaml-mode")
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+ '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Auto fill
 (setq-default fill-column 78)
