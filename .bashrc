@@ -116,7 +116,7 @@ export LESS="-S -R"
 
 export GIT_PS1_SHOWDIRTYSTATE=1
 export GIT_PS1_SHOWSTASHSTATE=1
-export GIT_PS1_SHOWUPSTREAM="verbose"
+export GIT_PS1_SHOWUPSTREAM="auto"
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
