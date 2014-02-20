@@ -49,51 +49,12 @@ if [ -n "$force_color_prompt" ]; then
     fi
 fi
 
-function get_svn_branch {
-  # Capture the output of the "git status" command.
-  svn_info="$(svn info | egrep '^URL: ' 2> /dev/null)"
-
-  # Get the name of the branch.
-  branch_pattern="^URL: .*/(branches|tags)/([^/]+)"
-  trunk_pattern="^URL: .*/trunk(/.*)?$"
-  if [[ ${svn_info} =~ $branch_pattern ]]; then
-    echo ${BASH_REMATCH[2]}
-  elif [[ ${svn_info} =~ $trunk_pattern ]]; then
-    echo 'trunk'
-  fi
-}
-
-function ps_svn() {
-    local REV=$(svnversion 2>/dev/null)
-    [ $? -eq 0 ] || return
-    [ "$REV" == 'exported' ] && return
-    [ "$REV" == 'Unversioned directory' ] && return
-    echo -n \[
-    local BRANCH=$(get_svn_branch)
-    echo "$BRANCH" | grep -q '.' && echo -n "$BRANCH:"
-    echo -n "$REV]" | sed -e 's/M/\*/'
-}
-
-# Todo: Use git status --porcelain
-function ps_git() {
-    local BRANCH=$(__git_ps1)
-    [ "x$BRANCH" != 'x' ] || return
-    echo -n "$BRANCH" | sed -e 's/^ (/\[:/' -e 's/)//'
-    local STATUS=$(git status 2>/dev/null)
-    echo "$STATUS" | grep -q 'have diverged' && echo -n !
-    echo "$STATUS" | grep -q 'Your branch is behind' && echo -n -
-    echo "$STATUS" | grep -q 'Your branch is ahead of' && echo -n +
-    echo "$STATUS" | grep -q 'Changes to be committed' && echo -n \#
-    echo "$STATUS" | grep -q 'Changed but not updated\|Changes not staged for commit' && echo -n \*
-    echo -n \]
-}
-
 if [ "$color_prompt" = yes ]; then
     #PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
     PS1='${debian_chroot:+($debian_chroot)}\[\033[01;32m\]\u@\h\[\033[00m\]:\[\033[01;34m\]\w\[\033[00m\]\$ '
 else
     #PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w\$ '
-    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(ps_svn)$(ps_git)\$ '
+    PS1='${debian_chroot:+($debian_chroot)}\u@\h:\w$(__git_ps1)\$ '
 fi
 unset color_prompt force_color_prompt
 
@@ -152,6 +113,10 @@ export PAGER=less
 export HISTSIZE=50000
 export HISTFILESIZE=100000
 export LESS="-S -R"
+
+export GIT_PS1_SHOWDIRTYSTATE=1
+export GIT_PS1_SHOWSTASHSTATE=1
+export GIT_PS1_SHOWUPSTREAM="verbose"
 
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
