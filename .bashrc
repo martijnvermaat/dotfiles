@@ -185,6 +185,7 @@ alias lumcui='ssh lumcui'
 alias hue='ssh hue.remote'
 alias europium='ssh europium'
 alias casave='ssh casave'
+alias web03='ssh -t web03 "screen -Rd default && clear"'
 alias zwarterita='ssh -t zwarterita "screen -Rd default && clear"'
 alias zwaluwtiran='ssh -t zwaluwtiran "screen -Rd default && clear"'
 alias zwaveltiran='ssh -t zwaveltiran "screen -Rd default && clear"'
@@ -194,6 +195,7 @@ alias svep='ssh -t svep "screen -Rd default && clear"'
 alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
 alias rp3cloud='ssh -t rp3cloud "screen -Rd default && clear"'
+alias rp3cloud2='ssh -t rp3cloud2 "screen -Rd default && clear"'
 
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
