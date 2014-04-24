@@ -159,7 +159,8 @@ alias svep='ssh -t svep "screen -Rd default && clear"'
 alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
 alias rp3cloud='ssh -t rp3cloud "screen -Rd default && clear"'
-alias rp3cloud2='ssh -t rp3cloud2 "screen -Rd default && clear"'
+alias rp3qtl='ssh -t rp3qtl "screen -Rd default && clear"'
+alias rp3polya='ssh -t rp3polya "screen -Rd default && clear"'
 
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
