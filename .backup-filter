@@ -8,6 +8,7 @@
 /.montana.key
 /.cpan
 /.config/google-chrome
+/.virtualenvs
 .svn
 .gvfs
 urlclassifier3.sqlite
