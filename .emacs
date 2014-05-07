@@ -91,6 +91,10 @@
 ;;(line-number-mode 1)
 (column-number-mode 1)
 
+;; cl-lib.el
+(add-to-list 'load-path "~/.emacs.d/vendor/cl-lib")
+(require 'cl-lib)
+
 ;; OCaml tuareg mode
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
