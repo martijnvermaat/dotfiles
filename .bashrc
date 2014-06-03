@@ -123,7 +123,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias ack='ack-grep'
 alias py='ipython'
-alias igv='/home/martijn/projects/IGV/IGV_2.3.23/igv.sh'
+alias igv='/home/martijn/projects/IGV/IGV_2.3.32/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
@@ -145,6 +145,7 @@ alias pi_boot='ssh -o "UserKnownHostsFile /dev/null" -i ~/.ssh/id_rsa_pi_dropbea
 alias n900='ssh n900'
 alias shark='ssh -t shark.remote "screen -Rd default && clear"'
 alias ngslims='ssh -t ngslims "screen -Rd default && clear"'
+alias gitlab='ssh -t gitlab "screen -Rd default && clear"'
 alias lumcui='ssh lumcui'
 alias hue='ssh hue.remote'
 alias europium='ssh europium'
