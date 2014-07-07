@@ -121,6 +121,7 @@ export GIT_PS1_SHOWUPSTREAM="auto"
 alias ocaml='ledit ocaml'
 alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
+alias la='l -a'
 alias ack='ack-grep'
 alias py='ipython'
 alias igv='/home/martijn/projects/IGV/IGV_2.3.32/igv.sh'
