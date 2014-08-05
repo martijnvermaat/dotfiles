@@ -123,7 +123,7 @@ alias gemacs='/usr/bin/emacs-snapshot-gtk'
 alias l='ls -lh --group-directories-first'
 alias la='l -a'
 alias ack='ack-grep'
-alias py='ipython'
+alias py='ipython --colors=Linux'
 alias igv='/home/martijn/projects/IGV/IGV_2.3.32/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
 
