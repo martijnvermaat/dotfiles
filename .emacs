@@ -116,14 +116,12 @@
 ;;          (require 'font-lock)))
 
 ;; Python mode
-(when (featurep 'python) (unload-feature 'python t))
-(add-to-list 'load-path "~/.emacs.d/vendor/python-mode")
-(require 'python-mode)
-(add-to-list 'auto-mode-alist '("\\.py$" . python-mode))
-(add-to-list 'interpreter-mode-alist '("python" . python-mode))
-(add-hook 'python-mode-hook 'turn-on-auto-fill)
-(require 'ipython nil 'noerror)
-(setq py-set-fill-column-p t)
+;(setq auto-mode-alist
+;      (cons '("\\.py$" . python-mode) auto-mode-alist))
+;(setq interpreter-mode-alist
+;      (cons '("python" . python-mode)
+;            interpreter-mode-alist))
+;(autoload 'python-mode "python-mode" "Python editing mode." t)
 
 ;; Prolog mode
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)

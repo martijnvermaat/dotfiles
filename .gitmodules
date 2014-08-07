@@ -34,6 +34,3 @@
 [submodule ".emacs.d/vendor/emacs-python-environment"]
 	path = .emacs.d/vendor/emacs-python-environment
 	url = https://github.com/tkf/emacs-python-environment.git
-[submodule ".emacs.d/vendor/python-mode"]
-	path = .emacs.d/vendor/python-mode
-	url = https://github.com/emacsmirror/python-mode.git
