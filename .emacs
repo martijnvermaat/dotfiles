@@ -18,20 +18,11 @@
        (global-font-lock-mode t)
 ))
 
-;; Nicer font in emacs-gtk
-(cond
- ((string-match "gtk" (emacs-version))
-  (set-default-font "DejaVu Sans Mono-10")
-))
-
-;; Show tabs for buffers
-;;(tabbar-mode t)
-
+;; Don't save abbreviations
 (setq save-abbrevs nil)
 
-;; Split window horizontally by default
-;(setq split-height-threshold nil)
-;(setq split-width-threshold 80)
+;; No backupfiles
+(setq make-backup-files nil)
 
 ;; No splash screen
 (setq inhibit-startup-message t)
@@ -62,36 +53,34 @@
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
 (add-hook 'before-save-hook 'my-delete-trailing-blank-lines)
 
+;; Default tab width
 (setq-default tab-width 4)
 (setq-default c-basic-offset 4)
 
+;; No tab characters
 (setq-default indent-tabs-mode nil)
 
+;; Stroustrup C style for Java
 (defun doe-maar-stroustrup-doen ()
   (c-set-style "stroustrup"))
 (add-hook 'java-mode-hook 'doe-maar-stroustrup-doen)
 
-;;(defun java-indent-four ()
-;;  (set-variable 'tab-width 4)
-;;  (set-variable 'c-basic-offset 4))
-;;(add-hook 'java-mode-hook 'java-indent-four)
-
-;; No backupfiles
-(setq make-backup-files nil)
-
+;; Enable C-x C-u (upcase-region) and C-x C-l (downcase-region)
+(put 'downcase-region 'disabled nil)
 (put 'upcase-region 'disabled nil)
 
 ;; Use mouse scrolling
-;;(mouse-wheel-mode 1)
+;(mouse-wheel-mode 1)
 (cond (window-system (mwheel-install)))
 
 ;; Scrollbar right
 (cond (window-system (set-scroll-bar-mode 'right)))
 
-;;(line-number-mode 1)
+;; Show line and column numbers
+(line-number-mode 1)
 (column-number-mode 1)
 
-;; cl-lib.el
+;; Only needed on Emacs < 24
 (add-to-list 'load-path "~/.emacs.d/vendor/cl-lib")
 (require 'cl-lib)
 
@@ -100,28 +89,14 @@
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
 (autoload 'camldebug "camldebug" "Run the Caml debugger" t)
 
-;; no indentation after `in' keywords
+;; No indentation after 'in' keywords
 (add-hook 'tuareg-mode-hook
           '(lambda () (setq tuareg-in-indent 0)))
 
-;;; use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
+;; Use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
 (add-to-list 'interpreter-mode-alist '("groovy" . groovy-mode))
-
-;;(if (and (boundp 'window-system) window-system)
-;;    (when (string-match "XEmacs" emacs-version)
-;;          (if (not (and (boundp 'mule-x-win-initted) mule-x-win-initted))
-;;            (require 'sym-lock))
-;;          (require 'font-lock)))
-
-;; Python mode
-;(setq auto-mode-alist
-;      (cons '("\\.py$" . python-mode) auto-mode-alist))
-;(setq interpreter-mode-alist
-;      (cons '("python" . python-mode)
-;            interpreter-mode-alist))
-;(autoload 'python-mode "python-mode" "Python editing mode." t)
 
 ;; Prolog mode
 (autoload 'run-prolog "prolog" "Start a Prolog sub-process." t)
@@ -131,14 +106,6 @@
 (setq auto-mode-alist (append '(("\\.pl$" . prolog-mode)
                                 ("\\.m$" . mercury-mode))
                               auto-mode-alist))
-
-;; Javascript mode
-;(autoload 'javascript-mode "javascript" "Major mode for editing Javascript programs" t)
-;(setq auto-mode-alist
-;      (cons '("\\.js$" . javascript-mode) auto-mode-alist))
-;(autoload 'js2-mode "js2" "Major mode for editing Javascript programs" t)
-;(setq auto-mode-alist
-;      (cons '("\\.js$" . js2-mode) auto-mode-alist))
 
 ;; CoffeeScript mode
 (add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
