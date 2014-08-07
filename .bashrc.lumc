@@ -13,6 +13,7 @@ alias vermaat='ssh -t vermaat.lumc screen -Rd default'
 alias pi='ssh -t pi.lumc screen -Rd default'
 alias alienblonde='ssh -t alienblonde.lumc screen -Rd default'
 alias shark='ssh -t shark "screen -Rd default && clear"'
+alias newshark='ssh -t newshark "screen -Rd default && clear"'
 alias eas='ssh -t eas "screen -Rd default && clear"'
 
 #export CLASSPATH=/usr/share/java/varscan.jar:/usr/share/java/activation.jar:/usr/share/java/gnumail.jar:/usr/share/java/xercesImpl.jar:/usr/share/java/axis.jar:/usr/share/java/jaxrpc.jar:/usr/share/java/saaj.jar:/usr/share/java/commons-logging.jar:/usr/share/java/commons-discovery.jar:/usr/share/java/wsdl4j.jar:$CLASSPATH
