@@ -30,6 +30,9 @@
 ;; Dependency of emacs-jedi
 (add-to-list 'load-path "~/.emacs.d/vendor/auto-complete")
 
+;; Dependency of emacs-jedi
+(add-to-list 'load-path "~/.emacs.d/vendor/emacs-python-environment")
+
 ;; Jedi.el
 (add-to-list 'load-path "~/.emacs.d/vendor/emacs-jedi")
 
