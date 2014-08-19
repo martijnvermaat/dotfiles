@@ -163,9 +163,9 @@ alias svep='ssh -t svep "screen -Rd default && clear"'
 alias groningen='ssh -t groningen "screen -Rd default && clear"'
 alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
-alias rp3cloud='ssh -t rp3cloud "screen -Rd default && clear"'
-alias rp3qtl='ssh -t rp3qtl "screen -Rd default && clear"'
-alias rp3polya='ssh -t rp3polya "screen -Rd default && clear"'
+alias rp3vm='ssh -t rp3vm "screen -Rd default && clear"'
+alias rp3martijn='ssh -t rp3martijn "screen -Rd default && clear"'
+alias research-ssh='ssh -t research-ssh "screen -Rd default && clear"'
 
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
