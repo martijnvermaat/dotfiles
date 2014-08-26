@@ -3,6 +3,7 @@
 /.thumbnails
 /.Trash
 /.VirtualBox
+/.vagrant.d
 /.private
 /.netrc
 /.montana.key

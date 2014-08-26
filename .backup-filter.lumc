@@ -1,3 +1,4 @@
 /HumGen
 /.backup-temp
 /data
+*.git-crypt.key
