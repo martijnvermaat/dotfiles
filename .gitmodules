@@ -34,3 +34,6 @@
 [submodule ".emacs.d/vendor/emacs-python-environment"]
 	path = .emacs.d/vendor/emacs-python-environment
 	url = https://github.com/tkf/emacs-python-environment.git
+[submodule ".emacs.d/vendor/ess"]
+	path = .emacs.d/vendor/ess
+	url = https://github.com/emacs-ess/ESS.git

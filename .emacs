@@ -170,3 +170,13 @@
   (setq custom-file host-file)
   (if (file-exists-p host-file)
       (load host-file)))
+
+;; ESS mode configuration
+(add-to-list 'load-path "~/.emacs.d/vendor/ess/lisp")
+(autoload 'R-mode "ess-site.el" "ESS" t)
+(add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+
+;; R configuration
+;(setq ess-eval-visibly-p nil)
+;(setq ess-ask-for-ess-directory nil)
+;(require 'ess-eldoc)
