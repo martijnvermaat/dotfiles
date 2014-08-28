@@ -177,3 +177,5 @@
 (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
 (setq ess-ask-for-ess-directory nil)
 (setq ess-eval-visibly nil)
+(define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
+(define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
