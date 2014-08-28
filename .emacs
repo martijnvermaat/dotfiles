@@ -175,8 +175,5 @@
 (add-to-list 'load-path "~/.emacs.d/vendor/ess/lisp")
 (autoload 'R-mode "ess-site.el" "ESS" t)
 (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
-
-;; R configuration
-;(setq ess-eval-visibly-p nil)
-;(setq ess-ask-for-ess-directory nil)
-;(require 'ess-eldoc)
+(setq ess-ask-for-ess-directory nil)
+(setq ess-eval-visibly nil)
