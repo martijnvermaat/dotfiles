@@ -165,19 +165,20 @@
 (setq-default fill-column 78)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
-;; Load custom per-host files
-(let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
-  (setq custom-file host-file)
-  (if (file-exists-p host-file)
-      (load host-file)))
-
 ;; ESS mode configuration
 (add-to-list 'load-path "~/.emacs.d/vendor/ess/lisp")
 (autoload 'R-mode "ess-site.el" "ESS" t)
 (add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
 (setq ess-ask-for-ess-directory nil)
-(setq ess-eval-visibly nil)
+(setq ess-eval-visibly 'nowait)
+(setq inferior-R-args "--no-save --no-restore ")
 (setq ess-history-directory "~/.R/")
 (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
 (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 (setq comint-input-ring-size 10000)
+
+;; Load custom per-host files
+(let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
+  (setq custom-file host-file)
+  (if (file-exists-p host-file)
+      (load host-file)))
