@@ -168,7 +168,7 @@ alias rp3vm='ssh -t rp3vm "screen -Rd default && clear"'
 alias rp3martijn='ssh -t rp3martijn "screen -Rd default && clear"'
 alias research-ssh='ssh -t research-ssh "screen -Rd default && clear"'
 
-export R_LIBS_USER=~/.R/%p/%V
+export R_LIBS_USER=~/.R/%p/%v
 
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
