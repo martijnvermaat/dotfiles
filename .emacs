@@ -167,8 +167,8 @@
 
 ;; ESS mode configuration
 (add-to-list 'load-path "~/.emacs.d/vendor/ess/lisp")
-(autoload 'R-mode "ess-site.el" "ESS" t)
-(add-to-list 'auto-mode-alist '("\\.R$" . R-mode))
+(autoload 'r-mode "ess-site.el" "ESS" t)
+(add-to-list 'auto-mode-alist '("\\.R$" . r-mode))
 (setq ess-ask-for-ess-directory nil)
 (setq ess-eval-visibly 'nowait)
 (setq inferior-R-args "--no-save --no-restore ")
@@ -176,6 +176,23 @@
 (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
 (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 (setq comint-input-ring-size 10000)
+
+;; Polymode
+(add-to-list 'load-path "~/.emacs.d/vendor/polymode")
+(add-to-list 'load-path "~/.emacs.d/vendor/polymode/modes")
+(require 'poly-R)
+(require 'poly-markdown)
+(require 'poly-noweb)
+(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
+
+;; Make poly-markdown+r-mode play nice with ESS evaluation
+;; https://github.com/vitoshka/polymode/issues/6
+(defun Rmd-setup ()
+  (setq paragraph-start "```\\|\\s-*$")
+  (setq paragraph-separate "```\\|\\s-*$"))
+(add-hook 'poly-markdown+r-mode-hook 'Rmd-setup)
 
 ;; Load custom per-host files
 (let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
