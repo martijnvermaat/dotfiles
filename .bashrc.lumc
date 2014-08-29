@@ -23,4 +23,3 @@ export PYTHONPATH=$PYTHONPATH:/usr/local/samba/lib/python2.6/site-packages
 export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/usr/local/samba/lib/pkgconfig
 
 export PERL5LIB=~/projects/vcftools_0.1.11/perl
-export R_LIBS_USER=~/.R/x86_64-unknown-linux-gnu-library/3.1
