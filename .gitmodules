@@ -40,3 +40,9 @@
 [submodule ".emacs.d/vendor/polymode"]
 	path = .emacs.d/vendor/polymode
 	url = https://github.com/vitoshka/polymode.git
+[submodule ".emacs.d/vendor/flycheck"]
+	path = .emacs.d/vendor/flycheck
+	url = https://github.com/flycheck/flycheck.git
+[submodule ".emacs.d/vendor/dash"]
+	path = .emacs.d/vendor/dash
+	url = https://github.com/magnars/dash.el.git
