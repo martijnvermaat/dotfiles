@@ -38,4 +38,5 @@
 
 (autoload 'jedi:setup "jedi" nil t)
 (add-hook 'python-mode-hook 'jedi:setup)
+(add-hook 'inferior-python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)

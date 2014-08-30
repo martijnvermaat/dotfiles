@@ -195,6 +195,15 @@
   (setq paragraph-separate "```\\|\\s-*$"))
 (add-hook 'poly-markdown+r-mode-hook 'Rmd-setup)
 
+;; Configure python.el for IPython
+(setq python-shell-interpreter "ipython")
+(setq python-shell-interpreter-args "")
+(setq python-shell-prompt-regexp "In \\[[0-9]+\\]: ")
+(setq python-shell-prompt-output-regexp "Out\\[[0-9]+\\]: ")
+(setq python-shell-completion-setup-code "from IPython.core.completerlib import module_completion")
+(setq python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n")
+(setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
+
 ;; Flycheck, only for Python
 (add-to-list 'load-path "~/.emacs.d/vendor/dash")
 (add-to-list 'load-path "~/.emacs.d/vendor/flycheck")
