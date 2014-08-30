@@ -1,0 +1,63 @@
+#!/bin/bash
+# This hook is run after a new virtualenv is activated.
+#
+# For use with virtualenvwrapper [1], based on [2].
+#
+# This script makes it possible to use PyGTK/Pycairo/PyQt/wxPython in Python
+# virtual environments from the corresponding system packages. It is tested on
+# Debian wheezy and Ubuntu 12.04.
+#
+# Copy this script to `~/.virtualenvs/postmkvirtualenv` (make it executable)
+# and it will automatically be run after a new virtualenv is created. You can
+# also run it yourself if the relevant virtual environment is activated.
+#
+# The following system packages should be installed:
+# - python-qt4
+# - libfreetype6-dev
+# - libpng12-dev
+# - python-cairo
+# - python-gtk2
+# - python-gtk2-dev
+# - python-wxgtk2.8
+#
+# 2013, Martijn Vermaat <martijn@vermaat.name>
+#
+# [1] http://virtualenvwrapper.readthedocs.org/
+# [2] https://gist.github.com/jlesquembre/2042882
+
+set -o nounset
+set -o errexit
+set -o pipefail
+
+libs=( PyQt4 sip.so glib gobject gtk-2.0 gtk-2.0-pysupport-compat.pth pygtk.pth cairo wx.pth wx-2.8-gtk2-unicode wxversion.py )
+
+python_version=python$(python -c "import sys; print (str(sys.version_info[0])+'.'+str(sys.version_info[1]))")
+var=( $(which -a $python_version) )
+
+get_python_lib_cmd="from distutils.sysconfig import get_python_lib; print (get_python_lib())"
+lib_virtualenv_path=$(python -c "$get_python_lib_cmd")
+lib_system_path=$(${var[-1]} -c "$get_python_lib_cmd")
+
+echo Virtual environment library path: $lib_virtualenv_path
+echo System library path: $lib_system_path
+
+for lib in ${libs[@]}
+do
+    if [ -e $lib_system_path/$lib ]; then
+        ln -fs $lib_system_path/$lib $lib_virtualenv_path/$lib
+        echo Linked to virtual environment: $lib_system_path/$lib
+    else
+        echo Could not find system package: $lib_system_path/$lib
+    fi
+done
+
+# Unfortunately, Pycairo is not always installed in dist-packages.
+if [ ! -e $lib_virtualenv_path/cairo ]; then
+    cairo_path=$(dirname "$(locate 'cairo/__init__.py' | grep -m 1 $python_version)")
+    if echo "$cairo_path" | grep -q cairo; then
+        ln -fs $cairo_path $lib_virtualenv_path/cairo
+        echo Linked to virtual environment from alternative location: $cairo_path
+    fi
+fi
+
+pip install ipython epc jedi flake8
