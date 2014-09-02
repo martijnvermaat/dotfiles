@@ -166,6 +166,7 @@ alias dvd='ssh -t dvd "screen -Rd default && clear"'
 alias dvdtest='ssh dvdtest'
 alias rp3vm='ssh -t rp3vm "screen -Rd default && clear"'
 alias rp3martijn='ssh -t rp3martijn "screen -Rd default && clear"'
+alias rp3jenny='ssh -t rp3jenny "screen -Rd default && clear"'
 alias research-ssh='ssh -t research-ssh "screen -Rd default && clear"'
 
 export R_LIBS_USER=~/.R/%p/%v
