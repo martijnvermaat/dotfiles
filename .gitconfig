@@ -8,12 +8,9 @@ ui = auto
 [core]
 pager = less -R
 
-[format]
-pretty=format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset
-
 [alias]
 s = status
-l = log --graph --abbrev-commit --date=relative
+l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 b = branch --all --verbose
 r = remote --verbose
 d = diff --patience
