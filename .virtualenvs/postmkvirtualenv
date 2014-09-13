@@ -25,9 +25,9 @@
 # [1] http://virtualenvwrapper.readthedocs.org/
 # [2] https://gist.github.com/jlesquembre/2042882
 
-set -o nounset
-set -o errexit
-set -o pipefail
+#set -o nounset
+#set -o errexit
+#set -o pipefail
 
 libs=( PyQt4 sip.so glib gobject gtk-2.0 gtk-2.0-pysupport-compat.pth pygtk.pth cairo wx.pth wx-2.8-gtk2-unicode wxversion.py )
 
