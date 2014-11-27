@@ -205,10 +205,11 @@
 (setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 ;; Flycheck, only for Python
-(add-to-list 'load-path "~/.emacs.d/vendor/dash")
-(add-to-list 'load-path "~/.emacs.d/vendor/flycheck")
-(autoload 'flycheck-mode "flycheck" nil t)
-(add-hook 'python-mode-hook 'flycheck-mode)
+(cond ((>= emacs-major-version 24)
+       (add-to-list 'load-path "~/.emacs.d/vendor/dash")
+       (add-to-list 'load-path "~/.emacs.d/vendor/flycheck")
+       (autoload 'flycheck-mode "flycheck" nil t)
+       (add-hook 'python-mode-hook 'flycheck-mode)))
 
 ;; Load custom per-host files
 (let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
