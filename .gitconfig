@@ -14,6 +14,7 @@ l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Cr
 b = branch --all --verbose
 r = remote --verbose
 d = diff --patience
+f = fetch --all
 
 [merge]
 conflictstyle = diff3
