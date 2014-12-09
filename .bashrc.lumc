@@ -13,7 +13,7 @@ alias vermaat='ssh -t vermaat.lumc screen -Rd default'
 alias pi='ssh -t pi.lumc screen -Rd default'
 alias alienblonde='ssh -t alienblonde.lumc screen -Rd default'
 alias shark='ssh -t shark "screen -Rd default && clear"'
-alias newshark='ssh -t newshark "screen -Rd default && clear"'
+alias oldshark='ssh -t oldshark "screen -Rd default && clear"'
 alias eas='ssh -t eas "screen -Rd default && clear"'
 
 export PERL5LIB=~/projects/vcftools_0.1.11/perl
