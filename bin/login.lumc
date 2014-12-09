@@ -8,6 +8,6 @@ sleep 3
 
 /usr/bin/gnome-terminal &
 
-/usr/bin/google-chrome &
+/usr/bin/iceweasel &
 
 /usr/bin/evolution &
