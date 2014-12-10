@@ -49,3 +49,6 @@
 [submodule ".emacs.d/vendor/smartparens"]
 	path = .emacs.d/vendor/smartparens
 	url = https://github.com/Fuco1/smartparens.git
+[submodule ".emacs.d/vendor/web-mode"]
+	path = .emacs.d/vendor/web-mode
+	url = https://github.com/fxbois/web-mode.git
