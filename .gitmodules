@@ -52,3 +52,6 @@
 [submodule ".emacs.d/vendor/web-mode"]
 	path = .emacs.d/vendor/web-mode
 	url = https://github.com/fxbois/web-mode.git
+[submodule ".emacs.d/vendor/editorconfig"]
+	path = .emacs.d/vendor/editorconfig
+	url = https://github.com/editorconfig/editorconfig-emacs.git

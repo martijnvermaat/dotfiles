@@ -1,3 +1,16 @@
+;; EditorConfig
+;;
+;; This needs EditorConfig core installed:
+;;
+;;     git clone https://github.com/editorconfig/editorconfig-core-c.git
+;;     cd editorconfig-core-c
+;;     cmake .
+;;     sudo make install
+
+(add-to-list 'load-path "~/.emacs.d/vendor/editorconfig")
+(load "editorconfig")
+
+
 ;; Python auto-completion
 ;;
 ;; This needs Jedi and python-epc installed:
