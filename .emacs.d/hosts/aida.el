@@ -2,6 +2,7 @@
 ;;
 ;; This needs EditorConfig core installed:
 ;;
+;;     sudo apt-get install cmake libpcre3-dev
 ;;     git clone https://github.com/editorconfig/editorconfig-core-c.git
 ;;     cd editorconfig-core-c
 ;;     cmake .
