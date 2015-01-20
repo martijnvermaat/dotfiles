@@ -54,3 +54,23 @@
 (add-hook 'python-mode-hook 'jedi:setup)
 (add-hook 'inferior-python-mode-hook 'jedi:setup)
 (setq jedi:complete-on-dot t)
+
+
+;; Javascript auto-completion
+;;
+;; This needs Tern installed:
+;;
+;;     npm install -g tern
+
+;; Dependency of tern-auto-complete (already added above)
+;(add-to-list 'load-path "~/.emacs.d/vendor/auto-complete")
+
+(add-to-list 'load-path "~/.emacs.d/vendor/tern")
+(autoload 'tern-mode "tern" nil t)
+
+(add-hook 'js-mode-hook (lambda () (tern-mode t)))
+(eval-after-load 'tern
+  '(progn
+     (require 'tern-auto-complete)
+     (tern-ac-setup)
+     (auto-complete-mode t)))
