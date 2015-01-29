@@ -80,6 +80,17 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; Ido mode
+(ido-mode 1)
+(setq ido-everywhere t)
+(setq ido-enable-flex-matching t)
+
+;; Ido mode vertically
+(add-to-list 'load-path "~/.emacs.d/vendor/ido-vertical-mode")
+(require 'ido-vertical-mode)
+(ido-vertical-mode 1)
+(setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
+
 ;; Only needed on Emacs < 24
 (add-to-list 'load-path "~/.emacs.d/vendor/cl-lib")
 (require 'cl-lib)

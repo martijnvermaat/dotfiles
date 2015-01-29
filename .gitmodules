@@ -55,3 +55,6 @@
 [submodule ".emacs.d/vendor/editorconfig"]
 	path = .emacs.d/vendor/editorconfig
 	url = https://github.com/editorconfig/editorconfig-emacs.git
+[submodule ".emacs.d/vendor/ido-vertical-mode"]
+	path = .emacs.d/vendor/ido-vertical-mode
+	url = https://github.com/gempesaw/ido-vertical-mode.el.git
