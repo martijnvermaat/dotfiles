@@ -28,9 +28,6 @@
 [submodule ".emacs.d/vendor/yaml-mode"]
 	path = .emacs.d/vendor/yaml-mode
 	url = https://github.com/yoshiki/yaml-mode.git
-[submodule ".emacs.d/vendor/cl-lib"]
-	path = .emacs.d/vendor/cl-lib
-	url = https://github.com/emacsmirror/cl-lib.git
 [submodule ".emacs.d/vendor/emacs-python-environment"]
 	path = .emacs.d/vendor/emacs-python-environment
 	url = https://github.com/tkf/emacs-python-environment.git

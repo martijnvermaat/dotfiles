@@ -106,10 +106,6 @@
 ;; Unified diffs in diff-mode
 (setq diff-switches '("-u"))
 
-;; Only needed on Emacs < 24
-(add-to-list 'load-path "~/.emacs.d/vendor/cl-lib")
-(require 'cl-lib)
-
 ;; OCaml tuareg mode
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
