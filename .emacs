@@ -85,21 +85,25 @@
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
 
+;; Add vendor packages to load path
+(defvar mv/vendor-dir (expand-file-name "vendor" user-emacs-directory))
+(add-to-list 'load-path mv/vendor-dir)
+(dolist (project (directory-files mv/vendor-dir t "\\w+"))
+  (when (file-directory-p project)
+    (add-to-list 'load-path project)))
+
 ;; Ido mode vertically
-(add-to-list 'load-path "~/.emacs.d/vendor/ido-vertical-mode")
 (require 'ido-vertical-mode)
 (ido-vertical-mode 1)
 (setq ido-vertical-define-keys 'C-n-C-p-up-down-left-right)
 
 ;; Smex
-(add-to-list 'load-path "~/.emacs.d/vendor/smex")
 (require 'smex)
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
 
 ;; undo-tree mode
-(add-to-list 'load-path "~/.emacs.d/vendor/undo-tree")
 (require 'undo-tree)
 (global-undo-tree-mode 1)
 
@@ -130,7 +134,6 @@
                               auto-mode-alist))
 
 ;; CoffeeScript mode
-(add-to-list 'load-path "~/.emacs.d/vendor/coffee-mode")
 (require 'coffee-mode)
 
 ;; C# mode
@@ -158,7 +161,6 @@
 (setq cssm-indent-level '4)
 
 ;; Less CSS mode
-(add-to-list 'load-path "~/.emacs.d/vendor/less-css-mode")
 (require 'less-css-mode)
 
 ;; RELAX NG Compact Syntax mode
@@ -166,7 +168,6 @@
 (setq auto-mode-alist (cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))
 
 ;; Tomorrow theme
-(add-to-list 'load-path "~/.emacs.d/vendor/tomorrow-theme")
 (require 'color-theme-tomorrow)
 (color-theme-tomorrow-night)
 
@@ -177,7 +178,6 @@
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
 
 ;; YAML mode
-(add-to-list 'load-path "~/.emacs.d/vendor/yaml-mode")
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-hook 'yaml-mode-hook
@@ -188,7 +188,9 @@
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; ESS mode configuration
-(add-to-list 'load-path "~/.emacs.d/vendor/ess/lisp")
+(defvar mv/ess-lisp (expand-file-name "ess/lisp" mv/vendor-dir))
+(when (file-directory-p mv/ess-lisp)
+  (add-to-list 'load-path mv/ess-lisp))
 (autoload 'r-mode "ess-site.el" "ESS" t)
 (add-to-list 'auto-mode-alist '("\\.R$" . r-mode))
 (setq ess-ask-for-ess-directory nil)
@@ -200,15 +202,15 @@
 (setq comint-input-ring-size 10000)
 
 ;; Polymode
-(cond ((>= emacs-major-version 24)
-       (add-to-list 'load-path "~/.emacs.d/vendor/polymode")
-       (add-to-list 'load-path "~/.emacs.d/vendor/polymode/modes")
-       (require 'poly-R)
-       (require 'poly-markdown)
-       (require 'poly-noweb)
-       (add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
-       (add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
-       (add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))))
+(defvar mv/polymodes (expand-file-name "polymode/modes" mv/vendor-dir))
+(when (file-directory-p mv/polymodes)
+  (add-to-list 'load-path mv/polymodes))
+(require 'poly-R)
+(require 'poly-markdown)
+(require 'poly-noweb)
+(add-to-list 'auto-mode-alist '("\\.Snw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rnw" . poly-noweb+r-mode))
+(add-to-list 'auto-mode-alist '("\\.Rmd" . poly-markdown+r-mode))
 
 ;; Make poly-markdown+r-mode play nice with ESS evaluation
 ;; https://github.com/vitoshka/polymode/issues/6
@@ -227,14 +229,10 @@
 (setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
 ;; Flycheck, only for Python
-(cond ((>= emacs-major-version 24)
-       (add-to-list 'load-path "~/.emacs.d/vendor/dash")
-       (add-to-list 'load-path "~/.emacs.d/vendor/flycheck")
-       (autoload 'flycheck-mode "flycheck" nil t)
-       (add-hook 'python-mode-hook 'flycheck-mode)))
+(autoload 'flycheck-mode "flycheck" nil t)
+(add-hook 'python-mode-hook 'flycheck-mode)
 
 ;; web-mode for web templates
-(add-to-list 'load-path "~/.emacs.d/vendor/web-mode")
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
 (add-to-list 'auto-mode-alist '("\\.tpl\\.php\\'" . web-mode))
