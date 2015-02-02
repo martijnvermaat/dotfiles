@@ -110,6 +110,9 @@
 ;; Unified diffs in diff-mode
 (setq diff-switches '("-u"))
 
+(require 'neotree)
+(global-set-key [f8] 'neotree-toggle)
+
 ;; Auto completion
 (require 'auto-complete-config)
 (defvar mv/ac-dict-dir (expand-file-name "dict" user-emacs-directory))
