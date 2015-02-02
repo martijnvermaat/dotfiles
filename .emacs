@@ -89,6 +89,9 @@
 ;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
+(setq neo-window-width 30)
+(setq neo-banner-message nil)
+(setq neo-dont-be-alone t)
 
 ;; Auto completion
 (require 'auto-complete-config)
