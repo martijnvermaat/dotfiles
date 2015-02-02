@@ -44,5 +44,4 @@
 (eval-after-load 'tern
   '(progn
      (require 'tern-auto-complete)
-     (tern-ac-setup)
-     (auto-complete-mode t)))
+     (tern-ac-setup)))

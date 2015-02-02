@@ -110,6 +110,12 @@
 ;; Unified diffs in diff-mode
 (setq diff-switches '("-u"))
 
+;; Auto completion
+(require 'auto-complete-config)
+(defvar mv/ac-dict-dir (expand-file-name "dict" user-emacs-directory))
+(add-to-list 'ac-dictionary-directories mv/ac-dict-dir)
+(ac-config-default)
+
 ;; OCaml tuareg mode
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
 (autoload 'tuareg-mode "tuareg" "Major mode for editing Caml code" t)
