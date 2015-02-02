@@ -58,3 +58,9 @@
 [submodule ".emacs.d/vendor/ido-vertical-mode"]
 	path = .emacs.d/vendor/ido-vertical-mode
 	url = https://github.com/gempesaw/ido-vertical-mode.el.git
+[submodule ".emacs.d/vendor/smex"]
+	path = .emacs.d/vendor/smex
+	url = https://github.com/nonsequitur/smex.git
+[submodule ".emacs.d/vendor/undo-tree"]
+	path = .emacs.d/vendor/undo-tree
+	url = https://github.com/emacsmirror/undo-tree.git
