@@ -1,22 +1,24 @@
-;; XEmacs or Emacs?
-(defvar running-xemacs (string-match "XEmacs\\|Lucid" emacs-version))
+;; Add vendor packages to load path
+(defvar mv/vendor-dir (expand-file-name "vendor" user-emacs-directory))
+(add-to-list 'load-path mv/vendor-dir)
+(dolist (project (directory-files mv/vendor-dir t "\\w+"))
+  (when (file-directory-p project)
+    (add-to-list 'load-path project)))
 
 ;; Setup keyboard for right [del] behavior
 (global-set-key [delete] 'delete-char)
 (global-set-key [kp-delete] 'delete-char)
 
-;; Compile with F12
-(defun silent-compile ()
-  (interactive)
-  (compile "make")
-  (delete-other-windows)
-)
-(global-set-key [f12] 'silent-compile)
+;; Enable C-x C-u (upcase-region) and C-x C-l (downcase-region)
+(put 'downcase-region 'disabled nil)
+(put 'upcase-region 'disabled nil)
 
-;; Turn of font-lock mode for Emacs
-(cond ((not running-xemacs)
-       (global-font-lock-mode t)
-))
+;; Tomorrow theme
+(require 'color-theme-tomorrow)
+(color-theme-tomorrow-night)
+
+;; Our color theme makes markdown headings unreadable
+(setq-default frame-background-mode 'dark)
 
 ;; Don't save abbreviations
 (setq save-abbrevs nil)
@@ -43,7 +45,7 @@
 (setq next-line-add-newlines nil)
 
 ;; Remove trailing whitespace
-(defun my-delete-trailing-blank-lines ()
+(defun mv/delete-trailing-blank-lines ()
   (interactive)
   (save-excursion
     (save-restriction
@@ -51,30 +53,11 @@
       (goto-char (point-max))
       (delete-blank-lines))))
 (add-hook 'before-save-hook 'delete-trailing-whitespace)
-(add-hook 'before-save-hook 'my-delete-trailing-blank-lines)
+(add-hook 'before-save-hook 'mv/delete-trailing-blank-lines)
 
-;; Default tab width
-(setq-default tab-width 4)
-(setq-default c-basic-offset 4)
-
-;; No tab characters
-(setq-default indent-tabs-mode nil)
-
-;; Stroustrup C style for Java
-(defun doe-maar-stroustrup-doen ()
-  (c-set-style "stroustrup"))
-(add-hook 'java-mode-hook 'doe-maar-stroustrup-doen)
-
-;; Enable C-x C-u (upcase-region) and C-x C-l (downcase-region)
-(put 'downcase-region 'disabled nil)
-(put 'upcase-region 'disabled nil)
-
-;; Use mouse scrolling
-;(mouse-wheel-mode 1)
-(cond (window-system (mwheel-install)))
-
-;; Scrollbar right
-(cond (window-system (set-scroll-bar-mode 'right)))
+;; Auto fill
+(setq-default fill-column 78)
+(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; Show line and column numbers
 (line-number-mode 1)
@@ -84,13 +67,6 @@
 (ido-mode 1)
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
-
-;; Add vendor packages to load path
-(defvar mv/vendor-dir (expand-file-name "vendor" user-emacs-directory))
-(add-to-list 'load-path mv/vendor-dir)
-(dolist (project (directory-files mv/vendor-dir t "\\w+"))
-  (when (file-directory-p project)
-    (add-to-list 'load-path project)))
 
 ;; Ido mode vertically
 (require 'ido-vertical-mode)
@@ -110,6 +86,7 @@
 ;; Unified diffs in diff-mode
 (setq diff-switches '("-u"))
 
+;; neotree
 (require 'neotree)
 (global-set-key [f8] 'neotree-toggle)
 
@@ -118,6 +95,29 @@
 (defvar mv/ac-dict-dir (expand-file-name "dict" user-emacs-directory))
 (add-to-list 'ac-dictionary-directories mv/ac-dict-dir)
 (ac-config-default)
+
+;; Default tab width
+(setq-default tab-width 4)
+(setq-default c-basic-offset 4)
+
+;; No tab characters
+(setq-default indent-tabs-mode nil)
+
+;; Stroustrup C style for Java
+(defun mv/c-style ()
+  (c-set-style "stroustrup"))
+(add-hook 'java-mode-hook 'mv/c-style)
+
+;; C# mode
+(defun mv/csharp-mode ()
+  (java-mode)
+  (setq mode-name "C#")
+  (set-variable 'tab-width 4)
+  (set-variable 'indent-tabs-mode t)
+  (set-variable 'c-basic-offset 4)
+  (c-set-offset 'inline-open 0)
+  (c-set-offset 'case-label 0)
+)
 
 ;; OCaml tuareg mode
 (setq auto-mode-alist (cons '("\\.ml\\w?" . tuareg-mode) auto-mode-alist))
@@ -142,59 +142,15 @@
                                 ("\\.m$" . mercury-mode))
                               auto-mode-alist))
 
-;; CoffeeScript mode
-(require 'coffee-mode)
-
-;; C# mode
-(defun poor-mans-csharp-mode ()
-  (java-mode)
-  (setq mode-name "C#")
-  (set-variable 'tab-width 4)
-  (set-variable 'indent-tabs-mode t)
-  (set-variable 'c-basic-offset 4)
-  (c-set-offset 'inline-open 0)
-  (c-set-offset 'case-label 0)
-)
-
 ;; Stratego mode
 (autoload 'stratego-mode "stratego")
 (setq auto-mode-alist (cons '("\.str$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.strs$" . stratego-mode) auto-mode-alist))
 (setq auto-mode-alist (cons '("\.sdf$" . stratego-mode) auto-mode-alist))
 
-;; CSS mode
-(autoload 'css-mode "css-mode")
-(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
-(add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
-(setq cssm-indent-function #'cssm-c-style-indenter)
-(setq cssm-indent-level '4)
-
-;; Less CSS mode
-(require 'less-css-mode)
-
 ;; RELAX NG Compact Syntax mode
 (autoload 'rnc-mode "rnc-mode")
 (setq auto-mode-alist (cons '("\\.rnc\\'" . rnc-mode) auto-mode-alist))
-
-;; Tomorrow theme
-(require 'color-theme-tomorrow)
-(color-theme-tomorrow-night)
-
-;; Our color theme makes markdown headings unreadable
-(setq-default frame-background-mode 'dark)
-
-;; Markdown mode
-(setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
-
-;; YAML mode
-(require 'yaml-mode)
-(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
-(add-hook 'yaml-mode-hook
- '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
-
-;; Auto fill
-(setq-default fill-column 78)
-(add-hook 'text-mode-hook 'turn-on-auto-fill)
 
 ;; ESS mode configuration
 (defvar mv/ess-lisp (expand-file-name "ess/lisp" mv/vendor-dir))
@@ -206,6 +162,7 @@
 (setq ess-eval-visibly 'nowait)
 (setq inferior-R-args "--no-save --no-restore ")
 (setq ess-history-directory "~/.R/")
+(require 'comint)
 (define-key comint-mode-map [C-up] 'comint-previous-matching-input-from-input)
 (define-key comint-mode-map [C-down] 'comint-next-matching-input-from-input)
 (setq comint-input-ring-size 10000)
@@ -256,9 +213,34 @@
       (let ((web-mode-enable-part-face nil))
         ad-do-it)
     ad-do-it))
+(add-hook 'web-mode-hook (lambda () (auto-complete-mode t)))
+
+;; CoffeeScript mode
+(require 'coffee-mode)
+
+;; CSS mode
+(autoload 'css-mode "css-mode")
+(add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
+(add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
+(setq cssm-indent-function #'cssm-c-style-indenter)
+(setq cssm-indent-level '4)
+
+;; Less CSS mode
+(require 'less-css-mode)
+
+;; YAML mode
+(require 'yaml-mode)
+(add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
+(add-hook 'yaml-mode-hook
+ '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+
+;; Markdown mode
+(setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
 
 ;; Load custom per-host files
-(let ((host-file (format "~/.emacs.d/hosts/%s.el" (car (split-string (system-name) "\\.")))))
-  (setq custom-file host-file)
-  (if (file-exists-p host-file)
-      (load host-file)))
+(let ((host (car (split-string (system-name) "\\."))))
+  (defvar mv/host-file (expand-file-name (format "hosts/%s.el" host)
+                                         user-emacs-directory)))
+(setq custom-file mv/host-file)
+(if (file-exists-p mv/host-file)
+    (load mv/host-file))
