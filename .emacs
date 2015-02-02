@@ -103,6 +103,9 @@
 (require 'undo-tree)
 (global-undo-tree-mode 1)
 
+;; Unified diffs in diff-mode
+(setq diff-switches '("-u"))
+
 ;; Only needed on Emacs < 24
 (add-to-list 'load-path "~/.emacs.d/vendor/cl-lib")
 (require 'cl-lib)
