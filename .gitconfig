@@ -19,3 +19,6 @@ f = fetch --all
 
 [merge]
 conflictstyle = diff3
+
+[push]
+default = simple
