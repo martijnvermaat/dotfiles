@@ -131,6 +131,10 @@
 (add-hook 'tuareg-mode-hook
           '(lambda () (setq tuareg-in-indent 0)))
 
+;; haskell-mode
+(require 'haskell-mode-autoloads)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
 ;; Use groovy-mode when file ends in .groovy or has #!/bin/groovy at start
 (autoload 'groovy-mode "groovy-mode" "Groovy editing mode." t)
 (add-to-list 'auto-mode-alist '("\.groovy$" . groovy-mode))
