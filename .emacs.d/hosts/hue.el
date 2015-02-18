@@ -45,3 +45,19 @@
   '(progn
      (require 'tern-auto-complete)
      (tern-ac-setup)))
+
+
+;; haskell-mode
+;;
+;; This needs the geneated autoloads file (haskell-mode-autoloads.el) by
+;; either:
+;;
+;;     cd ~/.emacs.d/vendor/haskell-mode
+;;     make haskell-mode-autoloads.el
+;;
+;; or from inside Emacs, `M-x update-directory-autoloads` and answering the
+;; questions for the folder `~/.emacs.d/vendor/haskell-mode` and for the
+;; output-file `~/.emacs.d/vendor/haskell-mode/haskell-mode-autoloads.el`.
+
+(require 'haskell-mode-autoloads)
+(add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
