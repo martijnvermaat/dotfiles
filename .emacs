@@ -201,6 +201,11 @@
 (autoload 'flycheck-mode "flycheck" nil t)
 (add-hook 'python-mode-hook 'flycheck-mode)
 
+;; JavaScript js2-mode
+(require 'js2-mode)
+(add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
+(setq js2-indent-switch-body t)
+
 ;; web-mode for web templates
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
