@@ -197,9 +197,10 @@
 (setq python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n")
 (setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;; Flycheck, only for Python
+;; Flycheck, only for Python and JavaScript
 (autoload 'flycheck-mode "flycheck" nil t)
 (add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'js2-mode-hook 'flycheck-mode)
 
 ;; JavaScript js2-mode
 (require 'js2-mode)
@@ -240,7 +241,7 @@
 (require 'yaml-mode)
 (add-to-list 'auto-mode-alist '("\\.yml$" . yaml-mode))
 (add-hook 'yaml-mode-hook
- '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
+          '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Markdown mode
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
