@@ -126,6 +126,7 @@ alias ack='ack-grep'
 alias py='ipython'
 alias igv='/home/martijn/projects/IGV/IGV_2.3.32/igv.sh'
 alias sd='svn diff --diff-cmd ~/bin/svn-diff-meld'
+alias io='iojs --harmony --harmony_arrow_functions'
 
 PATH=/home/martijn/projects/kiek/trunk:"${PATH}"
 #PATH=/home/martijn/coq-8.3-beta0-1/bin:"${PATH}"
