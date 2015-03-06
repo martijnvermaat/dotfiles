@@ -1,0 +1,5 @@
+--sort-files
+--pager=less
+
+--type-set
+jsx=.jsx
