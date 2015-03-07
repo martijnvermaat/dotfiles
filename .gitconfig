@@ -10,12 +10,13 @@ pager = less -R
 excludesfile = ~/.globalgitignore
 
 [alias]
-s = status
-l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 b = branch --all --verbose
-r = remote --verbose
+c = checkout
 d = diff --patience
 f = fetch --all
+l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
+r = remote --verbose
+s = status
 
 [merge]
 conflictstyle = diff3
