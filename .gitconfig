@@ -12,6 +12,7 @@ excludesfile = ~/.globalgitignore
 [alias]
 b = branch --all --verbose
 c = checkout
+cm = commit
 d = diff --patience
 f = fetch --all
 l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
