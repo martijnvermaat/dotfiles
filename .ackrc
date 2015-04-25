@@ -3,3 +3,6 @@
 
 --type-set
 jsx=.jsx
+
+--type-set
+less=.less
