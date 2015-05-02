@@ -186,3 +186,8 @@ fi
 if [ -f ~/.bashrc.site ]; then
     source ~/.bashrc.site
 fi
+
+# Ensure that new gnome-terminal tabs keep the parent working dir
+if [ -e /etc/profile.d/vte.sh ]; then
+    . /etc/profile.d/vte.sh
+fi
