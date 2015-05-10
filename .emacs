@@ -197,11 +197,6 @@
 (setq python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n")
 (setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
-;; Flycheck, only for Python and JavaScript
-(autoload 'flycheck-mode "flycheck" nil t)
-(add-hook 'python-mode-hook 'flycheck-mode)
-(add-hook 'js2-mode-hook 'flycheck-mode)
-
 ;; JavaScript js2-mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -223,6 +218,17 @@
         ad-do-it)
     ad-do-it))
 (add-hook 'web-mode-hook (lambda () (auto-complete-mode t)))
+
+;; Flycheck, only for Python and JavaScript
+(autoload 'flycheck-mode "flycheck" nil t)
+(add-hook 'python-mode-hook 'flycheck-mode)
+(add-hook 'js2-mode-hook 'flycheck-mode)
+
+;; Convince Flycheck it's useful in web-mode, but only for JSX
+(add-hook 'web-mode-hook
+          (lambda () (when (equal web-mode-content-type "jsx")
+                       (flycheck-mode)
+                       (flycheck-add-mode 'javascript-eslint 'web-mode))))
 
 ;; CoffeeScript mode
 (require 'coffee-mode)
