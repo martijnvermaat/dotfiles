@@ -12,6 +12,10 @@
 /.config/google-chrome
 /.virtualenvs
 /.cabal
+/.npm
+/.gradle
+.tox
+node_modules
 .svn
 .gvfs
 urlclassifier3.sqlite

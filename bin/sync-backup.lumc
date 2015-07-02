@@ -13,32 +13,16 @@
 set -e
 set -u
 
-MOUNT_DIR=/home/martijn/HumGen
-BACKUP_DIR=$MOUNT_DIR/lab-j/Martijn/Backup
+BACKUP_DIR="/run/user/1000/gvfs/smb-share:server=vf-i-humgen,share=humgen/lab-j/Martijn/Backup"
 BACKUP_TEMP=/home/martijn/.backup-temp
 
 echo
 echo "$(/bin/date)   Starting synchronizing lab-j folder backup"
 
-UNMOUNT="echo Not unmounting because it was already mounted"
-
-# Test if backup disk is mounted
-if ! /bin/grep -q -w $MOUNT_DIR /etc/mtab; then
-    echo "$(/bin/date)   Mounting backup directory filesystem"
-    /bin/mount $MOUNT_DIR
-    UNMOUNT="/bin/umount $MOUNT_DIR"
-fi
-
-# Test again
-if ! /bin/grep -q -w $MOUNT_DIR /etc/mtab; then
-    echo "$(/bin/date)   Backup directory not mounted"
-    exit 1
-fi
-
 # Make sure backup dir exists
 if [ ! -d $BACKUP_DIR ]; then
-    echo "$(/bin/date)   Creating backup directory"
-    /bin/mkdir -p $BACKUP_DIR
+    echo "$(/bin/date)   Backup directory does not exist (drive not mounted?)"
+    exit 1
 fi
 
 # Make sure temp backup dir exists
@@ -57,14 +41,10 @@ echo "$(/bin/date)   Copying from $BACKUP_TEMP to $BACKUP_DIR/home.tar.gz"
 # Copy to home.tar on backup disk
 # Todo: this will include the full leading path from $BACKUP_TEMP in the
 # filenames.
-rm -f $BACKUP_DIR/home.tar.gz
-/bin/tar -czf $BACKUP_DIR/home.tar.gz $BACKUP_TEMP
+rm -f "$BACKUP_DIR/home.tar.gz"
+/bin/tar -czf "$BACKUP_DIR/home.tar.gz" $BACKUP_TEMP
 
-echo "$(/bin/date)   Backup is $(/usr/bin/du -sh $BACKUP_DIR/home.tar.gz | cut -f1) in size"
-
-echo "$(/bin/date)   Unmounting backup directory filesystem"
-
-$UNMOUNT
+echo "$(/bin/date)   Backup is $(/usr/bin/du -sh "$BACKUP_DIR/home.tar.gz" | cut -f1) in size"
 
 echo "$(/bin/date)   Finished synchronizing lab-j folder backup"
 echo
