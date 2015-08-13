@@ -6,3 +6,12 @@ jsx=.jsx
 
 --type-set
 less=.less
+
+--ignore-dir
+build
+
+--ignore-dir
+.build
+
+--ignore-dir
+.tox
