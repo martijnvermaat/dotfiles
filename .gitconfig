@@ -13,6 +13,7 @@ excludesfile = ~/.globalgitignore
 b = branch --all --verbose
 c = checkout
 cm = commit
+ca = commit --amend --no-edit
 d = diff --patience
 dc = diff --patience --cached
 f = fetch --all
