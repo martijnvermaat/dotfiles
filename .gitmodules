@@ -70,3 +70,9 @@
 [submodule ".emacs.d/vendor/js2-mode"]
 	path = .emacs.d/vendor/js2-mode
 	url = https://github.com/mooz/js2-mode.git
+[submodule ".emacs.d/vendor/ag-el"]
+	path = .emacs.d/vendor/ag-el
+	url = https://github.com/Wilfred/ag.el.git
+[submodule ".emacs.d/vendor/s"]
+	path = .emacs.d/vendor/s
+	url = https://github.com/magnars/s.el.git

@@ -252,6 +252,10 @@
 ;; Markdown mode
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
 
+;; ag.el
+(require 'ag)
+(setq ag-highlight-search t)
+
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
   (defvar mv/host-file (expand-file-name (format "hosts/%s.el" host)
