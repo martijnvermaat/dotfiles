@@ -256,6 +256,18 @@
 (require 'ag)
 (setq ag-highlight-search t)
 
+;; Run sh and Python from org-mode
+(org-babel-do-load-languages
+ 'org-babel-load-languages
+ '((sh . t)
+   (python . t)))
+
+;; Disable prompt for running code blocks from org-mode
+(setq org-confirm-babel-evaluate nil)
+
+;; Simple presentation mode for org-mode
+(require 'epresent)
+
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
   (defvar mv/host-file (expand-file-name (format "hosts/%s.el" host)
