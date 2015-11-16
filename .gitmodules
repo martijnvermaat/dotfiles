@@ -76,3 +76,6 @@
 [submodule ".emacs.d/vendor/s"]
 	path = .emacs.d/vendor/s
 	url = https://github.com/magnars/s.el.git
+[submodule ".emacs.d/vendor/org-mode"]
+	path = .emacs.d/vendor/org-mode
+	url = http://orgmode.org/org-mode.git

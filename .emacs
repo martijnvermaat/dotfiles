@@ -256,16 +256,22 @@
 (require 'ag)
 (setq ag-highlight-search t)
 
-;; Run sh and Python from org-mode
+;; Our own Org mode version (if available; install with 'make autoloads')
+(defvar mv/org-mode (expand-file-name "org-mode/lisp" mv/vendor-dir))
+(when (file-regular-p (expand-file-name "org-loaddefs.el" mv/org-mode))
+  (add-to-list 'load-path mv/org-mode)
+  (require 'org))
+
+;; Run sh and Python from Org mode
 (org-babel-do-load-languages
  'org-babel-load-languages
  '((sh . t)
    (python . t)))
 
-;; Disable prompt for running code blocks from org-mode
+;; Disable prompt for running code blocks from Org mode
 (setq org-confirm-babel-evaluate nil)
 
-;; Simple presentation mode for org-mode
+;; Simple presentation mode for Org mode
 (require 'epresent)
 
 ;; Load custom per-host files
