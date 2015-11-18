@@ -126,5 +126,5 @@
 \echo '  :ll     List.'
 \echo
 \echo 'To reset stats for one table or index:'
-\echo '  SELECT pg_stat_reset_single_table_counters(to_regclass("mytable"));'
+\echo '  SELECT pg_stat_reset_single_table_counters(to_regclass(\'mytable\'));'
 \echo
