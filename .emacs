@@ -274,6 +274,19 @@
 ;; Simple presentation mode for Org mode
 (require 'epresent)
 
+;; Magit mode
+(defvar mv/magit (expand-file-name "magit/lisp" mv/vendor-dir))
+(when (file-directory-p mv/magit)
+  (add-to-list 'load-path mv/magit))
+(require 'magit)
+(global-magit-file-mode t)
+
+;; The default C-tab doesn't work in gnome-terminal
+(define-key magit-mode-map (kbd "`") 'magit-section-cycle)
+
+;; Apparently this is how we receive s-tab
+(define-key magit-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
+
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
   (defvar mv/host-file (expand-file-name (format "hosts/%s.el" host)

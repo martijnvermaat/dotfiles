@@ -82,3 +82,6 @@
 [submodule ".emacs.d/vendor/seq"]
 	path = .emacs.d/vendor/seq
 	url = https://github.com/NicolasPetton/seq.el.git
+[submodule ".emacs.d/vendor/magit"]
+	path = .emacs.d/vendor/magit
+	url = https://github.com/magit/magit.git
