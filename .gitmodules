@@ -79,3 +79,6 @@
 [submodule ".emacs.d/vendor/org-mode"]
 	path = .emacs.d/vendor/org-mode
 	url = http://orgmode.org/org-mode.git
+[submodule ".emacs.d/vendor/seq"]
+	path = .emacs.d/vendor/seq
+	url = https://github.com/NicolasPetton/seq.el.git
