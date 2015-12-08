@@ -29,6 +29,14 @@
 ;; No splash screen
 (setq inhibit-startup-message t)
 
+;; Just typing y or n should be enough
+(fset 'yes-or-no-p 'y-or-n-p)
+
+;; Kill a buffer with a live process attached to it
+(setq kill-buffer-query-functions
+      (remq 'process-kill-buffer-query-function
+            kill-buffer-query-functions))
+
 ;; Just follow version controlled symlinks
 (setq vc-follow-symlinks t)
 
