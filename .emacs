@@ -299,9 +299,11 @@
 ;; Apparently this is how we receive s-tab
 (define-key magit-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
 
+;; More magit configuration
 (global-magit-file-mode t)
 (setq magit-popup-show-common-commands nil)
-(add-to-list 'magit-fetch-arguments "--prune")
+(setq magit-fetch-arguments '("--prune"))
+(setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
 
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
