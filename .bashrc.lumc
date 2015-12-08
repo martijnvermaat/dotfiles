@@ -17,3 +17,7 @@ alias oldshark='ssh -t oldshark "screen -Rd default && clear"'
 alias eas='ssh -t eas "screen -Rd default && clear"'
 
 export PERL5LIB=~/projects/vcftools_0.1.11/perl
+
+export EDITOR="emacsclient -a '' -c"
+alias e="${EDITOR}"
+alias emacs="${EDITOR}"

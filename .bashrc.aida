@@ -1,0 +1,3 @@
+export EDITOR="emacsclient -a '' -c"
+alias e="${EDITOR}"
+alias emacs="${EDITOR}"
