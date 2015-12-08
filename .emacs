@@ -287,7 +287,6 @@
 (when (file-directory-p mv/magit)
   (add-to-list 'load-path mv/magit))
 (require 'magit)
-(global-magit-file-mode t)
 
 ;; These are also bound by magit-file-mode, but it might be useful to even
 ;; have them when we're not visiting a file.
@@ -299,6 +298,10 @@
 
 ;; Apparently this is how we receive s-tab
 (define-key magit-mode-map (kbd "<backtab>") 'magit-section-cycle-global)
+
+(global-magit-file-mode t)
+(setq magit-popup-show-common-commands nil)
+(add-to-list 'magit-fetch-arguments "--prune")
 
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
