@@ -281,6 +281,11 @@
 (require 'magit)
 (global-magit-file-mode t)
 
+;; These are also bound by magit-file-mode, but it might be useful to even
+;; have them when we're not visiting a file.
+(global-set-key (kbd "C-x g") 'magit-status)
+(global-set-key (kbd "C-x M-g") 'magit-dispatch-popup)
+
 ;; The default C-tab doesn't work in gnome-terminal
 (define-key magit-mode-map (kbd "`") 'magit-section-cycle)
 
