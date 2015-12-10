@@ -71,10 +71,19 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; Regexp replace with interactive visual feedback
+(require 'visual-regexp)
+(define-key global-map (kbd "C-c r") 'vr/replace)
+(define-key global-map (kbd "C-c q") 'vr/query-replace)
+
 ;; Ido mode
 (ido-mode 1)
 (setq ido-everywhere t)
 (setq ido-enable-flex-matching t)
+
+;; Ido really everywhere
+(require 'ido-ubiquitous)
+(ido-ubiquitous-mode 1)
 
 ;; Ido mode vertically
 (require 'ido-vertical-mode)
@@ -86,6 +95,12 @@
 (global-set-key (kbd "M-x") 'smex)
 (global-set-key (kbd "M-X") 'smex-major-mode-commands)
 (global-set-key (kbd "C-c C-c M-x") 'execute-extended-command)
+
+;; Show the equivalent key-binding when M-x command has one
+(setq suggest-key-bindings 4)
+
+;; Unique buffer names
+(require 'uniquify)
 
 ;; undo-tree mode
 (require 'undo-tree)
@@ -241,10 +256,14 @@
 ;; CoffeeScript mode
 (require 'coffee-mode)
 
+;; Colorize color names
+(require 'rainbow-mode)
+
 ;; CSS mode
 (autoload 'css-mode "css-mode")
 (add-to-list 'auto-mode-alist '("\\.css\\'" . css-mode))
 (add-hook 'css-mode-hook 'cssm-leave-mirror-mode)
+(add-hook 'css-mode-hook 'rainbow-mode)
 (setq cssm-indent-function #'cssm-c-style-indenter)
 (setq cssm-indent-level '4)
 
@@ -304,6 +323,12 @@
 (setq magit-popup-show-common-commands nil)
 (setq magit-fetch-arguments '("--prune"))
 (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
+
+;; Show git info in the gutter
+(require 'git-gutter)
+(global-git-gutter-mode t)
+(add-hook 'git-gutter:update-hooks 'magit-after-revert-hook)
+(add-hook 'git-gutter:update-hooks 'magit-not-reverted-hook)
 
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
