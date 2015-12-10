@@ -321,6 +321,10 @@
 ;; More magit configuration
 (global-magit-file-mode t)
 (setq magit-popup-show-common-commands nil)
+(setq magit-process-popup-time 10)
+(setq magit-completing-read-function 'magit-ido-completing-read)
+(setq magit-push-always-verify nil)
+(setq magit-diff-refine-hunk 'all)
 (setq magit-fetch-arguments '("--prune"))
 (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
 
