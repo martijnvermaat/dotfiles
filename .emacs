@@ -37,6 +37,14 @@
       (remq 'process-kill-buffer-query-function
             kill-buffer-query-functions))
 
+;; Rewire C-x k as C-x # if the buffer is from an emacsclient
+(add-hook 'server-switch-hook
+          (lambda ()
+            (when (current-local-map)
+              (use-local-map (copy-keymap (current-local-map))))
+            (when server-buffer-clients
+              (local-set-key (kbd "C-x k") 'server-edit))))
+
 ;; Just follow version controlled symlinks
 (setq vc-follow-symlinks t)
 
