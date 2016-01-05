@@ -20,6 +20,8 @@ dc = diff --patience --cached
 f = fetch --all --prune
 l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 la = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
+p = push
+pf = push --force
 r = remote --verbose
 s = status
 
