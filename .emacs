@@ -332,7 +332,7 @@
 (setq magit-process-popup-time 10)
 (setq magit-completing-read-function 'magit-ido-completing-read)
 (setq magit-push-always-verify nil)
-(setq magit-diff-refine-hunk 'all)
+(setq magit-diff-refine-hunk t)
 (setq magit-fetch-arguments '("--prune"))
 (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
 
