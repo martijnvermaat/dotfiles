@@ -17,7 +17,7 @@ ca = commit --amend --no-edit
 cl = !git clone $(echo $* | grep -q github.com && echo "-o github") $(echo $* | grep -q git.lumc.nl && echo "-o gitlab")
 d = diff --patience
 dc = diff --patience --cached
-f = fetch --all
+f = fetch --all --prune
 l = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset'
 la = log --graph --abbrev-commit --date=relative --pretty='format:%C(yellow)%h%Creset -%C(red)%d%Creset %s %Cgreen(%ar) %C(bold blue)<%an>%Creset' --all
 r = remote --verbose
