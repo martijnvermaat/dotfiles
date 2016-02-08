@@ -232,6 +232,7 @@
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
 (setq js2-indent-switch-body t)
+(setq js2-basic-offset 2)
 
 ;; web-mode for web templates
 (require 'web-mode)
@@ -263,6 +264,7 @@
 
 ;; CoffeeScript mode
 (require 'coffee-mode)
+(setq coffee-tab-width 2)
 
 ;; Colorize color names
 (require 'rainbow-mode)
