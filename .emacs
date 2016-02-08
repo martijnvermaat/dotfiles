@@ -255,6 +255,7 @@
 (autoload 'flycheck-mode "flycheck" nil t)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'js2-mode-hook 'flycheck-mode)
+(add-hook 'coffee-mode-hook 'flycheck-mode)
 
 ;; Convince Flycheck it's useful in web-mode, but only for JSX
 (add-hook 'web-mode-hook
