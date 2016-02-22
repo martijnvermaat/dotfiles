@@ -97,3 +97,12 @@
 [submodule ".emacs.d/vendor/ido-ubiquitous"]
 	path = .emacs.d/vendor/ido-ubiquitous
 	url = https://github.com/DarwinAwardWinner/ido-ubiquitous.git
+[submodule ".emacs.d/vendor/json-mode"]
+	path = .emacs.d/vendor/json-mode
+	url = https://github.com/joshwnj/json-mode.git
+[submodule ".emacs.d/vendor/json-snatcher"]
+	path = .emacs.d/vendor/json-snatcher
+	url = https://github.com/Sterlingg/json-snatcher.git
+[submodule ".emacs.d/vendor/json-reformat"]
+	path = .emacs.d/vendor/json-reformat
+	url = https://github.com/gongo/json-reformat.git

@@ -228,6 +228,10 @@
 (setq python-shell-completion-module-string-code "';'.join(module_completion('''%s'''))\n")
 (setq python-shell-completion-string-code "';'.join(get_ipython().Completer.all_completions('''%s'''))\n")
 
+;; json-mode
+(require 'json-mode)
+(setq json-reformat:indent-width 2)
+
 ;; JavaScript js2-mode
 (require 'js2-mode)
 (add-to-list 'auto-mode-alist '("\\.js$" . js2-mode))
@@ -250,6 +254,7 @@
         ad-do-it)
     ad-do-it))
 (add-hook 'web-mode-hook (lambda () (auto-complete-mode t)))
+(setq web-mode-code-indent-offset 2)
 
 ;; Flycheck, only for Python and JavaScript
 (autoload 'flycheck-mode "flycheck" nil t)
