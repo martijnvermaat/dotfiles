@@ -178,6 +178,9 @@ export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
+export GOPATH=$HOME/projects/go
+export PATH=$PATH:/usr/local/go/bin
+
 if [ -n "$BASH_VERSION" ]; then
     # startup virtualenv-burrito
     if [ -f "$HOME/.venvburrito/startup.sh" ]; then

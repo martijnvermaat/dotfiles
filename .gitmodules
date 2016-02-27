@@ -106,3 +106,6 @@
 [submodule ".emacs.d/vendor/json-reformat"]
 	path = .emacs.d/vendor/json-reformat
 	url = https://github.com/gongo/json-reformat.git
+[submodule ".emacs.d/vendor/go-mode"]
+	path = .emacs.d/vendor/go-mode
+	url = https://github.com/dominikh/go-mode.el.git

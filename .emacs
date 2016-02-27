@@ -256,11 +256,12 @@
 (add-hook 'web-mode-hook (lambda () (auto-complete-mode t)))
 (setq web-mode-code-indent-offset 2)
 
-;; Flycheck, only for Python and JavaScript
+;; Flycheck, only for Python, JavaScript, and Go
 (autoload 'flycheck-mode "flycheck" nil t)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'js2-mode-hook 'flycheck-mode)
 (add-hook 'coffee-mode-hook 'flycheck-mode)
+(add-hook 'go-mode-hook 'flycheck-mode)
 
 ;; Convince Flycheck it's useful in web-mode, but only for JSX
 (add-hook 'web-mode-hook
@@ -271,6 +272,10 @@
 ;; CoffeeScript mode
 (require 'coffee-mode)
 (setq coffee-tab-width 2)
+
+;; go-mode
+(require 'go-mode-autoloads)
+(add-hook 'before-save-hook 'gofmt-before-save)
 
 ;; Colorize color names
 (require 'rainbow-mode)
