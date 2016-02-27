@@ -298,6 +298,7 @@
 ;; ag.el
 (require 'ag)
 (setq ag-highlight-search t)
+(setq ag-reuse-buffers t)
 
 ;; Our own Org mode version (if available; install with 'make autoloads')
 (defvar mv/org-mode (expand-file-name "org-mode/lisp" mv/vendor-dir))
