@@ -61,3 +61,13 @@
 
 (require 'haskell-mode-autoloads)
 (add-hook 'haskell-mode-hook 'turn-on-haskell-indentation)
+
+
+;; Go auto-completion
+;;
+;; This needs gocode installed:
+;;
+;;     go get -u github.com/nsf/gocode
+
+(require 'go-autocomplete)
+(add-hook 'go-mode-hook (lambda () (auto-complete-mode t)))
