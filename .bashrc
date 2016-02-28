@@ -179,7 +179,7 @@ export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
 
 export GOPATH=$HOME/projects/go
-export PATH=$PATH:/usr/local/go/bin
+export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 
 if [ -n "$BASH_VERSION" ]; then
     # startup virtualenv-burrito
