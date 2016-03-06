@@ -274,6 +274,7 @@
 (setq coffee-tab-width 2)
 
 ;; go-mode
+;; Works best after installing github.com/rogpeppe/godef
 (require 'go-mode-autoloads)
 (add-hook 'before-save-hook 'gofmt-before-save)
 
