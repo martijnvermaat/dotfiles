@@ -60,7 +60,7 @@
 	url = https://github.com/nonsequitur/smex.git
 [submodule ".emacs.d/vendor/undo-tree"]
 	path = .emacs.d/vendor/undo-tree
-	url = https://github.com/emacsmirror/undo-tree.git
+	url = https://github.com/martijnvermaat/undo-tree.git
 [submodule ".emacs.d/vendor/emacs-neotree"]
 	path = .emacs.d/vendor/emacs-neotree
 	url = https://github.com/jaypei/emacs-neotree.git
