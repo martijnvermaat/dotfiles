@@ -106,7 +106,11 @@ if [ -d ~/bin ] ; then
     PATH=~/bin:"${PATH}"
 fi
 
-export TERM=xterm-256color
+# Emacs shells are dumb, they are not a full terminal emulator
+if [ ! -n "${INSIDE_EMACS+1}" ]; then
+    export TERM=xterm-256color
+fi
+
 export ENABLE_COLORS=true
 export EDITOR=emacs
 export PAGER=less
