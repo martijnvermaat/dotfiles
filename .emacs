@@ -303,6 +303,9 @@
 ;; Markdown mode
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
 
+;; Nix mode
+(require 'nix-mode)
+
 ;; ag.el
 (require 'ag)
 (setq ag-highlight-search t)
