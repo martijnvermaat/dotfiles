@@ -1,0 +1,16 @@
+#!/bin/sh
+
+# https://wiki.archlinux.org/index.php/HiDPI#How_to_use_non-whole_numbers
+#xrandr --output eDP1 --scale 1.5x1.5 --panning 3840x2160 #--dpi 288
+#gsettings set org.gnome.desktop.interface scaling-factor 2
+#https://ask.fedoraproject.org/en/question/39272/how-to-configure-screen-dpi-ppi-properly/
+
+#xrandr --output eDP1 --dpi 192
+gsettings set org.gnome.desktop.interface scaling-factor 1
+gsettings set org.gnome.desktop.interface ext-scaling-factor 1.5
+
+/home/martijn/.nix-profile/bin/devilspie2 &
+
+sleep 1
+
+/run/current-system/sw/bin/gnome-terminal
