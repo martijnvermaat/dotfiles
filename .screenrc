@@ -4,6 +4,9 @@
 # See: http://techblog.appnexus.com/2011/managing-ssh-sockets-in-gnu-screen/
 setenv SSH_AUTH_SOCK $HOME/.ssh/ssh_auth_sock
 
+# We're capable of showing 256 colors
+term screen-256color
+
 # Erase background with current bg color
 defbce "on"
 
