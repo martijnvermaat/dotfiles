@@ -67,8 +67,8 @@ alias ag="ag --pager=less"
 
 # Emacs is our editor.
 export EDITOR="emacsclient -a '' -c"
-alias emacs="\${EDITOR}"
-alias e="emacs"
+alias emacs="${EDITOR}"
+alias e="${EDITOR}"
 
 # Quick IPython terminal.
 alias py="ipython"
