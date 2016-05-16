@@ -19,7 +19,13 @@ shopt -s histappend
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
-# Prompt.
+# Bash completion.
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
+fi
+
+# Prompt. This should be after loading completions, since many distributions
+# load __git_ps1 as part of the completions.
 if available __git_ps1; then
     GIT_PS1_SHOWDIRTYSTATE=0
     GIT_PS1_SHOWSTASHSTATE=0
@@ -27,11 +33,6 @@ if available __git_ps1; then
     PS1='\u@\h:\w$(__git_ps1)\$ '
 else
     PS1='\u@\h:\w\$ '
-fi
-
-# Bash completion.
-if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-    . /etc/bash_completion
 fi
 
 # Emacs shells are dumb, they are not a full terminal emulator.
