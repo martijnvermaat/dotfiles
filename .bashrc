@@ -35,9 +35,10 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 fi
 
 # Emacs shells are dumb, they are not a full terminal emulator.
-if [ ! -n "${INSIDE_EMACS+1}" ]; then
-    export TERM=xterm-256color
-fi
+# TODO: Would be best if we could live without touching this.
+#if [ ! -n "${INSIDE_EMACS+1}" ]; then
+#    export TERM=xterm-256color
+#fi
 
 # Setup ls.
 available dircolors && eval "$(dircolors -b)"
