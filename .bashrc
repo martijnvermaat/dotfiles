@@ -35,12 +35,6 @@ else
     PS1='\u@\h:\w\$ '
 fi
 
-# Emacs shells are dumb, they are not a full terminal emulator.
-# TODO: Would be best if we could live without touching this.
-#if [ ! -n "${INSIDE_EMACS+1}" ]; then
-#    export TERM=xterm-256color
-#fi
-
 # Setup ls.
 available dircolors && eval "$(dircolors -b)"
 alias ls="ls --color=auto"
