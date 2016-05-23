@@ -11,6 +11,4 @@ gsettings set org.gnome.desktop.interface ext-scaling-factor 1.5
 
 /home/martijn/.nix-profile/bin/devilspie2 &
 
-sleep 1
-
-/run/current-system/sw/bin/gnome-terminal
+/run/current-system/sw/bin/gnome-terminal &
