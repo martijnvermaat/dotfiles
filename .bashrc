@@ -37,6 +37,7 @@ fi
 
 # Setup ls.
 available dircolors && eval "$(dircolors -b)"
+export QUOTING_STYLE=literal
 alias ls="ls --color=auto"
 alias l="ls -lh --group-directories-first"
 alias la="l -a"
