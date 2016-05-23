@@ -1,0 +1,16 @@
+directory: ~/Music
+library: ~/.cache/beets/musiclibrary.blb
+
+plugins: fetchart fromfilename
+
+threaded: no
+per_disc_numbering: yes
+paths:
+  default: $albumartist/$album%aunique{}/$track - $artist - $title
+  disctotal:2..: $albumartist/$album%aunique{}/Disc $disc/$track - $artist - $title
+  comp: Compilations/$album%aunique{}/$track - $artist - $title
+  singleton: Non-Album/$artist/$artist - $title
+
+fetchart:
+  auto: yes
+  maxwidth: 1024
