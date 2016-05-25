@@ -81,14 +81,12 @@ if [ -f ~/.ssh/config ]; then
 fi
 
 # Go.
-# TODO: What to do on NixOS?
 if [ -d $HOME/projects/go ]; then
     export GOPATH=$HOME/projects/go
     export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 fi
 
 # Python virtualenvwrapper with virtualenv-burrito.
-# TODO: What to do on NixOS?
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
