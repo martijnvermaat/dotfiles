@@ -7,7 +7,7 @@
 
 #xrandr --output eDP1 --dpi 192
 gsettings set org.gnome.desktop.interface scaling-factor 1
-gsettings set org.gnome.desktop.interface ext-scaling-factor 1.5
+gsettings set org.gnome.desktop.interface text-scaling-factor 1.5
 
 /home/martijn/.nix-profile/bin/devilspie2 &
 
