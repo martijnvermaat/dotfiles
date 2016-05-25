@@ -301,6 +301,7 @@
           '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
 ;; Markdown mode
+(require 'markdown-mode)
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))
 
 ;; Nix mode
