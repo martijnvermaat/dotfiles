@@ -109,3 +109,6 @@
 [submodule ".emacs.d/vendor/go-mode"]
 	path = .emacs.d/vendor/go-mode
 	url = https://github.com/dominikh/go-mode.el.git
+[submodule ".emacs.d/vendor/markdown-mode"]
+	path = .emacs.d/vendor/markdown-mode
+	url = https://github.com/jrblevin/markdown-mode.git
