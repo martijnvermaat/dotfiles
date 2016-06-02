@@ -5,12 +5,16 @@
       paths = [
         # Nix-related.
         nix-repl
+        nixops
 
         # General utilities.
         ag
+        binutils
+        colordiff
         dos2unix
         file
         htop
+        pciutils
         psmisc
         tree
         usbutils
