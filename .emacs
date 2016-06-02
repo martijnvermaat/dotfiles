@@ -367,6 +367,11 @@
 ;;(add-to-list 'auto-mode-alist '("^github\\.com[^/]+\\.txt$" . markdown-mode))
 (add-to-list 'auto-mode-alist '("itsalltext/github\\.com" . markdown-mode))
 
+;; Pastebin (sorry, can't remember the name sprunge)
+(require 'sprunge)
+(defalias 'pastebin-buffer 'sprunge-buffer)
+(defalias 'pastebin-region 'sprunge-region)
+
 ;; Load custom per-host files
 (let ((host (car (split-string (system-name) "\\."))))
   (defvar mv/host-file (expand-file-name (format "hosts/%s.el" host)

@@ -112,3 +112,9 @@
 [submodule ".emacs.d/vendor/markdown-mode"]
 	path = .emacs.d/vendor/markdown-mode
 	url = https://github.com/jrblevin/markdown-mode.git
+[submodule ".emacs.d/vendor/sprunge"]
+	path = .emacs.d/vendor/sprunge
+	url = https://github.com/tomjakubowski/sprunge.el
+[submodule ".emacs.d/vendor/request"]
+	path = .emacs.d/vendor/request
+	url = https://github.com/tkf/emacs-request
