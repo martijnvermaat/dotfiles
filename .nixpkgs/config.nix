@@ -1,11 +1,42 @@
 {
   packageOverrides = pkgs: rec {
-    all = with pkgs; buildEnv {
+    all = with pkgs; let
+
+      # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
+      # https://github.com/NixOS/nixpkgs/issues/10026
+      latex = texlive.combine {
+        inherit (texlive)
+          scheme-basic
+          beamer
+          extsizes
+          ms
+          metafont
+          ec
+          tex-gyre
+          qpxqtx
+          cm-super
+          txfonts
+          preprint
+          multirow
+          ntgclass
+          placeins
+          pxfonts;
+      };
+
+      # lesspipe is not in Nixpkgs 16.03.
+      # https://github.com/NixOS/nixpkgs/pull/15338
+      lesspipe = callPackage ./packages/lesspipe.nix {};
+
+      # shellcheck is not a top-level package in 16.03.
+      # https://github.com/NixOS/nixpkgs/pull/15972
+      shellcheck = haskellPackages.ShellCheck;
+
+    in buildEnv {
       name = "all";
       paths = [
         # Nix-related.
         nix-repl
-        nixops
+        #nixops
 
         # General utilities.
         ag
@@ -14,6 +45,7 @@
         dos2unix
         file
         htop
+        lesspipe
         pciutils
         psmisc
         tree
@@ -23,12 +55,14 @@
 
         # Archives.
         unrar
+        unzip
 
         # Emacs.
         editorconfig-core-c
         emacs24-nox
         python27Packages.markdown2
-        # todo: jedi, eslint, gocode, ...
+        shellcheck
+        # TODO: jedi, eslint, gocode, ...
 
         # Git.
         git
@@ -41,27 +75,34 @@
         pwgen
 
         # Development tools.
+        gnumake
         jq
         sqlite-interactive
 
+        # LaTeX.
+        ghostscript
+        latex
+
         # Music.
-        # TODO: wrap beets with pillow dep
         beets
-        imagemagick # or pillow
+        imagemagick # or pillow (TODO: wrap beets with this dep)
         vorbis-tools
+        youtube-dl
 
         # Desktop.
         chromium
         devilspie2
         firefox
+        gimp
+        libreoffice
         transmission_gtk
-
-        #lesspipe
       ];
     };
   };
 
   allowUnfree = true;
+
+  allowTexliveBuilds = true;
 
   firefox = {
     enableAdobeFlash = true;
