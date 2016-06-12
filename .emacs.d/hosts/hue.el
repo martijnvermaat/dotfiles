@@ -49,7 +49,7 @@
 
 ;; haskell-mode
 ;;
-;; This needs the geneated autoloads file (haskell-mode-autoloads.el) by
+;; This needs the generated autoloads file (haskell-mode-autoloads.el) by
 ;; either:
 ;;
 ;;     cd ~/.emacs.d/vendor/haskell-mode
