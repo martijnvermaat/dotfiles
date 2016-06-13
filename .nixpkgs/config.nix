@@ -27,6 +27,16 @@
       # https://github.com/NixOS/nixpkgs/pull/15338
       lesspipe = callPackage ./packages/lesspipe.nix {};
 
+      # Python with our beloved IPython and some libs we use in Emacs.
+      python = pkgs.python27.buildEnv.override {
+        extraLibs = with pkgs.python27Packages; [
+          epc
+          flake8
+          ipython
+          jedi
+        ];
+      };
+
       # shellcheck is not a top-level package in 16.03.
       # https://github.com/NixOS/nixpkgs/pull/15972
       shellcheck = haskellPackages.ShellCheck;
@@ -78,6 +88,9 @@
         gnumake
         jq
         sqlite-interactive
+
+        # Python.
+        python
 
         # LaTeX.
         ghostscript
