@@ -20,7 +20,10 @@
           multirow
           ntgclass
           placeins
-          pxfonts;
+          pxfonts
+          gastex
+          listings
+          cleveref;
       };
 
       # lesspipe is not in Nixpkgs 16.03.
