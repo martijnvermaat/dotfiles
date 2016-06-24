@@ -80,6 +80,9 @@ if [ -f ~/.ssh/config ]; then
     done
 fi
 
+# Quick querying of available Nix packages.
+alias nq='nix-env -qaP --description | ag'
+
 # Go.
 if [ -d $HOME/projects/go ]; then
     export GOPATH=$HOME/projects/go
