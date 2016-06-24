@@ -115,6 +115,7 @@
         firefox
         gimp
         libreoffice
+        shotwell
         transmission_gtk
       ];
     };
