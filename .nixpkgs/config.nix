@@ -23,7 +23,10 @@
           pxfonts
           gastex
           listings
-          cleveref;
+          cleveref
+          hyphenat
+          type1cm
+          fp;
       };
 
       # lesspipe is not in Nixpkgs 16.03.
