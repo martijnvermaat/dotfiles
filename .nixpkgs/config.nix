@@ -91,6 +91,7 @@
         pwgen
 
         # Development tools.
+        ansible2
         gnumake
         jq
         sqlite-interactive
