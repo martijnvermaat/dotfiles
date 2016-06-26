@@ -31,7 +31,7 @@
 
       # lesspipe is not in Nixpkgs 16.03.
       # https://github.com/NixOS/nixpkgs/pull/15338
-      lesspipe = callPackage ./packages/lesspipe.nix {};
+      lesspipe = callPackage ./packages/lesspipe {};
 
       # Python with our beloved IPython and some libs we use in Emacs.
       python = pkgs.python27.buildEnv.override {
