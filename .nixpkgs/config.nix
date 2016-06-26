@@ -47,6 +47,9 @@
       # https://github.com/NixOS/nixpkgs/pull/15972
       shellcheck = haskellPackages.ShellCheck;
 
+      # tern is not in Nixpkgs 16.03.
+      tern = callPackage ./packages/tern {};
+
     in buildEnv {
       name = "all";
       paths = [
@@ -78,7 +81,8 @@
         emacs24-nox
         python27Packages.markdown2
         shellcheck
-        # TODO: jedi, eslint, gocode, ...
+        tern
+        # TODO: eslint, gocode, ...
 
         # Git.
         git
