@@ -34,6 +34,8 @@
       lesspipe = callPackage ./packages/lesspipe {};
 
       # Python with our beloved IPython and some libs we use in Emacs.
+      # In NixOS 16.09, withPackages can be used instead of buildEnv.
+      # https://github.com/NixOS/nixpkgs/pull/15804
       python = pkgs.python27.buildEnv.override {
         extraLibs = with pkgs.python27Packages; [
           epc
