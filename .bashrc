@@ -99,8 +99,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-export AIRFLOW_HOME=~/projects/airflow
-
 # Source site-specific configuration if it exists.
 if [ -f ~/.bashrc.site ]; then
     . ~/.bashrc.site
