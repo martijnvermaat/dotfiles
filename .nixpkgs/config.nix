@@ -2,6 +2,10 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
+      # exa is broken in Nixpkgs 16.03.
+      # Might be related to https://github.com/NixOS/nixpkgs/issues/14125
+      exa = callPackage ./packages/exa {};
+
       # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
       # https://github.com/NixOS/nixpkgs/issues/10026
       latex = texlive.combine {
@@ -66,6 +70,7 @@
         binutils
         colordiff
         dos2unix
+        exa
         file
         htop
         lesspipe
