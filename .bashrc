@@ -75,7 +75,7 @@ alias sudo='sudo '
 
 # Auto aliases for SSH hosts (disable with '#bash:no-alias').
 if [ -f ~/.ssh/config ]; then
-    for host in $(grep -v 'bash:no-alias' ~/.ssh/config | grep -oP '^Host \K[\w-.]+'); do
+    for host in $(grep -v 'bash:no-alias' ~/.ssh/config | grep -oP '^Host \K[\w-.]+$'); do
         alias "${host}=ssh -t ${host} \"screen -Rd default && clear\""
     done
 fi
