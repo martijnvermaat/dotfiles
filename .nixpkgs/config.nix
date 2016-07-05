@@ -70,6 +70,7 @@
         htop
         lesspipe
         pciutils
+        powertop
         psmisc
         tree
         usbutils
@@ -79,6 +80,7 @@
         # Archives.
         unrar
         unzip
+        zip
 
         # Emacs.
         editorconfig-core-c
@@ -99,10 +101,14 @@
         pwgen
 
         # Development tools.
+        Fabric
         ansible2
         gnumake
         jq
+        postgresql
+        python27Packages.docker_compose
         sqlite-interactive
+        vagrant
 
         # Python.
         python
@@ -122,6 +128,7 @@
         devilspie2
         firefox
         gimp
+        gnome3.cheese
         libreoffice
         shotwell
         transmission_gtk
