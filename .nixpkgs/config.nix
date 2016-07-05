@@ -26,7 +26,9 @@
           cleveref
           hyphenat
           type1cm
-          fp;
+          fp
+          caption
+          eurosym;
       };
 
       # lesspipe is not in Nixpkgs 16.03.
