@@ -12,6 +12,7 @@ excludesfile = ~/.globalgitignore
 [alias]
 b = branch --all --verbose
 c = checkout
+ap = add -p
 cm = commit
 ca = commit --amend --no-edit
 cl = !git clone $(echo $* | grep -q github.com && echo "-o github") $(echo $* | grep -q 'gitlab\\|git.lumc.nl' && echo "-o gitlab")
