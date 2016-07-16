@@ -80,6 +80,7 @@
         file
         htop
         lesspipe
+        moreutils
         pciutils
         powertop
         psmisc
