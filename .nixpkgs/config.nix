@@ -6,6 +6,12 @@
       # Might be related to https://github.com/NixOS/nixpkgs/issues/14125
       exa = callPackage ./packages/exa {};
 
+      # GNotifier add-on cannot find libnotify.
+      # https://github.com/mkiol/GNotifier/issues/89
+      firefox = pkgs.stdenv.lib.overrideDerivation pkgs.firefox (oldAttrs: {
+        libs = oldAttrs.libs ++ [ (libnotify + "/lib") ];
+      });
+
       # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
       # https://github.com/NixOS/nixpkgs/issues/10026
       latex = texlive.combine {
