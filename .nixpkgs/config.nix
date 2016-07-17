@@ -2,6 +2,9 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
+      # Backup script.
+      backup = callPackage ./packages/backup {};
+
       # exa is broken in Nixpkgs 16.03.
       # Might be related to https://github.com/NixOS/nixpkgs/issues/14125
       exa = callPackage ./packages/exa {};
@@ -111,6 +114,10 @@
         # Secrets management.
         pass
         pwgen
+
+        # Backup.
+        backup
+        borgbackup
 
         # Development tools.
         Fabric
