@@ -157,6 +157,7 @@
         libreoffice
         shotwell
         transmission_gtk
+        vlc
       ];
     };
   };
