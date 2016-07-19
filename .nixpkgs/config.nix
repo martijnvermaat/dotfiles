@@ -88,6 +88,7 @@
         htop
         lesspipe
         moreutils
+        mtr
         pciutils
         powertop
         psmisc
