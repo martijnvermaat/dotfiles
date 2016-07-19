@@ -15,6 +15,10 @@
         libs = oldAttrs.libs ++ [ (libnotify + "/lib") ];
       });
 
+      # The gnome-open binary is provided by libgnome and not in my PATH
+      # unless included top-level.
+      gnome-open = gnome.libgnome;
+
       # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
       # https://github.com/NixOS/nixpkgs/issues/10026
       latex = texlive.combine {
@@ -148,6 +152,7 @@
         firefox
         gimp
         gnome3.cheese
+        gnome-open
         libreoffice
         shotwell
         transmission_gtk
