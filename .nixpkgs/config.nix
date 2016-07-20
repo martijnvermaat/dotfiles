@@ -156,6 +156,7 @@
         gnome-open
         libreoffice
         shotwell
+        skype
         transmission_gtk
         vlc
       ];
