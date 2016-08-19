@@ -43,3 +43,10 @@ writeScriptBin "backup" ''
     --keep-yearly=100                           \
     '${repository}'
 ''
+
+# Retrieve files as follows:
+#
+# borg extract \
+#   --remote-path '.virtualenvs/borg/bin/borg' \
+#   'pi.remote:/data/martijn/backup/tipi/borg::tipi-2016-08-12' \
+#   home/martijn/.bash_history
