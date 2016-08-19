@@ -281,6 +281,9 @@
 (require 'go-mode-autoloads)
 (add-hook 'before-save-hook 'gofmt-before-save)
 
+;; Elixir mode
+(require 'elixir-mode)
+
 ;; Colorize color names
 (require 'rainbow-mode)
 
