@@ -129,6 +129,7 @@
         ansible2
         gnumake
         jq
+        mysql55
         postgresql
         python27Packages.docker_compose
         sqlite-interactive
