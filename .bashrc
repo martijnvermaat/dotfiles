@@ -68,7 +68,11 @@ alias e="${EDITOR}"
 
 # Dedicated Emacs server per nix-shell environment.
 ne () {
-    nix-shell --run "${EDITOR} -s \"${PWD}/.emacs-server-socket.tmp\" \"$@\""
+    if [ "$IN_NIX_SHELL" ]; then
+        ${EDITOR} -s "${PWD}/.emacs-server-socket.tmp" "$@"
+    else
+        nix-shell --run "${EDITOR} -s \"${PWD}/.emacs-server-socket.tmp\" \"$@\""
+    fi
 }
 
 # Quick IPython terminal.
