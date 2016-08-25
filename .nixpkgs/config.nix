@@ -151,6 +151,7 @@
         # Desktop.
         chromium
         devilspie2
+        dia
         firefox
         gimp
         gnome3.cheese
