@@ -83,6 +83,9 @@
 (line-number-mode 1)
 (column-number-mode 1)
 
+;; Highlight current line
+(global-hl-line-mode)
+
 ;; Regexp replace with interactive visual feedback
 (require 'visual-regexp)
 (define-key global-map (kbd "C-c r") 'vr/replace)
