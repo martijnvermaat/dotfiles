@@ -26,6 +26,10 @@
 ;; No backupfiles
 (setq make-backup-files nil)
 
+;; Whenever a file changes and the corresponding buffer has no unsaved
+;; changes, revert it's content
+(global-auto-revert-mode 1)
+
 ;; No splash screen
 (setq inhibit-startup-message t)
 
