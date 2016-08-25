@@ -137,6 +137,16 @@
 ;; No tab characters
 (setq-default indent-tabs-mode nil)
 
+;; For all practical purposes, multi-term is better than term or ansi-term
+(require 'multi-term)
+
+;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
+;; but we use IPython so often let's dedicate a function to it
+(defun ipython ()
+  "Make a multi-term buffer running IPython."
+  (let ((multi-term-program "ipython"))
+    (multi-term)))
+
 ;; Stroustrup C style for Java
 (defun mv/c-style ()
   (c-set-style "stroustrup"))

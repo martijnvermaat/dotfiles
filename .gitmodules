@@ -130,3 +130,6 @@
 [submodule ".emacs.d/vendor/epl"]
 	path = .emacs.d/vendor/epl
 	url = https://github.com/cask/epl.git
+[submodule ".emacs.d/vendor/multi-term"]
+	path = .emacs.d/vendor/multi-term
+	url = https://github.com/emacsmirror/multi-term.git
