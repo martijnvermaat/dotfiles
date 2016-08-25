@@ -66,6 +66,11 @@ export EDITOR="emacsclient -a '' -c"
 alias emacs="${EDITOR}"
 alias e="${EDITOR}"
 
+# Dedicated Emacs server per nix-shell environment.
+ne () {
+    nix-shell --run "${EDITOR} -s \"${PWD}/.emacs-server-socket.tmp\" \"$@\""
+}
+
 # Quick IPython terminal.
 alias py="ipython"
 
