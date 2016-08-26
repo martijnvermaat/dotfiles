@@ -144,6 +144,7 @@
 
         # Music.
         beets
+        faad2
         imagemagick # or pillow (TODO: wrap beets with this dep)
         vorbis-tools
         youtube-dl
