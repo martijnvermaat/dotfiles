@@ -15,6 +15,7 @@ c = checkout
 ap = add -p
 cm = commit
 ca = commit --amend --no-edit
+reword = commit --amend
 cl = !git clone $(echo $* | grep -q github.com && echo "-o github") $(echo $* | grep -q 'gitlab\\|git.lumc.nl' && echo "-o gitlab")
 d = diff --patience
 dc = diff --patience --cached
