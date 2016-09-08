@@ -133,3 +133,6 @@
 [submodule ".emacs.d/vendor/multi-term"]
 	path = .emacs.d/vendor/multi-term
 	url = https://github.com/emacsmirror/multi-term.git
+[submodule ".emacs.d/vendor/php-mode"]
+	path = .emacs.d/vendor/php-mode
+	url = https://github.com/ejmr/php-mode.git

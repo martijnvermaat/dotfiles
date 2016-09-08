@@ -258,6 +258,9 @@
 (setq js2-indent-switch-body t)
 (setq js2-basic-offset 2)
 
+;; php-mode
+(require 'php-mode)
+
 ;; web-mode for web templates
 (require 'web-mode)
 (add-to-list 'auto-mode-alist '("\\.phtml\\'" . web-mode))
