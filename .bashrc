@@ -64,16 +64,28 @@ alias ag="ag --pager=less"
 # Emacs is our editor.
 export EDITOR="emacsclient -a '' -c"
 alias emacs="${EDITOR}"
-alias e="${EDITOR}"
 
-# Dedicated Emacs server per nix-shell environment.
-ne () {
-    if [ "$IN_NIX_SHELL" ]; then
-        ${EDITOR} -s "${PWD}/.emacs-server-socket.tmp" "$@"
-    else
-        nix-shell --run "${EDITOR} -s \"${PWD}/.emacs-server-socket.tmp\" \"$@\""
-    fi
-}
+# One-letter editor shortcut that takes into account nix-shell.
+if available nix-shell; then
+    # If we have nix-shell, try to take it into account in how to run Emacs.
+    e () {
+        if [ -f shell.nix ] || grep -qs '^\s*shellHook\s*=' default.nix; then
+            # Dedicated Emacs server per nix-shell environment.
+            socket="${PWD}/.emacs-server-socket.tmp"
+            if [ "$IN_NIX_SHELL" ]; then
+                emacs -s "${socket}" "$@"
+            else
+                # Unfortunately we loose the ability to pass multiple
+                # arguments.
+                nix-shell --run "${EDITOR} -s \"${socket}\" \"$*\""
+            fi
+        else
+            emacs "$@"
+        fi
+    }
+else
+    alias e="${EDITOR}"
+fi
 
 # Quick IPython terminal.
 alias py="ipython"
