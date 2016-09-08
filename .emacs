@@ -143,13 +143,19 @@
 
 ;; For all practical purposes, multi-term is better than term or ansi-term
 (require 'multi-term)
+(setq multi-term-dedicated-select-after-open-p t)
 
 ;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
 ;; but we use IPython so often let's dedicate a function to it
-(defun ipython ()
+(defun run-ipython ()
   "Make a multi-term buffer running IPython."
+  (interactive)
+  (split-window-sensibly)
+  (other-window 1)
   (let ((multi-term-program "ipython"))
-    (multi-term)))
+    (multi-term))
+  (set-window-dedicated-p (selected-window) t))
+(global-set-key (kbd "C-c p") 'run-ipython)
 
 ;; Stroustrup C style for Java
 (defun mv/c-style ()
