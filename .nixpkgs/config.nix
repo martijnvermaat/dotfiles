@@ -2,6 +2,9 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
+      # Some packages are not in 16.03 but are easily fetched from 16.09.
+      pkgs1609 = import (fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-16.09.tar.gz") {};
+
       # Backup script.
       backup = callPackage ./packages/backup {};
 
@@ -18,6 +21,9 @@
       # The gnome-open binary is provided by libgnome and not in my PATH
       # unless included top-level.
       gnome-open = gnome.libgnome;
+
+      # The keybase.io Go client is not in Nixpkgs 16.03.
+      keybase = pkgs1609.keybase;
 
       # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
       # https://github.com/NixOS/nixpkgs/issues/10026
@@ -117,6 +123,8 @@
         gitg
 
         # Secrets management.
+        gnupg
+        keybase
         pass
         pwgen
 
