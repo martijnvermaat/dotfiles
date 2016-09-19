@@ -334,6 +334,10 @@
 ;; Nix mode
 (require 'nix-mode)
 
+;; Terraform mode
+(require 'terraform-mode)
+(setq terraform-indent-level 4)
+
 ;; ag.el
 (require 'ag)
 (setq ag-highlight-search t)

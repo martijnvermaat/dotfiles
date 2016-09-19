@@ -136,3 +136,9 @@
 [submodule ".emacs.d/vendor/php-mode"]
 	path = .emacs.d/vendor/php-mode
 	url = https://github.com/ejmr/php-mode.git
+[submodule ".emacs.d/vendor/terraform-mode"]
+	path = .emacs.d/vendor/terraform-mode
+	url = https://github.com/syohex/emacs-terraform-mode.git
+[submodule ".emacs.d/vendor/hcl-mode"]
+	path = .emacs.d/vendor/hcl-mode
+	url = https://github.com/syohex/emacs-hcl-mode.git
