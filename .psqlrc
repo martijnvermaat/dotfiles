@@ -40,7 +40,7 @@
 \set HISTCONTROL ignoredups
 
 -- Keep more history.
-\set HISTSIZE 50000
+\set HISTSIZE 1000000
 
 -- Autocomplete keywords (like SELECT) in upper-case, even if you started
 -- typing them in lower case.
