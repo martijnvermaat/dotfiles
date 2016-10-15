@@ -8,6 +8,9 @@
       # Backup script.
       backup = callPackage ./packages/backup {};
 
+      # Bit more recent consul.
+      consul = pkgs1609.consul;
+
       # exa is broken in Nixpkgs 16.03.
       # Might be related to https://github.com/NixOS/nixpkgs/issues/14125
       exa = callPackage ./packages/exa {};
@@ -135,6 +138,7 @@
         # Development tools.
         Fabric
         ansible2
+        consul
         gnumake
         jq
         mysql55
