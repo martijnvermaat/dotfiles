@@ -11,10 +11,6 @@
       # Bit more recent consul.
       consul = pkgs1609.consul;
 
-      # exa is broken in Nixpkgs 16.03.
-      # Might be related to https://github.com/NixOS/nixpkgs/issues/14125
-      exa = callPackage ./packages/exa {};
-
       # GNotifier add-on cannot find libnotify.
       # https://github.com/mkiol/GNotifier/issues/89
       firefox = pkgs.stdenv.lib.overrideDerivation pkgs.firefox (oldAttrs: {
@@ -95,7 +91,6 @@
         binutils
         colordiff
         dos2unix
-        exa
         file
         htop
         lesspipe
