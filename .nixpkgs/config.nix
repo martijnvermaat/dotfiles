@@ -2,14 +2,8 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
-      # Some packages are not in 16.03 but are easily fetched from 16.09.
-      pkgs1609 = import (fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/nixos-16.09.tar.gz") {};
-
       # Backup script.
       backup = callPackage ./packages/backup {};
-
-      # Bit more recent consul.
-      consul = pkgs1609.consul;
 
       # GNotifier add-on cannot find libnotify.
       # https://github.com/mkiol/GNotifier/issues/89
@@ -21,10 +15,7 @@
       # unless included top-level.
       gnome-open = gnome.libgnome;
 
-      # The keybase.io Go client is not in Nixpkgs 16.03.
-      keybase = pkgs1609.keybase;
-
-      # texlive.combined.scheme-full is broken in Nixpkgs 16.03.
+      # texlive.combined.scheme-full is broken in Nixpkgs 16.09.
       # https://github.com/NixOS/nixpkgs/issues/10026
       latex = texlive.combine {
         inherit (texlive)
@@ -53,30 +44,18 @@
           eurosym;
       };
 
-      # lesspipe is not in Nixpkgs 16.03.
-      # https://github.com/NixOS/nixpkgs/pull/15338
-      lesspipe = callPackage ./packages/lesspipe {};
-
-      # mycli version in Nixpkgs 16.03 is old, we packaged 1.8.0.
+      # mycli version in Nixpkgs 16.09 is old, we packaged 1.8.0.
       mycli = callPackage ./packages/mycli {};
 
       # Python with our beloved IPython and some libs we use in Emacs.
-      # In NixOS 16.09, withPackages can be used instead of buildEnv.
-      # https://github.com/NixOS/nixpkgs/pull/15804
-      python = pkgs.python27.buildEnv.override {
-        extraLibs = with pkgs.python27Packages; [
-          epc
-          flake8
-          ipython
-          jedi
-        ];
-      };
+      python = pkgs.python27.withPackages (ps: with ps; [
+        epc
+        flake8
+        ipython
+        jedi
+      ]);
 
-      # shellcheck is not a top-level package in 16.03.
-      # https://github.com/NixOS/nixpkgs/pull/15972
-      shellcheck = haskellPackages.ShellCheck;
-
-      # tern is not in Nixpkgs 16.03.
+      # tern is not in Nixpkgs 16.09.
       tern = callPackage ./packages/tern {};
 
     in buildEnv {
