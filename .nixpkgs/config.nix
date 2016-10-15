@@ -61,6 +61,9 @@
       # https://github.com/NixOS/nixpkgs/pull/15338
       lesspipe = callPackage ./packages/lesspipe {};
 
+      # mycli version in Nixpkgs 16.03 is old, we packaged 1.8.0.
+      mycli = callPackage ./packages/mycli {};
+
       # Python with our beloved IPython and some libs we use in Emacs.
       # In NixOS 16.09, withPackages can be used instead of buildEnv.
       # https://github.com/NixOS/nixpkgs/pull/15804
@@ -141,6 +144,7 @@
         consul
         gnumake
         jq
+        mycli
         mysql55
         postgresql
         python27Packages.docker_compose
