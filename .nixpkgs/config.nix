@@ -67,6 +67,7 @@
 
         # General utilities.
         ag
+        bc
         binutils
         colordiff
         dos2unix
