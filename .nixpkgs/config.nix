@@ -5,12 +5,6 @@
       # Backup script.
       backup = callPackage ./packages/backup {};
 
-      # GNotifier add-on cannot find libnotify.
-      # https://github.com/mkiol/GNotifier/issues/89
-      firefox = pkgs.stdenv.lib.overrideDerivation pkgs.firefox (oldAttrs: {
-        libs = oldAttrs.libs ++ [ (libnotify + "/lib") ];
-      });
-
       # The gnome-open binary is provided by libgnome and not in my PATH
       # unless included top-level.
       gnome-open = gnome.libgnome;
