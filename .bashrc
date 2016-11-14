@@ -77,6 +77,7 @@ if available nix-shell; then
             else
                 # Unfortunately we loose the ability to pass multiple
                 # arguments.
+                # TODO: Calling without arguments is broken.
                 nix-shell --run "${EDITOR} -s \"${socket}\" \"$*\""
             fi
         else
