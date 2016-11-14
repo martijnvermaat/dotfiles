@@ -110,6 +110,7 @@
         # Development tools.
         Fabric
         ansible2
+        awscli
         consul
         gnumake
         jq
