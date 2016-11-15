@@ -311,6 +311,9 @@ names to which it refers are bound."
      (magit-log-head-label-tags ((,class (:foreground ,aqua :box nil :weight bold))))
      (magit-section-title ((,class (:inherit diff-hunk-header))))
 
+     ;; magit-blame headings are very hard to read by default...
+     (magit-blame-heading ((,class (:background "#303030" :foreground "#909090"))))
+
      (link ((,class (:foreground nil :underline t))))
      (widget-button ((,class (:underline t))))
      (widget-field ((,class (:background ,current-line :box (:line-width 1 :color ,foreground)))))
