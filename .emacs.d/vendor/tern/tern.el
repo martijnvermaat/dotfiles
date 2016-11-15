@@ -1,10 +1,11 @@
-;;; -*- lexical-binding: t -*-
-;;; tern.el --- Tern-powered JavaScript integration
+;;; tern.el --- Tern-powered JavaScript integration -*- lexical-binding: t -*-
 
 ;; Author: Marijn Haverbeke
 ;; URL: http://ternjs.net/
 ;; Version: 0.0.1
 ;; Package-Requires: ((json "1.2") (cl-lib "0.5") (emacs "24"))
+
+;;; Code:
 
 (require 'cl-lib)
 (require 'json)
@@ -15,6 +16,8 @@
 (defvar tern-server nil)
 (defvar tern-explicit-port nil)
 (defvar tern-project-dir nil)
+(defvar tern-last-file-name nil)
+(defvar tern-last-project-dir nil)
 
 (defun tern-message (fmt &rest objects)
   (apply 'message fmt objects))
@@ -23,7 +26,7 @@
   (let* ((url-mime-charset-string nil) ; Suppress huge, useless header
          (url-request-method "POST")
          (deactivate-mark nil) ; Prevents json-encode from interfering with shift-selection-mode
-         (url-request-data (json-encode doc))
+         (url-request-data (encode-coding-string (json-encode doc) 'utf-8))
          (url-show-status nil)
          (url (url-parse-make-urlobj "http" nil nil tern-server port "/" nil nil nil)))
     (url-http url #'tern-req-finished (list c))))
@@ -34,6 +37,7 @@
   (let ((is-error (and (consp c) (eq (car c) :error)))
         (found-body (search-forward "\n\n" nil t))
         (deactivate-mark nil))
+    (set-buffer-multibyte t)
     (if (or is-error (not found-body))
         (let ((message (and found-body
                             (buffer-substring-no-properties (point) (point-max))))
@@ -48,22 +52,34 @@
         (funcall c nil json)))))
 
 (defun tern-project-dir ()
-  (or tern-project-dir
+  (or (and (equal tern-last-file-name (buffer-file-name)) tern-project-dir)
       (and (not (buffer-file-name)) (setf tern-project-dir ""))
       (let ((project-dir (file-name-directory (buffer-file-name))))
-        (cl-loop for cur = project-dir then (let ((shorter (file-name-directory (substring cur 0 (1- (length cur))))))
+        (cl-loop for cur = project-dir then (let ((shorter (file-name-directory (directory-file-name cur))))
                                               (and (< (length shorter) (length cur)) shorter))
                  while cur do
                  (when (file-exists-p (expand-file-name ".tern-project" cur))
                    (cl-return (setf project-dir cur))))
-        (setf tern-project-dir project-dir))))
+        (setf tern-project-dir project-dir)))
+  ;; Track the file name to detect if it changed, which means the project
+  ;; directory needs to be found again.
+  (setf tern-last-file-name (buffer-file-name))
+  tern-project-dir)
+
+(defun tern-known-port ()
+  ;; Invalidate the port when the project directory changes, since a new
+  ;; directory may yield a new .tern-port file.
+  (if (equal tern-last-project-dir (tern-project-dir))
+      tern-known-port
+    (setf tern-last-project-dir (tern-project-dir)
+          tern-known-port nil)))
 
 (defun tern-find-server (c &optional ignore-port)
   (cl-block nil
-    (when tern-known-port
-      (cl-return (if (consp tern-known-port)
-                     (funcall c nil (cdr tern-known-port))
-                   (funcall c tern-known-port nil))))
+    (when (tern-known-port)
+      (cl-return (if (consp (tern-known-port))
+                     (funcall c nil (cdr (tern-known-port)))
+                   (funcall c (tern-known-port) nil))))
     (if tern-explicit-port
         (funcall c tern-explicit-port nil)
       (unless (buffer-file-name)
@@ -83,14 +99,15 @@
   (let* ((script-file (or load-file-name
                           (and (boundp 'bytecomp-filename) bytecomp-filename)
                           buffer-file-name))
-         (bin-file (expand-file-name "../bin/tern" (file-name-directory (file-truename script-file))))
-         (tern-itself (list (if (file-exists-p bin-file) bin-file "tern"))))
-    (if (eq system-type 'windows-nt) (cons "node" tern-itself) tern-itself))
+         (bin-file (expand-file-name "../bin/tern" (file-name-directory (file-truename script-file)))))
+    (if (file-exists-p bin-file)
+        (if (eq system-type 'windows-nt) (list "node" bin-file) (list bin-file))
+      (list "tern")))
   "The command to be run to start the Tern server. Should be a
 list of strings, giving the binary name and arguments.")
 
 (defun tern-start-server (c)
-  (let* ((default-directory tern-project-dir)
+  (let* ((default-directory (tern-project-dir))
          (cmd (if (member "--strip-crs" tern-command) tern-command (append tern-command '("--strip-crs"))))
          (proc (apply #'start-process "Tern" nil cmd))
          (all-output ""))
@@ -101,9 +118,9 @@ list of strings, giving the binary name and arguments.")
                                  (run-at-time "30 sec" nil
                                               (lambda (buf)
                                                 (with-current-buffer buf
-                                                  (when (consp tern-known-port) (setf tern-known-port nil))))
+                                                  (when (consp (tern-known-port)) (setf tern-known-port nil))))
                                               (current-buffer))
-                                 (funcall c nil tern-known-port)))
+                                 (funcall c nil (tern-known-port))))
     (set-process-filter proc (lambda (proc output)
                                (if (not (string-match "Listening on port \\([0-9][0-9]*\\)" output))
                                    (setf all-output (concat all-output output))
@@ -112,7 +129,7 @@ list of strings, giving the binary name and arguments.")
                                                               (delete-process proc)
                                                               (setf tern-known-port nil)))
                                  (set-process-filter proc nil)
-                                 (funcall c tern-known-port nil))))))
+                                 (funcall c (tern-known-port) nil))))))
 
 (defvar tern-command-generation 0)
 (defvar tern-activity-since-command -1)
@@ -123,7 +140,9 @@ list of strings, giving the binary name and arguments.")
 (defvar tern-buffer-is-dirty nil)
 
 (defun tern-project-relative-file ()
-  (substring (buffer-file-name) (length (tern-project-dir))))
+  (if (buffer-file-name)
+      (substring (buffer-file-name) (length (tern-project-dir)))
+    (buffer-name)))
 
 (defun tern-get-partial-file (at)
   (let* (min-indent start-pos end-pos
@@ -154,7 +173,7 @@ list of strings, giving the binary name and arguments.")
       (when (and (not (eq buf (current-buffer)))
                  (buffer-local-value 'tern-mode buf)
                  (buffer-local-value 'tern-buffer-is-dirty buf)
-                 (equal tern-project-dir (buffer-local-value 'tern-project-dir buf)))
+                 (equal (tern-project-dir) (with-current-buffer buf (tern-project-dir))))
         (with-current-buffer buf
           (push `((type . "full")
                   (name . ,(tern-project-relative-file))
@@ -177,7 +196,7 @@ list of strings, giving the binary name and arguments.")
                                  (or (eq (cl-cadar err) 'connection-failed)
                                      (eq (caar err) 'file-error)))
                             (setf retrying t)
-                            (let ((old-port tern-known-port))
+                            (let ((old-port (tern-known-port)))
                               (setf tern-known-port nil)
                               (if tern-explicit-port
                                   (funcall callback nil err)
@@ -206,11 +225,11 @@ list of strings, giving the binary name and arguments.")
     (push `(end . ,(1- pos)) (cdr (assq 'query doc)))
     (tern-run-request
      (lambda (err data)
-       (when (< tern-activity-since-command generation)
+       (when (= tern-activity-since-command (1- generation))
          (cond ((not err)
                 (dolist (file files)
                   (when (equal (cdr (assq 'type file)) "full")
-                    (with-current-buffer (find-file-noselect (expand-file-name (cdr (assq 'name file)) tern-project-dir))
+                    (with-current-buffer (find-file-noselect (expand-file-name (cdr (assq 'name file)) (tern-project-dir)))
                       (setf tern-buffer-is-dirty nil))))
                 (funcall f data))
                ((not (eq mode :silent)) (tern-message "Request failed: %s" err)))))
@@ -384,7 +403,7 @@ list of strings, giving the binary name and arguments.")
 
 ;; Highlight references in scope
 
-(defvar tern-flash-timeout 0.5 "Delay before highlight overlay dissappears.")
+(defvar tern-flash-timeout 0.5 "Delay before the highlight overlay disappears.")
 
 (defun tern-flash-region (start end)
   "Temporarily highlight region from START to END."
@@ -428,7 +447,7 @@ list of strings, giving the binary name and arguments.")
               '(font-lock-comment-face font-lock-comment-delimiter-face font-lock-string-face))
       nil
     (let ((around (buffer-substring-no-properties (max 1 (1- (point))) (min (1+ (point)) (point-max)))))
-      (string-match "\\sw" around))))
+      (string-match "\\sw\\|)\\|]\\|_" around))))
 
 (defun tern-find-definition (&optional prompt-var)
   (interactive)
@@ -469,7 +488,8 @@ list of strings, giving the binary name and arguments.")
 
 (defun tern-go-to-position (file pos)
   (find-file file)
-  (goto-char (min pos (point-max))))
+  (goto-char (min pos (point-max)))
+  (setf tern-last-point-pos (point)))
 
 ;; Query type
 
@@ -510,24 +530,32 @@ list of strings, giving the binary name and arguments.")
 
 ;; Mode plumbing
 
-(defun tern-before-change (start end)
+(defun tern-after-change (start end prev-length)
+  "Track changes to the buffer."
   (if tern-buffer-is-dirty
-      (setf (car tern-buffer-is-dirty) (min (car tern-buffer-is-dirty) start)
-            (cdr tern-buffer-is-dirty) (max (cdr tern-buffer-is-dirty) end))
+      (setf tern-buffer-is-dirty (cons (min start (car tern-buffer-is-dirty))
+                                       (max end   (cdr tern-buffer-is-dirty))))
     (setf tern-buffer-is-dirty (cons start end)))
-  (when (> (- (cdr tern-buffer-is-dirty) (car tern-buffer-is-dirty)) 4000)
-    (run-at-time "200 millisec" nil
-                 (lambda (buf)
-                   (with-current-buffer buf
-                     (when tern-buffer-is-dirty
-                       (setf tern-buffer-is-dirty nil)
-                       (tern-send-buffer-to-server))))
-                 (current-buffer)))
-  (setf tern-last-point-pos nil)
-  (when (and tern-last-argument-hints (<= start (car tern-last-argument-hints)))
-    (setf tern-last-argument-hints nil))
-  (when (and tern-last-completions (<= start (cadr tern-last-completions)))
-    (setf tern-last-completions nil)))
+  ;; Set this here in addition to `tern-post-command', since the buffer may have
+  ;; changed before a command completes (e.g. in a `query-replace' session).
+  ;; See issue #786.
+  (setf tern-activity-since-command tern-command-generation))
+
+(defvar tern-idle-time 2.5
+  "The time Emacs is allowed to idle before updating Tern's representation of the file.")
+(defvar tern-idle-timer nil
+  "The timer on which `tern-reparse-on-idle' runs.")
+(defun tern-reparse-on-idle ()
+  "Do some mode plumbing and refresh tern's representation of the buffer."
+  (when tern-mode
+    (setf tern-last-point-pos nil)
+    (when (and tern-last-argument-hints tern-buffer-is-dirty
+               (<= (car tern-buffer-is-dirty) (car tern-last-argument-hints)))
+      (setf tern-last-argument-hints nil))
+    (when (and tern-last-completions tern-buffer-is-dirty
+               (<= (car tern-buffer-is-dirty) (cadr tern-last-completions)))
+      (setf tern-last-completions nil))
+    (tern-send-buffer-to-server)))
 
 (defun tern-post-command ()
   (unless (eq (point) tern-last-point-pos)
@@ -562,20 +590,29 @@ list of strings, giving the binary name and arguments.")
   (set (make-local-variable 'tern-server) "127.0.0.1")
   (set (make-local-variable 'tern-explicit-port) nil)
   (set (make-local-variable 'tern-project-dir) nil)
+  (set (make-local-variable 'tern-last-file-name) nil)
+  (set (make-local-variable 'tern-last-project-dir) nil)
   (set (make-local-variable 'tern-last-point-pos) nil)
   (set (make-local-variable 'tern-last-completions) nil)
   (set (make-local-variable 'tern-last-argument-hints) nil)
   (set (make-local-variable 'tern-buffer-is-dirty) (and (buffer-modified-p) (cons (point-min) (point-max))))
   (make-local-variable 'completion-at-point-functions)
   (push 'tern-completion-at-point completion-at-point-functions)
-  (add-hook 'before-change-functions 'tern-before-change nil t)
+  (add-hook 'after-change-functions 'tern-after-change nil t)
+  (when (null tern-idle-timer)
+    (setq tern-idle-timer
+          (run-with-idle-timer tern-idle-time t #'tern-reparse-on-idle)))
   (add-hook 'post-command-hook 'tern-post-command nil t)
-  (add-hook 'buffer-list-update-hook 'tern-left-buffer nil t))
+  (add-hook 'buffer-list-update-hook 'tern-left-buffer nil t)
+  (tern-send-buffer-to-server))
 
 (defun tern-mode-disable ()
   (setf completion-at-point-functions
         (remove 'tern-completion-at-point completion-at-point-functions))
-  (remove-hook 'before-change-functions 'tern-before-change t)
+  (unless (null tern-idle-timer)
+    (cancel-timer tern-idle-timer)
+    (setq tern-idle-timer nil))
+  (remove-hook 'after-change-functions 'tern-after-change t)
   (remove-hook 'post-command-hook 'tern-post-command t)
   (remove-hook 'buffer-list-update-hook 'tern-left-buffer t))
 
