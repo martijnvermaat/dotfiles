@@ -1,8 +1,8 @@
 { bash, consul, writeScriptBin }:
 
-# Provides the `wtcc` executable, a wrapper for SSH.
+# Provides the `wt` executable, a wrapper for SSH.
 #
-# Usage: wtcc host [ssh arguments ...]
+# Usage: wt host [ssh arguments ...]
 #
 # If host not an IP address, Consul is searched for matching hostnames to get
 # an IP address.
@@ -15,7 +15,7 @@
 #   StrictHostKeyChecking no
 #   ProxyCommand ssh -qa wtcc-jump-host 'nc -w 600 $(basename %h) %p'
 
-writeScriptBin "wtcc" ''
+writeScriptBin "wt" ''
   #!${bash}/bin/bash
 
   set -o nounset

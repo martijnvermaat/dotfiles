@@ -53,7 +53,7 @@
       tern = callPackage ./packages/tern {};
 
       # WTCC SSH script.
-      wtccSsh = callPackage ./packages/wtccSsh {};
+      wt = callPackage ./packages/wt {};
 
     in buildEnv {
       name = "all";
@@ -123,7 +123,7 @@
         python27Packages.docker_compose
         sqlite-interactive
         vagrant
-        wtccSsh
+        wt
 
         # Python.
         python
