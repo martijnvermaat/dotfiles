@@ -52,6 +52,9 @@
       # tern is not in Nixpkgs 16.09.
       tern = callPackage ./packages/tern {};
 
+      # WTCC SSH script.
+      wtccSsh = callPackage ./packages/wtccSsh {};
+
     in buildEnv {
       name = "all";
       paths = [
@@ -120,6 +123,7 @@
         python27Packages.docker_compose
         sqlite-interactive
         vagrant
+        wtccSsh
 
         # Python.
         python
