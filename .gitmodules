@@ -142,3 +142,6 @@
 [submodule ".emacs.d/vendor/hcl-mode"]
 	path = .emacs.d/vendor/hcl-mode
 	url = https://github.com/syohex/emacs-hcl-mode.git
+[submodule ".emacs.d/vendor/with-editor"]
+	path = .emacs.d/vendor/with-editor
+	url = https://github.com/magit/with-editor.git
