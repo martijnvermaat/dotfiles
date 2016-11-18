@@ -29,10 +29,10 @@ writeScriptBin "wt" ''
   if [[ ! "$host" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       host=$(${consul}/bin/consul members | awk "\$3 == \"alive\" && \$1 ~ /$host/ {print \$2; exit}" | cut -d : -f 1)
       if [[ ! "$host" ]]; then
-          echo "No matching host in Consul"
+          echo "No matching host in Consul" >&2
           exit 1
       fi
-      echo "Found IP in Consul: $host"
+      echo "Found IP in Consul: $host" >&2
   fi
 
   ssh "wtcc/$host" "$@"
