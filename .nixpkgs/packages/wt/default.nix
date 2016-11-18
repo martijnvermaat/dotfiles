@@ -28,6 +28,10 @@ writeScriptBin "wt" ''
   # If host is not an IP address, try to get it from Consul.
   if [[ ! "$host" =~ ^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+$ ]]; then
       host=$(${consul}/bin/consul members | awk "\$3 == \"alive\" && \$1 ~ /$host/ {print \$2; exit}" | cut -d : -f 1)
+      if [[ ! "$host" ]]; then
+          echo "No matching host in Consul"
+          exit 1
+      fi
       echo "Found IP in Consul: $host"
   fi
 
