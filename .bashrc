@@ -69,20 +69,35 @@ alias emacs="${EDITOR}"
 if available nix-shell; then
     # If we have nix-shell, try to take it into account in how to run Emacs.
     e () {
-        if [ -f shell.nix ] || grep -qs '^\s*shellHook\s*=' default.nix; then
-            # Dedicated Emacs server per nix-shell environment.
-            socket="${PWD}/.emacs-server-socket.tmp"
-            if [ "$IN_NIX_SHELL" ]; then
-                emacs -s "${socket}" "$@"
-            else
-                # Unfortunately we loose the ability to pass multiple
-                # arguments.
-                # TODO: Calling without arguments is broken.
-                nix-shell --run "${EDITOR} -s \"${socket}\" \"$*\""
+        origin="${PWD}"
+        root="${PWD}"
+        # Find a derivation for nix-shell going up starting with the current
+        # directory.
+        while [[ "${root}" != "/" ]]; do
+            if [ -f "${root}/shell.nix" ] || grep -qs '^\s*shellHook\s*=' "${root}/default.nix"; then
+                # Dedicated Emacs server per nix-shell environment.
+                socket="${root}/.emacs-server-socket.tmp"
+                # If there is a daemon already listening on the socket, we can
+                # just connect to it. If we are in a nix-shell we can just
+                # start a new daemon.
+                # In all other cases, we start a new daemon wrapped in a
+                # nix-shell session.
+                # Alternative to ss would be netstat -xan.
+                if ss -lx src "${socket}" | grep -q LISTEN || [ "$IN_NIX_SHELL" ]; then
+                    emacs -s "${socket}" "$@"
+                else
+                    # We should run nix-shell from the directory containing the
+                    # derivation file (not doing so is asking for trouble), so
+                    # we have to juggle a bit with working directories here.
+                    pushd "${root}" > /dev/null
+                    nix-shell --run "cd ${origin} && ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
+                    popd > /dev/null
+                fi
+                return
             fi
-        else
-            emacs "$@"
-        fi
+            root="$(readlink -f "${root}"/..)"
+        done
+        emacs "$@"
     }
 else
     alias e="${EDITOR}"
