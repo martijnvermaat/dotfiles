@@ -64,6 +64,7 @@ alias ag="ag --pager=less"
 # Emacs is our editor.
 export EDITOR="emacsclient -a '' -c"
 alias emacs="${EDITOR}"
+alias magit="e -e '(magit-status)'"
 
 # One-letter editor shortcut that takes into account nix-shell.
 if available nix-shell; then
