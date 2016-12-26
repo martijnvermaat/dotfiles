@@ -55,10 +55,16 @@
       # WTCC SSH script.
       wt = callPackage ./packages/wt {};
 
+      # Patch nix-shell to not set PS1. We define our own indicator in .bashrc.
+      nix = lib.overrideDerivation pkgs.nix (oldAttrs: {
+        postPatch = "sed '/PS1=/d' -i scripts/nix-build.in";
+      });
+
     in buildEnv {
       name = "all";
       paths = [
         # Nix-related.
+        nix
         nix-repl
         #nixops
 

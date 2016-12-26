@@ -24,16 +24,24 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# Prompt. This should be after loading completions, since many distributions
-# load __git_ps1 as part of the completions.
-if available __git_ps1; then
-    GIT_PS1_SHOWDIRTYSTATE=0
-    GIT_PS1_SHOWSTASHSTATE=0
-    GIT_PS1_SHOWUPSTREAM="auto"
-    PS1='\u@\h:\w$(__git_ps1)\$ '
-else
-    PS1='\u@\h:\w\$ '
-fi
+# Configure git PS1 indicator (and define as noop if unavailable). This should
+# be after loading completions since many distributions load __git_ps1 as
+# part of those.
+GIT_PS1_SHOWDIRTYSTATE=0
+GIT_PS1_SHOWSTASHSTATE=0
+GIT_PS1_SHOWUPSTREAM="auto"
+available __git_ps1 || __git_ps1 () { return 0; }
+
+# PS1 indicator for nix-shell.
+# We don't like the default PS1 change that nix-shell does, since it has ugly
+# coloring and overrides any of our existing PS1 customizations. So we use a
+# patched nix-shell which does not touch PS1 (see .nixpkgs/config.nix).
+__nix_shell_ps1 () {
+    [ "$IN_NIX_SHELL" ] && echo -e " (${name})"
+}
+
+# Prompt.
+PS1='\u@\h:\w$(__git_ps1)$(__nix_shell_ps1)\$ '
 
 # Setup ls.
 available dircolors && eval "$(dircolors -b)"
