@@ -95,21 +95,25 @@ if available nix-shell; then
         if [ -n "${root}" ]; then
             # Dedicated Emacs server per nix-shell environment.
             socket="${root}/.emacs-server-socket.tmp"
-            # If there is a daemon already listening on the socket, we can
-            # just connect to it. If we are in a nix-shell we can just
-            # start a new daemon.
-            # In all other cases, we start a new daemon wrapped in a
-            # nix-shell session.
+            # If there is a daemon already listening on the socket, we can just
+            # connect to it. If we are in a nix-shell we can just start a new
+            # daemon.
+            # In all other cases, we start a new daemon wrapped in a nix-shell
+            # session.
             # Alternative to ss would be netstat -xan.
             if ss -lx src "${socket}" | grep -q LISTEN || [ "$IN_NIX_SHELL" ]; then
                 emacs -s "${socket}" "$@"
             else
                 # We should run nix-shell from the directory containing the
-                # derivation file (not doing so is asking for trouble), so
-                # we have to juggle a bit with working directories here.
-                origin="${PWD}"
+                # derivation file (not doing so is asking for trouble), so we
+                # have to juggle a bit with working directories here.
+                # Also, for reasons not entirely clear to me, in nix-shell the
+                # $SHELL value is different from /run/current-system/sw/bin/bash
+                # or /bin/sh (pkgs.bash instead of pkgs.bashInteractive?). This
+                # causes issues in Emacs terminal sessions, so we explicitely
+                # set it to the current value.
                 pushd "${root}" > /dev/null
-                nix-shell --run "cd ${origin} && ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
+                nix-shell --run "cd ${OLDPWD} && SHELL=${SHELL} ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
                 popd > /dev/null
             fi
         else
