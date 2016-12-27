@@ -281,13 +281,14 @@
 (add-hook 'web-mode-hook (lambda () (auto-complete-mode t)))
 (setq web-mode-code-indent-offset 2)
 
-;; Flycheck, but only for some languages
+;; Flycheck, but opt-in
 (autoload 'flycheck-mode "flycheck" nil t)
 (add-hook 'python-mode-hook 'flycheck-mode)
 (add-hook 'js2-mode-hook 'flycheck-mode)
 (add-hook 'coffee-mode-hook 'flycheck-mode)
 (add-hook 'go-mode-hook 'flycheck-mode)
 (add-hook 'sh-mode-hook 'flycheck-mode)
+(add-hook 'rust-mode-hook 'flycheck-mode)
 
 ;; Convince Flycheck it's useful in web-mode, but only for JSX
 (add-hook 'web-mode-hook
@@ -303,6 +304,28 @@
 ;; Works best after installing github.com/rogpeppe/godef
 (require 'go-mode-autoloads)
 (add-hook 'before-save-hook 'gofmt-before-save)
+
+;; rust-mode
+(require 'rust-mode)
+(add-hook 'rust-mode-hook 'electric-pair-mode)
+
+;; cargo-minor-mode
+(require 'cargo)
+(add-hook 'rust-mode-hook 'cargo-minor-mode)
+
+;; flycheck-rust needs an additional setup hook
+(require 'flycheck-rust)
+(add-hook 'flycheck-mode-hook 'flycheck-rust-setup)
+
+;; We should move from auto-complete to company for everything, but for now we
+;; use company for racer-mode (it only supports company)
+(require 'company)
+(require 'racer)
+(add-hook 'rust-mode-hook 'racer-mode)
+(add-hook 'racer-mode-hook 'eldoc-mode)
+(add-hook 'racer-mode-hook 'company-mode)
+(define-key rust-mode-map (kbd "TAB") 'company-indent-or-complete-common)
+(setq company-tooltip-align-annotations t)
 
 ;; Elixir mode
 (require 'elixir-mode)
