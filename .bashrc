@@ -37,7 +37,7 @@ available __git_ps1 || __git_ps1 () { return 0; }
 # coloring and overrides any of our existing PS1 customizations. So we use a
 # patched nix-shell which does not touch PS1 (see .nixpkgs/config.nix).
 __nix_shell_ps1 () {
-    [ "$IN_NIX_SHELL" ] && echo -e " (${name})"
+    [ "$IN_NIX_SHELL" ] && echo -e " [${name}]"
 }
 
 # Prompt.
