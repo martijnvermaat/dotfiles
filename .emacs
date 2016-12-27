@@ -145,6 +145,21 @@
 (require 'multi-term)
 (setq multi-term-dedicated-select-after-open-p t)
 
+;; Mappings in ~/.inputrc are not picked up here, so we redefine them
+(defun term-send-history-search-backward ()
+  (interactive)
+  (term-send-raw-string "\e[A"))
+(defun term-send-history-search-forward ()
+  (interactive)
+  (term-send-raw-string "\e[B"))
+(add-to-list 'term-bind-key-alist '("<up>" . term-send-history-search-backward))
+(add-to-list 'term-bind-key-alist '("<down>" . term-send-history-search-forward))
+
+;; Moving by word doesn't actually send this action to the terminal program,
+;; so we also rebind these keys
+(add-to-list 'term-bind-key-alist '("C-<left>" . term-send-backward-word))
+(add-to-list 'term-bind-key-alist '("C-<right>" . term-send-forward-word))
+
 ;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
 ;; but we use IPython so often let's dedicate a function to it
 (defun run-ipython ()
