@@ -74,43 +74,54 @@ export EDITOR="emacsclient -a '' -c"
 alias emacs="${EDITOR}"
 alias magit="e -e '(magit-status)'"
 
+# Find a derivation for nix-shell going up starting with the current directory.
+get_nix_shell_root () {
+    root="${PWD}"
+    while [[ "${root}" != "/" ]]; do
+        if [ -f "${root}/shell.nix" ] || grep -qs '^\s*shellHook\s*=' "${root}/default.nix"; then
+            echo "${root}"
+            return
+        fi
+        root="$(readlink -f "${root}"/..)"
+    done
+    return 1
+}
+
 # One-letter editor shortcut that takes into account nix-shell.
 if available nix-shell; then
     # If we have nix-shell, try to take it into account in how to run Emacs.
     e () {
-        origin="${PWD}"
-        root="${PWD}"
-        # Find a derivation for nix-shell going up starting with the current
-        # directory.
-        while [[ "${root}" != "/" ]]; do
-            if [ -f "${root}/shell.nix" ] || grep -qs '^\s*shellHook\s*=' "${root}/default.nix"; then
-                # Dedicated Emacs server per nix-shell environment.
-                socket="${root}/.emacs-server-socket.tmp"
-                # If there is a daemon already listening on the socket, we can
-                # just connect to it. If we are in a nix-shell we can just
-                # start a new daemon.
-                # In all other cases, we start a new daemon wrapped in a
-                # nix-shell session.
-                # Alternative to ss would be netstat -xan.
-                if ss -lx src "${socket}" | grep -q LISTEN || [ "$IN_NIX_SHELL" ]; then
-                    emacs -s "${socket}" "$@"
-                else
-                    # We should run nix-shell from the directory containing the
-                    # derivation file (not doing so is asking for trouble), so
-                    # we have to juggle a bit with working directories here.
-                    pushd "${root}" > /dev/null
-                    nix-shell --run "cd ${origin} && ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
-                    popd > /dev/null
-                fi
-                return
+        root="$(get_nix_shell_root)"
+        if [ -n "${root}" ]; then
+            # Dedicated Emacs server per nix-shell environment.
+            socket="${root}/.emacs-server-socket.tmp"
+            # If there is a daemon already listening on the socket, we can
+            # just connect to it. If we are in a nix-shell we can just
+            # start a new daemon.
+            # In all other cases, we start a new daemon wrapped in a
+            # nix-shell session.
+            # Alternative to ss would be netstat -xan.
+            if ss -lx src "${socket}" | grep -q LISTEN || [ "$IN_NIX_SHELL" ]; then
+                emacs -s "${socket}" "$@"
+            else
+                # We should run nix-shell from the directory containing the
+                # derivation file (not doing so is asking for trouble), so
+                # we have to juggle a bit with working directories here.
+                origin="${PWD}"
+                pushd "${root}" > /dev/null
+                nix-shell --run "cd ${origin} && ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
+                popd > /dev/null
             fi
-            root="$(readlink -f "${root}"/..)"
-        done
-        emacs "$@"
+        else
+            emacs "$@"
+        fi
     }
 else
     alias e="${EDITOR}"
 fi
+
+# Kill Emacs daemon, taking nix-shell context into account.
+alias killemacs='e --eval "(kill-emacs)"'
 
 # Quick IPython terminal.
 alias py="ipython"
