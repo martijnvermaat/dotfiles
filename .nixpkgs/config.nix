@@ -2,14 +2,8 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
-      # Some packages we need from the unstable channel.
-      pkgsUnstable = import (fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/da70d3da0f11b22eac77756b39b349215e06b2e3.tar.gz") {};
-
       # Backup script.
       backup = callPackage ./packages/backup {};
-
-      # Unstable contains a flake8 3 version.
-      flake8 = pkgsUnstable.python27Packages.flake8;
 
       # The gnome-open binary is provided by libgnome and not in my PATH
       # unless included top-level.
@@ -52,6 +46,7 @@
         epc
         ipython
         jedi
+        pylint
       ]);
 
       # tern is not in Nixpkgs 16.09.
@@ -100,8 +95,6 @@
         # Emacs.
         editorconfig-core-c
         emacs24-nox
-        flake8
-        python27Packages.markdown2
         shellcheck
         tern
         # TODO: eslint, gocode, ...
