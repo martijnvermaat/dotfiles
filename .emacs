@@ -163,16 +163,21 @@
 (add-to-list 'term-bind-key-alist '("C-<left>" . term-send-backward-word))
 (add-to-list 'term-bind-key-alist '("C-<right>" . term-send-forward-word))
 
-;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
-;; but we use IPython so often let's dedicate a function to it
-(defun run-ipython ()
-  "Make a multi-term buffer running IPython."
+;; Split the screen, create a new dedicated multi-term buffer, and focus
+(defun multi-term-open (&optional program)
   (interactive)
   (split-window-sensibly)
   (other-window 1)
-  (let ((multi-term-program "ipython"))
+  (let ((multi-term-program (or program multi-term-program)))
     (multi-term))
   (set-window-dedicated-p (selected-window) t))
+(global-set-key (kbd "C-c m") 'multi-term-open)
+
+;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
+;; but we use IPython so often let's dedicate a function to it
+(defun run-ipython ()
+  (interactive)
+  (multi-term-open "ipython"))
 (global-set-key (kbd "C-c p") 'run-ipython)
 
 ;; Stroustrup C style for Java
