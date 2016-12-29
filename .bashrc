@@ -112,6 +112,8 @@ if available nix-shell; then
                 # or /bin/sh (pkgs.bash instead of pkgs.bashInteractive?). This
                 # causes issues in Emacs terminal sessions, so we explicitely
                 # set it to the current value.
+                # TODO: If we are already in nix-shell, $SHELL has the incorrect
+                # value.
                 pushd "${root}" > /dev/null
                 nix-shell --run "cd ${OLDPWD} && SHELL=${SHELL} ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
                 popd > /dev/null
