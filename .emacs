@@ -58,6 +58,9 @@
 ;; Visual feedback on selections
 (setq-default transient-mark-mode t)
 
+;; Highlight matching parenthesis
+(show-paren-mode 1)
+
 ;; Always end a file with a newline
 (setq require-final-newline t)
 
