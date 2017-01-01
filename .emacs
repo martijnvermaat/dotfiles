@@ -82,6 +82,9 @@
 (setq-default fill-column 78)
 (add-hook 'text-mode-hook 'turn-on-auto-fill)
 
+;; Minor mode to aid in finding common writing problems
+(require 'writegood-mode)
+
 ;; Show line and column numbers
 (line-number-mode 1)
 (column-number-mode 1)

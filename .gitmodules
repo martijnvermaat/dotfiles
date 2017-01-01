@@ -163,3 +163,6 @@
 [submodule ".emacs.d/vendor/f"]
 	path = .emacs.d/vendor/f
 	url = https://github.com/rejeep/f.el.git
+[submodule ".emacs.d/vendor/writegood-mode"]
+	path = .emacs.d/vendor/writegood-mode
+	url = https://github.com/bnbeckwith/writegood-mode.git
