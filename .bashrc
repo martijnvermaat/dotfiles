@@ -164,6 +164,12 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
+# Pastebin (sorry, can't remember the name sprunge).
+pastebin () {
+    # Read with cat because curl won't expand ~.
+    cat "${1:--}" | curl -F 'sprunge=<-' http://sprunge.us
+}
+
 # Source site-specific configuration if it exists.
 if [ -f ~/.bashrc.site ]; then
     . ~/.bashrc.site
