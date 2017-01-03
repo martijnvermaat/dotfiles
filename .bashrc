@@ -9,11 +9,13 @@ available () {
 # No beeps.
 [ $DISPLAY ] && xset -b b off
 
-# Append to history, ignore duplicate and empty lines.
+# Append to history, ignore duplicate and empty lines, merge multi-line
+# commands.
 HISTCONTROL=ignoreboth
-HISTSIZE=50000
-HISTFILESIZE=100000
+HISTSIZE=10000000
+HISTFILESIZE=10000000
 shopt -s histappend
+shopt -s cmdhist
 
 # Check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
