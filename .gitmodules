@@ -166,3 +166,6 @@
 [submodule ".emacs.d/vendor/writegood-mode"]
 	path = .emacs.d/vendor/writegood-mode
 	url = https://github.com/bnbeckwith/writegood-mode.git
+[submodule ".emacs.d/vendor/git-timemachine"]
+	path = .emacs.d/vendor/git-timemachine
+	url = https://github.com/pidu/git-timemachine.git

@@ -433,6 +433,9 @@
 (setq magit-fetch-arguments '("--prune"))
 (setq magit-log-arguments '("--graph" "--color" "--decorate" "-n256"))
 
+;; Git time machine
+(require 'git-timemachine)
+
 ;; Show git info in the gutter
 (require 'git-gutter)
 (global-git-gutter-mode t)
