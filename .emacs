@@ -372,6 +372,9 @@
 (add-hook 'yaml-mode-hook
           '(lambda () (define-key yaml-mode-map "\C-m" 'newline-and-indent)))
 
+;; TOML mode
+(require 'toml-mode)
+
 ;; Markdown mode
 (require 'markdown-mode)
 (setq auto-mode-alist (cons '("\.md$" . markdown-mode) auto-mode-alist))

@@ -169,3 +169,6 @@
 [submodule ".emacs.d/vendor/git-timemachine"]
 	path = .emacs.d/vendor/git-timemachine
 	url = https://github.com/pidu/git-timemachine.git
+[submodule ".emacs.d/vendor/toml-mode"]
+	path = .emacs.d/vendor/toml-mode
+	url = https://github.com/dryman/toml-mode.el.git
