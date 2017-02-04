@@ -2,6 +2,11 @@
   packageOverrides = pkgs: rec {
     all = with pkgs; let
 
+      # Some packages we need from the unstable channel.
+      pkgsUnstable = import (fetchTarball "https://github.com/NixOS/nixpkgs-channels/archive/f673243aff0bc9ae4d2e96ccd60124ff9fe5b103.tar.gz") {};
+
+      awscli = pkgsUnstable.awscli;
+
       # Backup script.
       backup = callPackage ./packages/backup {};
 
