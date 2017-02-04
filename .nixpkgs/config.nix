@@ -159,6 +159,7 @@
         gnome-open
         libreoffice
         shotwell
+        torbrowser
         transmission_gtk
         vlc
       ];
