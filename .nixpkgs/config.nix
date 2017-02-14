@@ -76,6 +76,7 @@
         # General utilities.
         ag
         bc
+        bind
         binutils
         colordiff
         direnv
