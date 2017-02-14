@@ -78,6 +78,7 @@
         bc
         binutils
         colordiff
+        direnv
         dos2unix
         file
         htop

@@ -72,63 +72,18 @@ alias grep="grep --color=auto"
 alias ag="ag --pager=less"
 
 # Emacs is our editor.
-export EDITOR="emacsclient -a '' -c"
-alias emacs="${EDITOR}"
-alias magit="e -e '(magit-status)'"
-
-# Find a derivation for nix-shell going up starting with the current directory.
-get_nix_shell_root () {
-    root="${PWD}"
-    while [[ "${root}" != "/" ]]; do
-        if [ -f "${root}/shell.nix" ] || grep -qs '^\s*shellHook\s*=' "${root}/default.nix"; then
-            echo "${root}"
-            return
-        fi
-        root="$(readlink -f "${root}"/..)"
-    done
-    return 1
+get_emacs_server_file () {
+    local filename=".emacs-server-socket.$(id -u).tmp"
+    if [ -n "${DIRENV_DIR}" ]; then
+        echo "${DIRENV_DIR#-}/${filename}"
+    else
+        echo "/tmp/${filename}"
+    fi
 }
-
-# One-letter editor shortcut that takes into account nix-shell.
-if available nix-shell; then
-    # If we have nix-shell, try to take it into account in how to run Emacs.
-    e () {
-        root="$(get_nix_shell_root)"
-        if [ -n "${root}" ]; then
-            # Dedicated Emacs server per nix-shell environment.
-            socket="${root}/.emacs-server-socket.tmp"
-            # If there is a daemon already listening on the socket, we can just
-            # connect to it. If we are in a nix-shell we can just start a new
-            # daemon.
-            # In all other cases, we start a new daemon wrapped in a nix-shell
-            # session.
-            # Alternative to ss would be netstat -xan.
-            if ss -lx src "${socket}" | grep -q LISTEN || [ "$IN_NIX_SHELL" ]; then
-                emacs -s "${socket}" "$@"
-            else
-                # We should run nix-shell from the directory containing the
-                # derivation file (not doing so is asking for trouble), so we
-                # have to juggle a bit with working directories here.
-                # Also, for reasons not entirely clear to me, in nix-shell the
-                # $SHELL value is different from /run/current-system/sw/bin/bash
-                # or /bin/sh (pkgs.bash instead of pkgs.bashInteractive?). This
-                # causes issues in Emacs terminal sessions, so we explicitely
-                # set it to the current value.
-                # TODO: If we are already in nix-shell, $SHELL has the incorrect
-                # value.
-                pushd "${root}" > /dev/null
-                nix-shell --run "cd ${OLDPWD} && SHELL=${SHELL} ${EDITOR} $(printf " %q" -s "${socket}" "$@")"
-                popd > /dev/null
-            fi
-        else
-            emacs "$@"
-        fi
-    }
-else
-    alias e="${EDITOR}"
-fi
-
-# Kill Emacs daemon, taking nix-shell context into account.
+export EDITOR="emacsclient -a '' -c -s \$(get_emacs_server_file)"
+alias emacs="${EDITOR}"
+alias e="${EDITOR}"
+alias magit="e -e '(magit-status)'"
 alias killemacs='e --eval "(kill-emacs)"'
 
 # Quick IPython terminal.
@@ -169,6 +124,9 @@ pastebin () {
     # Read with cat because curl won't expand ~.
     cat "${1:--}" | curl -F 'sprunge=<-' http://sprunge.us
 }
+
+# Shell environment switcher.
+available direnv && eval "$(direnv hook bash)"
 
 # Source site-specific configuration if it exists.
 if [ -f ~/.bashrc.site ]; then
