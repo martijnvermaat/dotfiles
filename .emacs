@@ -163,13 +163,14 @@
 (add-to-list 'term-bind-key-alist '("C-<left>" . term-send-backward-word))
 (add-to-list 'term-bind-key-alist '("C-<right>" . term-send-forward-word))
 
-;; Split the screen, create a new multi-term buffer, and focus
+;; Split the screen, create a new dedicated multi-term buffer, and focus
 (defun multi-term-open (&optional program)
   (interactive)
   (split-window-sensibly)
   (other-window 1)
   (let ((multi-term-program (or program multi-term-program)))
-    (multi-term)))
+    (multi-term))
+  (set-window-dedicated-p (selected-window) t))
 (global-set-key (kbd "C-c m") 'multi-term-open)
 
 ;; A custom shell can be entered by using the C-u prefix for C-x multi-term,
