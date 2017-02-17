@@ -13,7 +13,7 @@
         epc
         ipython
         jedi
-        pylint
+        flake8
       ]);
 
       # tern is not in Nixpkgs 16.09.
@@ -41,6 +41,7 @@
         bind
         binutils
         colordiff
+        coreutils
         direnv
         dos2unix
         file
