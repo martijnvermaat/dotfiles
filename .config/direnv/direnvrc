@@ -15,7 +15,7 @@ use_nix() {
   fi
   direnv_load cat "$cache"
   export ALTERNATE_EDITOR=""
-  export EDITOR="emacsclient -c -s $(expand_path .)/.emacs-server-socket.$(id -u).tmp"
+  export EDITOR="emacsclient -nw -c -s $(expand_path .)/.emacs-server-socket.$(id -u).tmp"
   if [[ $# = 0 ]]; then
     watch_file default.nix
     watch_file shell.nix

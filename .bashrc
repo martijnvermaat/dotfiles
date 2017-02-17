@@ -48,8 +48,8 @@ PS1='\u@\h:\w$(__git_ps1)$(__nix_shell_ps1)\$ '
 # Setup ls.
 available dircolors && eval "$(dircolors -b)"
 export QUOTING_STYLE=literal
-alias ls="ls --color=auto"
-alias l="ls -lh --group-directories-first"
+alias ls="ls -G"
+alias l="ls -lh"
 alias la="l -a"
 
 # Use less as pager.
@@ -73,7 +73,7 @@ alias ag="ag --pager=less"
 
 # Emacs is our editor.
 export ALTERNATE_EDITOR=""
-export EDITOR="emacsclient -c -s /tmp/.emacs-server-socket.$(id -u).tmp"
+export EDITOR="emacsclient -nw -c -s /tmp/.emacs-server-socket.$(id -u).tmp"
 alias emacs="\${EDITOR}"
 alias e=emacs
 alias magit="e -e '(magit-status)'"
@@ -88,7 +88,7 @@ alias sudo='sudo '
 
 # Auto aliases for SSH hosts (disable with '#bash:no-alias').
 if [ -f ~/.ssh/config ]; then
-    for host in $(grep -v 'bash:no-alias' ~/.ssh/config | grep -oP '^Host \K[\w-.]+$'); do
+    for host in $(grep -v 'bash:no-alias' ~/.ssh/config | sed -n 's/^Host \([a-zA-Z0-9.-]*\)$/\1/p'); do
         alias "${host}=ssh -t ${host} \"screen -Rd default && clear\""
     done
 fi
