@@ -72,17 +72,10 @@ alias grep="grep --color=auto"
 alias ag="ag --pager=less"
 
 # Emacs is our editor.
-get_emacs_server_file () {
-    local filename=".emacs-server-socket.$(id -u).tmp"
-    if [ -n "${DIRENV_DIR}" ]; then
-        echo "${DIRENV_DIR#-}/${filename}"
-    else
-        echo "/tmp/${filename}"
-    fi
-}
-export EDITOR="emacsclient -a '' -c -s \$(get_emacs_server_file)"
-alias emacs="${EDITOR}"
-alias e="${EDITOR}"
+export ALTERNATE_EDITOR=""
+export EDITOR="emacsclient -c -s /tmp/.emacs-server-socket.$(id -u).tmp"
+alias emacs="\${EDITOR}"
+alias e=emacs
 alias magit="e -e '(magit-status)'"
 alias killemacs='e --eval "(kill-emacs)"'
 
