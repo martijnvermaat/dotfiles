@@ -105,6 +105,9 @@ if [ -d $HOME/projects/go ]; then
     export PATH=$PATH:$GOPATH/bin:/usr/local/go/bin
 fi
 
+export GOROOT=/usr/local/opt/go/libexec
+export PATH=$PATH:$GOROOT/bin
+
 # Python virtualenvwrapper with virtualenv-burrito.
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
