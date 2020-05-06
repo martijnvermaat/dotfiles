@@ -386,7 +386,8 @@
 
 ;; Terraform mode
 (require 'terraform-mode)
-(setq terraform-indent-level 4)
+(setq terraform-indent-level 2)
+(add-hook 'terraform-mode-hook 'terraform-format-on-save-mode)
 
 ;; ag.el
 (require 'ag)
