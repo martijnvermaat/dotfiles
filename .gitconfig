@@ -26,6 +26,8 @@ p = push
 pf = push --force-with-lease
 r = remote --verbose
 s = status
+sh = stash
+shp = stash pop
 
 [merge]
 conflictstyle = diff3
