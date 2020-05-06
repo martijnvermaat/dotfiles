@@ -2,4 +2,6 @@
 *.pyc
 .tern-port
 .envrc
+.direnv
 .direnv.*
+.DS_Store
