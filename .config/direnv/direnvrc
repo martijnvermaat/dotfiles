@@ -21,3 +21,17 @@ use_nix() {
     watch_file shell.nix
   fi
 }
+
+# https://github.com/direnv/direnv/issues/250
+# use php [version]
+use_php() {
+  local ver=$1
+  if [[ -z $ver ]] && [[ -f .php-version ]]; then
+    ver=$(cat .php-version)
+  fi
+  if [[ -z $ver ]]; then
+    echo Unknown php version
+    exit 1
+  fi
+  source $(brew --prefix php-version)/php-version.sh && php-version $ver
+}
