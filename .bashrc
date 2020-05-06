@@ -127,6 +127,11 @@ pastebin () {
 # Shell environment switcher.
 available direnv && eval "$(direnv hook bash)"
 
+# https://github.com/wilmoore/php-version
+# Running brew is very slow, so we're hardcoding the path.
+#source $(brew --prefix php-version)/php-version.sh && php-version 7
+source /usr/local/opt/php-version/php-version.sh && php-version 7
+
 # https://blog.chendry.org/2015/03/13/starting-gpg-agent-in-osx.html
 # https://www.linuxquestions.org/questions/slackware-14/gpg-agent-write-env-file-obsolete-4175608513/
 # [ -f ~/.gpg-agent-info ] && source ~/.gpg-agent-info
