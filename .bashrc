@@ -6,6 +6,11 @@ available () {
   command -v > /dev/null 2>&1 "$1" && return 0 || return 1
 }
 
+# Add ~/bin to $PATH.
+if [ -d "$HOME/bin" ]; then
+    export PATH="$HOME/bin:$PATH"
+fi
+
 # No beeps.
 [ $DISPLAY ] && xset -b b off
 
