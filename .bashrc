@@ -127,6 +127,9 @@ pastebin () {
 # Shell environment switcher.
 available direnv && eval "$(direnv hook bash)"
 
+export WT_PLATFORM_USER=vermaat
+export WT_SSH_IDENTITY_FILE=/Users/martijnvermaat/.ssh/id_rsa_wetransfer_platform
+
 # Source site-specific configuration if it exists.
 if [ -f ~/.bashrc.site ]; then
     . ~/.bashrc.site
