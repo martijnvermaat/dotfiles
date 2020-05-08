@@ -401,16 +401,16 @@
   (require 'org))
 
 ;; Run sh and Python from Org mode
-(org-babel-do-load-languages
- 'org-babel-load-languages
- '((sh . t)
-   (python . t)))
+;; (org-babel-do-load-languages
+;;  'org-babel-load-languages
+;;  '((sh . t)
+;;    (python . t)))
 
 ;; Disable prompt for running code blocks from Org mode
 (setq org-confirm-babel-evaluate nil)
 
 ;; Simple presentation mode for Org mode
-(require 'epresent)
+;; (require 'epresent)
 
 ;; Magit mode
 (defvar mv/magit (expand-file-name "magit/lisp" mv/vendor-dir))
