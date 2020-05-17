@@ -112,11 +112,6 @@ export PATH=$PATH:$GOROOT/bin
 export WORKON_HOME=~/.virtualenvs
 export PIP_VIRTUALENV_BASE=$WORKON_HOME
 export PIP_RESPECT_VIRTUALENV=true
-if [ -n "$BASH_VERSION" ]; then
-    if [ -f "$HOME/.venvburrito/startup.sh" ]; then
-        . "$HOME/.venvburrito/startup.sh"
-    fi
-fi
 
 # Pastebin (sorry, can't remember the name sprunge).
 pastebin () {
@@ -148,4 +143,8 @@ export WT_SSH_IDENTITY_FILE=/Users/martijnvermaat/.ssh/id_rsa_wetransfer_platfor
 # Source site-specific configuration if it exists.
 if [ -f ~/.bashrc.site ]; then
     . ~/.bashrc.site
+fi
+
+if command -v pyenv 1>/dev/null 2>&1; then
+  eval "$(pyenv init -)"
 fi
