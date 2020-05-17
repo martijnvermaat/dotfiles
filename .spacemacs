@@ -405,6 +405,10 @@ you should place your code here."
   ;; (setq python-shell-interpreter "ipython"
   ;;       python-shell-interpreter-args "--simple-prompt -i") ;
 
+  ;; Scroll the window (without moving the cursor).
+  (global-set-key (kbd "ESC <down>") 'scroll-up-line)
+  (global-set-key (kbd "ESC <up>") 'scroll-down-line)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
