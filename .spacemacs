@@ -36,6 +36,9 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (spacemacs-layouts :variables
+                        persp-autokill-buffer-on-remove 'kill-weak)
+
      helm
      auto-completion
      ;; better-defaults
@@ -43,12 +46,15 @@ values."
      git
      markdown
      ;; org
-     ;; (shell :variables
-     ;;        shell-default-height 30
-     ;;        shell-default-position 'bottom)
+     (shell :variables
+            shell-default-height 30
+            shell-default-position 'bottom)
      ;; spell-checking
      syntax-checking
-     ;; version-control
+     ;; TODO: There seem to be some issues with using git-gutter or
+     ;; git-gutter+. They don't correctly display changed lines.
+     (version-control :variables
+                      version-control-diff-tool 'diff-hl)
      python
      javascript
      yaml
@@ -60,11 +66,11 @@ values."
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '(editorconfig sprunge)
+   dotspacemacs-additional-packages '(editorconfig sprunge helm-fuzzier ag direnv)
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
-   dotspacemacs-excluded-packages '()
+   dotspacemacs-excluded-packages '(exec-path-from-shell)
    ;; Defines the behaviour of Spacemacs when installing packages.
    ;; Possible values are `used-only', `used-but-keep-unused' and `all'.
    ;; `used-only' installs only explicitly used packages and uninstall any
@@ -320,18 +326,22 @@ you should place your code here."
   (xterm-mouse-mode -1)
 
   ;; Always enable editorconfig mode.
-  (editorconfig-mode 1)
+  ;; (editorconfig-mode 1)
 
   ;; Rewire C-x k as C-x # if the buffer is from an emacsclient.
-  (add-hook 'server-switch-hook
-            (lambda ()
-              (when (current-local-map)
-                (use-local-map (copy-keymap (current-local-map))))
-              (when server-buffer-clients
-                (local-set-key (kbd "C-x k") 'server-edit))))
+  ;; (add-hook 'server-switch-hook
+  ;;           (lambda ()
+  ;;             (when (current-local-map)
+  ;;               (use-local-map (copy-keymap (current-local-map))))
+  ;;             (when server-buffer-clients
+  ;;               (local-set-key (kbd "C-x k") 'server-edit))))
+  (global-set-key (kbd "C-x k") 'spacemacs/kill-this-buffer)
 
   ;; Just follow version controlled symlinks.
   (setq vc-follow-symlinks t)
+
+  ;; Always end a file with a newline.
+  (setq require-final-newline t)
 
   ;; No more annyoing beeps.
   (setq visible-bell 1)
@@ -360,9 +370,41 @@ you should place your code here."
   ;; https://github.com/syl20bnr/spacemacs/issues/7372
   (define-key evil-emacs-state-map (kbd "C-z") nil)
 
-  ;; todo, this doesn't work
-  ;; https://emacs.stackexchange.com/questions/47453/how-to-use-backspace-to-navigate-to-the-parent-folder-in-spacemacs
-  (define-key helm-find-files-map (kbd "<backspace>") 'helm-find-files-up-one-level)
+  ;; Go up a level in the HELM file finder with backspace.
+  (with-eval-after-load 'helm
+    (dolist (keymap (list helm-find-files-map helm-read-file-map))
+      (define-key keymap (kbd "<DEL>") 'helm-find-files-up-one-level)))
+
+  ;; No splash screen.
+  (setq inhibit-startup-screen t)
+  (kill-buffer "*spacemacs*")
+
+  ;; Fix Helm fuzzy matching.
+  ;; https://github.com/syl20bnr/spacemacs/issues/13100
+  (setq helm-completion-style 'emacs)
+  (setq completion-styles '(helm-flex))
+
+  ;; Better fuzzy matching in Helm.
+  (helm-fuzzier-mode 1)
+
+  ;; For now we don't care about how we're supposed to use .bashrc versus
+  ;; .bash_profile and just silence warnings about it.
+  ;; https://github.com/syl20bnr/spacemacs/issues/3920
+  ;; (setq exec-path-from-shell-arguments '("-l"))
+
+  ;; This might break certain layers (like Rust and Go) but it seems to give
+  ;; us more context-aware environment variables in shell buffers.
+  ;; https://github.com/syl20bnr/spacemacs/issues/2294
+  ;; https://github.com/syl20bnr/spacemacs/pull/5024
+  ;; (setq exec-path-from-shell-variables '())
+
+  ;; (global-rbenv-mode)
+  (direnv-mode)
+
+  ;; https://github.com/syl20bnr/spacemacs/issues/5544#issuecomment-359791716
+  ;; (setq python-shell-interpreter "ipython"
+  ;;       python-shell-interpreter-args "--simple-prompt -i") ;
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
