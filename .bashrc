@@ -162,3 +162,5 @@ export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
 # For pkg-config to find mysql@5.7 you may need to set
 export PKG_CONFIG_PATH="/usr/local/opt/mysql@5.7/lib/pkgconfig"
 
+alias ks='kubectl --namespace product --context stag'
+alias kp='kubectl --namespace product --context prod'
