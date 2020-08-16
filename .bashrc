@@ -74,6 +74,9 @@ fi
 alias grep="grep --color=auto"
 alias ag="ag --pager=less"
 
+# I want colored and unified diffs in 99% of the cases.
+alias d="colordiff -ruN"
+
 # Emacs is our editor.
 export ALTERNATE_EDITOR=""
 export EDITOR="emacsclient -nw -c -s /tmp/.emacs-server-socket.$(id -u).tmp"
