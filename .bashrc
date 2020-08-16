@@ -151,3 +151,14 @@ fi
 if command -v pyenv 1>/dev/null 2>&1; then
   eval "$(pyenv init -)"
 fi
+
+# MySQL 5.7 is an alternative version in Homebrew, so it doesn't automatically install in $PATH
+export PATH="/usr/local/opt/mysql@5.7/bin:$PATH"
+
+# For compilers to find mysql@5.7 you may need to set
+export LDFLAGS="-L/usr/local/opt/mysql@5.7/lib"
+export CPPFLAGS="-I/usr/local/opt/mysql@5.7/include"
+
+# For pkg-config to find mysql@5.7 you may need to set
+export PKG_CONFIG_PATH="/usr/local/opt/mysql@5.7/lib/pkgconfig"
+
