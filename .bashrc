@@ -164,3 +164,4 @@ export PKG_CONFIG_PATH="/usr/local/opt/mysql@5.7/lib/pkgconfig"
 
 alias ks='kubectl --namespace product --context stag'
 alias kp='kubectl --namespace product --context prod'
+alias kpus='kubectl --namespace product --context prod-useast1'
