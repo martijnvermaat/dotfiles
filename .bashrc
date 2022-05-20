@@ -48,7 +48,7 @@ __nix_shell_ps1 () {
 }
 
 # Prompt.
-PS1='\u@\h:\w$(__git_ps1)$(__nix_shell_ps1)\$ '
+PS1='me@\h:\w$(__git_ps1)$(__nix_shell_ps1)\$ '
 
 # Setup ls.
 alias ls="ls -G"
