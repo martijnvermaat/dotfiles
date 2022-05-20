@@ -37,3 +37,6 @@ default = simple
 
 [rerere]
 enabled = true
+
+[pull]
+rebase = false
