@@ -128,7 +128,7 @@ available direnv && eval "$(direnv hook bash)"
 # https://github.com/wilmoore/php-version
 # Running brew is very slow, so we're hardcoding the path.
 #source $(brew --prefix php-version)/php-version.sh && php-version 7
-source /usr/local/opt/php-version/php-version.sh && php-version 7
+[ -f /usr/local/opt/php-version/php-version.sh ] && source /usr/local/opt/php-version/php-version.sh && php-version 7
 
 # https://blog.chendry.org/2015/03/13/starting-gpg-agent-in-osx.html
 # https://www.linuxquestions.org/questions/slackware-14/gpg-agent-write-env-file-obsolete-4175608513/
@@ -149,7 +149,7 @@ if [ -f ~/.bashrc.site ]; then
 fi
 
 if command -v pyenv 1>/dev/null 2>&1; then
-  eval "$(pyenv init -)"
+  eval "$(pyenv init --path)"
 fi
 
 # MySQL 5.7 is an alternative version in Homebrew, so it doesn't automatically install in $PATH
@@ -170,3 +170,5 @@ export NVM_DIR="$HOME/.nvm"
 alias ks='kubectl --namespace product --context stag'
 alias kp='kubectl --namespace product --context prod'
 alias kpus='kubectl --namespace product --context prod-useast1'
+
+#hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000064,"HIDKeyboardModifierMappingDst":0x700000035},{"HIDKeyboardModifierMappingSrc":0x700000035,"HIDKeyboardModifierMappingDst":0x7000000E1}]}'
