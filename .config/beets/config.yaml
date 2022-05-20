@@ -1,7 +1,6 @@
 directory: ~/Music
-library: ~/.cache/beets/musiclibrary.blb
 
-plugins: fetchart fromfilename
+plugins: fetchart fromfilename ydl
 
 threaded: no
 per_disc_numbering: yes
